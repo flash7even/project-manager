@@ -1,1 +1,1 @@
-# project-manager
+# crypto-app
