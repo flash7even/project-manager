@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/add.css">
+  </head>
+  <body>
+    <p class="notify">Add a Project</p>
+
+    <div class="row2">
+      <form name="ipcForm" onSubmit="JavaScript:sendAddProjectForm(event)">
+        Project Name:<br>
+        <input type="text" name="project_name" id="project_name" placeholder="Enter a Project Name" required>
+        <br>
+        Description:<br>
+        <input type="text" name="description" id="description" placeholder="Enter Description" required>
+        <br><br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <script src="add_project.js"></script>
+</body>
+</html>
