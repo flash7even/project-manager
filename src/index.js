@@ -14,8 +14,8 @@ addProject.addEventListener('click', function (event) {
         frame: false,
         width: 950,
         height: 750,
-        transparent: true,
-        alwaysOnTop: true,
+      //  transparent: true,
+       // alwaysOnTop: true,
         webPreferences: {
           nodeIntegration: true
         }
@@ -23,5 +23,7 @@ addProject.addEventListener('click', function (event) {
     win.on('close', function () { win = null })
     win.loadURL(modalPath)
     win.show()
+    win.webContents.openDevTools()
+
   })
 

@@ -5,16 +5,20 @@ const ipc = electron.ipcRenderer
 
 const axios = require('axios');
 
-function postProject(project_data){
-  const url = 'http://localhost:5000/api/project/';
-  alert('URL: ' + url)
-  alert('project_data: ' + JSON.stringify(project_data))
 
-  axios.post(url, project_data)
-  .then(function(response){
-    console.log('saved successfully')
-    alert('Response received')
-  });  
+async function makePostRequest(project_data) {
+
+    let res = await axios.post('http://localhost:5000/api/project/', project_data);
+
+    console.log(`Status code: ${res.status}`);
+    console.log(`Status text: ${res.statusText}`);
+    console.log(`Request method: ${res.request.method}`);
+    console.log(`Path: ${res.request.path}`);
+
+    console.log(`Date: ${res.headers.date}`);
+    console.log(`Data: ${res.data.JSON}`);
+    return res
+
 }
 
 function getProject(){
@@ -30,22 +34,30 @@ function getProject(){
   })
 }
 
-function sendAddProjectForm(event) {
+async function sendAddProjectForm(event) {
     event.preventDefault() // stop the form from submitting
     let project_name = document.getElementById("project_name").value;
     let description = document.getElementById("description").value;
+    let myheader = document.getElementById("myheader").value;
+
+    alert('Inside sendAddProjectForm')
+    alert('project name is' + project_name)
 
     var project_data = {
       'project_name': project_name,
       'description': description
     }
+    
+    let data = await makePostRequest(project_data);
+    alert(JSON.stringify(data.data))
 
-    //getProject()
-    //alert('Returned from get project')
-    postProject(project_data)
-    alert('Returned from post project')
-
-    //var window = remote.getCurrentWindow();
-    //window.close();
-    //ipc.send('form-submission', firstname)
+    message = data.data['message']
+    alert(message)
+    var todoList = document.getElementById('todoList')
+    todoList.innerHTML = message
 }
+
+
+
+
+
