@@ -61,4 +61,11 @@ addProject.addEventListener('click', function (event) {
         win.show()
         win.webContents.openDevTools()
       })
-  
+
+ipc.on('after-transaction-complete', (event, message) => {
+  alert(message)
+})
+
+ipc.on('after-project-creation-complete', (event, message) => {
+  alert(message)
+})

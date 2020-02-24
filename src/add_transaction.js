@@ -56,7 +56,14 @@ async function sendAddTransactionForm(event) {
     }
     
     let data = await addTransactionToServer(transaction_data);
-    alert(JSON.stringify(data.data))
+    var message = 'Transaction Successfull'
+    if(data.status != 200){
+      message = 'Transaction Failed'
+    }
+    ipc.send('after-transaction', message)
+
+    var window = remote.getCurrentWindow();
+    window.close();
 }
 
 viewProjectInTransactionForm()

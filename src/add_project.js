@@ -26,7 +26,14 @@ async function sendAddProjectForm(event) {
     }
     
     let data = await addProjectToServer(project_data);
-    alert(JSON.stringify(data.data))
+    var message = 'Project Created Successfully'
+    if(data.status != 200){
+      message = 'Project Creation Failed'
+    }
+    ipc.send('after-project-creation', message)
+
+    var window = remote.getCurrentWindow();
+    window.close();
 }
 
 

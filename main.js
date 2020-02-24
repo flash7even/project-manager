@@ -83,3 +83,11 @@ app.on('activate', () => {
 ipc.on('update-notify-value', function (event, arg) {
   win.webContents.send('targetPriceVal', arg)
 })
+
+ipc.on('after-transaction', (event, message) => {
+  win.send('after-transaction-complete', message)
+})
+
+ipc.on('after-project-creation', (event, message) => {
+  win.send('after-project-creation-complete', message)
+})
