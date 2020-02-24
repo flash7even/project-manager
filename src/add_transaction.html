@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Add Transaction</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' />
+  </head>
+
+  <body>
+    <div class="container" style="text-align: center;">
+      <h2> Add a Transaction for a Project </h2>
+    </div>
+    </br>
+    <div class="container">
+      <div class="row">
+        <form name="ipcForm" onSubmit="JavaScript:sendAddTransactionForm(event)">
+          <div class="form-group">
+              <label for="pwd">Transaction ID</label>
+              <input type="text" name="transaction_id" id="transaction_id" class="form-control" placeholder="Enter a Transaction ID" required>
+          </div>
+          <div class="form-group">
+              <label for="pwd">Amount</label>
+              <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount" required>
+          </div>
+          <div class="form-group">
+            <label for="sel1">Select Project:</label>
+            <select class="form-control" id="projectListInTransaction">
+            </select>
+          </div>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+
+    <script src="add_transaction.js"></script>
+  </body>
+
+</html>
