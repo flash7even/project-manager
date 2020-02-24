@@ -1,3 +1,5 @@
+'use strict'
+
 const electron = require('electron')
 const path = require('path')
 const remote = electron.remote
@@ -9,7 +11,7 @@ var host_name = 'http://localhost:5000'
 
 async function getProjectList() {
   var page = 0
-  project_list = []
+  var project_list = []
   while(1){
     var post_url = host_name + '/api/project/search/' + page.toString()
     console.log("post_url: " + post_url)

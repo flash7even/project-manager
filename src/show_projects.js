@@ -1,3 +1,5 @@
+'use strict'
+
 const electron = require('electron')
 const path = require('path')
 const remote = electron.remote
@@ -9,7 +11,7 @@ var host_name = 'http://localhost:5000'
 
 async function getProjectList() {
   var page = 0
-  project_list = []
+  var project_list = []
   while(1){
     var post_url = host_name + '/api/project/search/' + page.toString()
     console.log("post_url: " + post_url)
@@ -31,7 +33,7 @@ async function showAllProjects() {
 
   for(idx = 0;idx<project_list.length;idx++){
     var project = project_list[idx]
-    cur_project = '<tr>'
+    var cur_project = '<tr>'
     cur_project += `<th scope="row">${idx.toString()}</th>`
     cur_project += `<td>${project['project_name']}</td>`
     cur_project += `<td>${project['description']}</td>`
@@ -45,6 +47,5 @@ async function showAllProjects() {
 }
 
 showAllProjects()
-
 
 

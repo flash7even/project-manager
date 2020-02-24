@@ -2,30 +2,22 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
-    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
-    <link rel="stylesheet" href="../assets/css/main.css">
+    <title>Project Manager App</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' />
   </head>
   <body>
-      <div class="row">
-          <div id="right-container">
-              <button id="addProject">Add Project</button>
-          </div>
+      <div class="container">
+        <div id="row">
+        <h3>Press any button to start working</h3>
+        </div>
+        <div id="row">
+            <div class="btn-group" role="group">
+                <button type="button" id="addProject" class="btn btn-secondary">Add Project</button>
+                <button type="button" id="showProjects" class="btn btn-secondary">Show Project</button>
+                <button type="button" id="addTransaction" class="btn btn-secondary">Add Transaction</button>
+            </div>
+        </div>
       </div>
-      <br>
-      <div class="row">
-          <div id="right-container">
-              <button id="showProjects">Show Project</button>
-          </div>
-      </div>
-      <br>
-      <div class="row">
-          <div id="right-container">
-              <button id="addTransaction">Add Transaction</button>
-          </div>
-      </div>
-  
       <script src="index.js"></script>
   </body>
 </html>

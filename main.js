@@ -1,93 +1,105 @@
-const {app, BrowserWindow, Menu, electron} = require('electron')
+'use strict'
+
 const path = require('path')
-const url = require('url')
-const shell = require('electron').shell
+const { app, ipcMain } = require('electron')
+
+const Window = require('./Window')
+
 require('electron-reload')(__dirname)
 
-const ipc = require('electron').ipcMain
+var host_name = 'http://localhost:5000'
 
-let win 
+let mainWindow
 
-function createWindow () {
-  // Create the browser window.
-  win = new BrowserWindow({
+function main () {
+  mainWindow = new Window({
+    file: path.join('src', 'index.html')
+  })
+  mainWindow.webContents.openDevTools()
+}
+
+
+let addProjectWin
+let addTransactionWin
+let showProjectsWin
+
+ipcMain.on('add-transaction-window', () => {
+  console.log('Create transaction window')
+  if (!addTransactionWin) {
+    addTransactionWin = new Window({
+      file: path.join('src', 'add_transaction.html'),
       width: 1000,
-      height: 800,
+      height: 700,
+      // close with the main window
+      parent: mainWindow,
       webPreferences: {
         nodeIntegration: true
       }
     })
 
-  // and load the index.html of the app.
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'src/index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
+    // addTransactionWin.webContents.openDevTools()
 
-  // Open the DevTools.
-  win.webContents.openDevTools()
-
-  // Emitted when the window is closed.
-  win.on('closed', () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    win = null
-  })
-
-  var menu = Menu.buildFromTemplate([
-    {
-        label: 'Menu',
-            submenu: [
-              {
-                label:'Adjust Notification Value'
-              },
-              {
-                label:'Add Project'
-              },
-              {
-                  label:'CoinMarketCap',
-                  click() { 
-                      shell.openExternal('http://coinmarketcap.com')
-                  },
-                  accelerator: 'CmdOrCtrl+Shift+C'
-              },
-              {type:'separator'},
-              {
-                  label:'Exit', 
-                  click() { 
-                      app.quit() 
-                  } 
-              }
-        ]
-    }
-  ])
-  Menu.setApplicationMenu(menu); 
-}
-
-app.on('ready', createWindow)
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
+    // cleanup
+    addTransactionWin.on('closed', () => {
+      addTransactionWin = null
+    })
   }
 })
 
-app.on('activate', () => {
-  if (win === null) {
-    createWindow()
+ipcMain.on('add-project-window', () => {
+  if (!addProjectWin) {
+    addProjectWin = new Window({
+      file: path.join('src', 'add_project.html'),
+      width: 1000,
+      height: 700,
+      // close with the main window
+      parent: mainWindow,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+
+    // showProjectsWin.webContents.openDevTools()
+
+    // cleanup
+    addProjectWin.on('closed', () => {
+      addProjectWin = null
+    })
   }
 })
 
-ipc.on('update-notify-value', function (event, arg) {
-  win.webContents.send('targetPriceVal', arg)
+ipcMain.on('show-projects-window', () => {
+  if (!showProjectsWin) {
+    showProjectsWin = new Window({
+      file: path.join('src', 'show_projects.html'),
+      width: 1000,
+      height: 700,
+      // close with the main window
+      parent: mainWindow,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+
+    // showProjectsWin.webContents.openDevTools()
+
+    // cleanup
+    showProjectsWin.on('closed', () => {
+      showProjectsWin = null
+    })
+  }
 })
 
-ipc.on('after-transaction', (event, message) => {
-  win.send('after-transaction-complete', message)
+ipcMain.on('after-transaction', (event, message) => {
+  mainWindow.send('after-transaction-complete', message)
 })
 
-ipc.on('after-project-creation', (event, message) => {
-  win.send('after-project-creation-complete', message)
+ipcMain.on('after-project-creation', (event, message) => {
+  mainWindow.send('after-project-creation-complete', message)
+})
+
+app.on('ready', main)
+
+app.on('window-all-closed', function () {
+  app.quit()
 })
