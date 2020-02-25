@@ -1,6 +1,6 @@
 'use strict'
 
-const { BrowserWindow } = require('electron')
+const { BrowserWindow, Menu } = require('electron')
 
 // default window settings
 const defaultProps = {

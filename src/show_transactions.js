@@ -12,7 +12,7 @@ var host_name = 'http://tarangopc:5000'
 async function getTransactionList() {
   var page = 0
   var transaction_list = []
-  while(1){
+  while(page == 0){
     var post_url = host_name + '/api/transaction/search/' + page.toString()
     console.log("post_url: " + post_url)
     let res = await axios.post(post_url, {});
@@ -46,4 +46,47 @@ async function showAllTransactions() {
   transactionListTable.innerHTML = html
 }
 
-showAllTransactions()
+async function findTransactionDataDT(){
+  let transaction_list = await getTransactionList();
+  console.log(JSON.stringify(transaction_list))
+
+  var dt_list = []
+  var idx = 0
+
+  for(idx = 0;idx<transaction_list.length;idx++){
+    var transaction = transaction_list[idx]
+    var tran_data = [transaction['transaction_id'], transaction['amount'], transaction['project_name'], "2013-10-15 10:30:00"]
+    dt_list.push(tran_data)
+  }
+  return dt_list
+}
+
+async function showAllTransactionsDT(){
+  let dt_list = await findTransactionDataDT();
+  $(function(){
+    $("#transactionListTable").dataTable({
+      "aaData": dt_list,
+      "aoColumnDefs":[{
+            "sTitle":"Site name"
+          , "aTargets": [ "site_name" ]
+      },{
+            "aTargets": [ 0 ]
+          , "bSortable": false
+          , "mRender": function ( url, type, full )  {
+              return  '<a href="'+url+'">' + url + '</a>';
+          }
+      },{
+            "aTargets": [ 1 ]
+          , "bSortable": true
+      },{
+            "aTargets":[ 3 ]
+          , "sType": "date"
+          , "mRender": function(date, type, full) {
+              return new Date(date).toDateString()
+          }  
+      }]
+    });
+  })
+}
+
+showAllTransactionsDT()
