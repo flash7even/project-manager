@@ -7,7 +7,7 @@ const ipc = electron.ipcRenderer
 
 const axios = require('axios');
 
-var host_name = 'http://localhost:5000'
+var host_name = 'http://tarangopc:5000'
 
 async function addProjectToServer(project_data) {
     var post_url = host_name + '/api/project/'
@@ -29,7 +29,7 @@ async function sendAddProjectForm(event) {
     
     let data = await addProjectToServer(project_data);
     var message = 'Project Created Successfully'
-    if(data.status != 200){
+    if(data.status != 200 && data.status != 201){
       message = 'Project Creation Failed'
     }
     ipc.send('after-project-creation', message)

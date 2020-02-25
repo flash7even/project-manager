@@ -7,7 +7,7 @@ const ipc = electron.ipcRenderer
 
 const axios = require('axios');
 
-var host_name = 'http://localhost:5000'
+var host_name = 'http://tarangopc:5000'
 
 async function getProjectList() {
   var page = 0
@@ -59,7 +59,7 @@ async function sendAddTransactionForm(event) {
     
     let data = await addTransactionToServer(transaction_data);
     var message = 'Transaction Successfull'
-    if(data.status != 200){
+    if(data.status != 200 && data.status != 201){
       message = 'Transaction Failed'
     }
     ipc.send('after-transaction', message)

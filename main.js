@@ -7,7 +7,7 @@ const Window = require('./Window')
 
 require('electron-reload')(__dirname)
 
-var host_name = 'http://localhost:5000'
+var host_name = 'http://tarangopc:5000'
 
 let mainWindow
 
@@ -22,6 +22,7 @@ function main () {
 let addProjectWin
 let addTransactionWin
 let showProjectsWin
+let showTransactionsWin
 
 ipcMain.on('add-transaction-window', () => {
   console.log('Create transaction window')
@@ -86,6 +87,28 @@ ipcMain.on('show-projects-window', () => {
     // cleanup
     showProjectsWin.on('closed', () => {
       showProjectsWin = null
+    })
+  }
+})
+
+ipcMain.on('show-transactions-window', () => {
+  if (!showTransactionsWin) {
+    showTransactionsWin = new Window({
+      file: path.join('src', 'show_transactions.html'),
+      width: 1000,
+      height: 700,
+      // close with the main window
+      parent: mainWindow,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+
+    // showTransactionsWin.webContents.openDevTools()
+
+    // cleanup
+    showTransactionsWin.on('closed', () => {
+      showTransactionsWin = null
     })
   }
 })
