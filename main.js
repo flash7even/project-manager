@@ -23,6 +23,7 @@ let addProjectWin
 let addTransactionWin
 let showProjectsWin
 let showTransactionsWin
+let showBillsWin
 
 ipcMain.on('add-transaction-window', () => {
   console.log('Create transaction window')
@@ -109,6 +110,28 @@ ipcMain.on('show-transactions-window', () => {
     // cleanup
     showTransactionsWin.on('closed', () => {
       showTransactionsWin = null
+    })
+  }
+})
+
+ipcMain.on('show-bills-window', () => {
+  if (!showBillsWin) {
+    showBillsWin = new Window({
+      file: path.join('src', 'show_bills.html'),
+      width: 1000,
+      height: 700,
+      // close with the main window
+      parent: mainWindow,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+
+    // showBillsWin.webContents.openDevTools()
+
+    // cleanup
+    showBillsWin.on('closed', () => {
+      showBillsWin = null
     })
   }
 })

@@ -31,6 +31,12 @@ showTransactions.addEventListener('click', function (event) {
   ipc.send('show-transactions-window')
 })
 
+const showBills = document.getElementById('showBills')
+
+showBills.addEventListener('click', function (event) {
+  ipc.send('show-bills-window')
+})
+
 ipc.on('after-transaction-complete', (event, message) => {
   alert(message)
 })

@@ -7,7 +7,7 @@ const ipc = electron.ipcRenderer
 
 const axios = require('axios');
 
-var host_name = 'http://localhost:5000'
+var host_name = 'http://tarangopc:5000'
 
 async function getTransactionList() {
   var page = 0
