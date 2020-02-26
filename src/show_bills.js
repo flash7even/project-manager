@@ -46,51 +46,48 @@ async function showAllBills() {
   billListTable.innerHTML = html
 }
 
-function showAllBillsTest(){
+
+async function findBillDataDT(){
+  let bill_list = await getBillList();
+  console.log(JSON.stringify(bill_list))
+
+  var dt_list = []
+  var idx = 0
+
+  for(idx = 0;idx<bill_list.length;idx++){
+    var bill = bill_list[idx]
+    var tran_data = [bill['bill_id'], bill['amount'], bill['project_name'], "2013-10-15 10:30:00"]
+    dt_list.push(tran_data)
+  }
+  return dt_list
+}
+
+async function showAllBillsDT(){
+  let dt_list = await findBillDataDT();
   $(function(){
     $("#billsTable").dataTable({
-      "aaData":[
-        ["Sitepoint","http://sitepoint.com","Blog","2013-10-15 10:30:00"],
-        ["Flippa","http://flippa.com","Marketplace","null"],
-        ["99designs","http://99designs.com","Marketplace","null"],
-        ["Learnable","http://learnable.com","Online courses","null"],
-        ["Rubysource","http://rubysource.com","Blog","2013-01-10 12:00:00"],
-        ["Sitepoint","http://sitepoint.com","Blog","2013-10-15 10:30:00"],
-        ["Flippa","http://flippa.com","Marketplace","null"],
-        ["99designs","http://99designs.com","Marketplace","null"],
-        ["Learnable","http://learnable.com","Online courses","null"],
-        ["Rubysource","http://rubysource.com","Blog","2013-01-10 12:00:00"],
-        ["Sitepoint","http://sitepoint.com","Blog","2013-10-15 10:30:00"],
-        ["Flippa","http://flippa.com","Marketplace","null"],
-        ["99designs","http://99designs.com","Marketplace","null"],
-        ["Learnable","http://learnable.com","Online courses","null"],
-        ["Rubysource","http://rubysource.com","Blog","2013-01-10 12:00:00"],
-        ["Sitepoint","http://sitepoint.com","Blog","2013-10-15 10:30:00"],
-        ["Flippa","http://flippa.com","Marketplace","null"],
-        ["99designs","http://99designs.com","Marketplace","null"],
-        ["Learnable","http://learnable.com","Online courses","null"],
-        ["Rubysource","http://rubysource.com","Blog","2013-01-10 12:00:00"]
-      ],
+      "aaData": dt_list,
       "aoColumnDefs":[{
             "sTitle":"Site name"
           , "aTargets": [ "site_name" ]
       },{
-            "aTargets": [ 1 ]
+            "aTargets": [ 0 ]
           , "bSortable": false
           , "mRender": function ( url, type, full )  {
               return  '<a href="'+url+'">' + url + '</a>';
           }
       },{
+            "aTargets": [ 1 ]
+          , "bSortable": true
+      },{
             "aTargets":[ 3 ]
           , "sType": "date"
           , "mRender": function(date, type, full) {
-              return (full[2] == "Blog") 
-                        ? new Date(date).toDateString()
-                        : "N/A" ;
+              return new Date(date).toDateString()
           }  
       }]
     });
   })
 }
 
-showAllBillsTest()
+showAllBillsDT()
