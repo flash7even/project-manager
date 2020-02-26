@@ -20,6 +20,7 @@ let addProjectWin
 let addTransactionWin
 let showProjectsWin
 let showTransactionsWin
+let addBillWin
 let showBillsWin
 
   var menu = Menu.buildFromTemplate([
@@ -169,9 +170,33 @@ let showBillsWin
             })
           }
         }
+      },
+      {
+        label:'Add Bill',
+        click() {
+          if (!addBillWin) {
+            addBillWin = new Window({
+              file: path.join('src', 'add_bill.html'),
+              width: 1000,
+              height: 700,
+              // close with the main window
+              parent: mainWindow,
+              webPreferences: {
+                nodeIntegration: true
+              }
+            })
+        
+            // addBillWin.webContents.openDevTools()
+        
+            // cleanup
+            addBillWin.on('closed', () => {
+              addBillWin = null
+            })
+          }
+        }
       }
       ]
-    }
+    },
   ])
   Menu.setApplicationMenu(menu); 
 }
