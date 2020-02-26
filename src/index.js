@@ -1,84 +1,89 @@
 'use strict'
-/*
-var script = document.createElement('script');
-script.src = 'https://canvasjs.com/assets/script/jquery-1.11.1.min.js';
-script.type = 'text/javascript';
-document.getElementsByTagName('head')[0].appendChild(script);
-var script2 = document.createElement('script');
-script2.src = 'https://canvasjs.com/assets/script/jquery.canvasjs.min.js';
-script2.type = 'text/javascript';
-document.getElementsByTagName('head')[0].appendChild(script2);
-var script3 = document.createElement('script');
-script3.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js';
-script3.type = 'text/javascript';
-document.getElementsByTagName('head')[0].appendChild(script3);
-*/
+
 const electron = require('electron')
-const path = require('path')
-const BrowserWindow = electron.remote.BrowserWindow
-var CanvasJS = require('canvasjs');
+alert('App Start')
 
-const axios = require('axios');
-const ipc = electron.ipcRenderer
 
-/*
-const addProject = document.getElementById('addProject')
-addProject.addEventListener('click', function (event) {
-  ipc.send('add-project-window')
-})
-*/
-
-ipc.on('after-transaction-complete', (event, message) => {
-  alert(message)
-})
-
-ipc.on('after-project-creation-complete', (event, message) => {
-  alert(message)
-})
-
-function showSSS(){
+function chart01(){
   window.onload = function () {
 
-  //Better to construct options first and then pass it as a parameter
-  var options = {
+  var chart = new CanvasJS.Chart("chartContainer01", {
+    theme: "white",
+    exportFileName: "Doughnut Chart",
+    exportEnabled: true,
     animationEnabled: true,
-    title: {
-      text: "Project Investment",                
-      fontColor: "Peru"
-    },	
-    axisY: {
-      tickThickness: 0,
-      lineThickness: 0,
-      valueFormatString: " ",
-      gridThickness: 0                    
+    title:{
+      text: "Monthly Expense"
     },
-    axisX: {
-      tickThickness: 0,
-      lineThickness: 0,
-      labelFontSize: 18,
-      labelFontColor: "Peru"				
+    legend:{
+      cursor: "pointer",
+      itemclick: explodePie
     },
     data: [{
-      indexLabelFontSize: 26,
-      toolTipContent: "<span style=\"color:#62C9C3\">{indexLabel}:</span> <span style=\"color:#CD853F\"><strong>{y}</strong></span>",
-      indexLabelPlacement: "inside",
-      indexLabelFontColor: "white",
-      indexLabelFontWeight: 600,
-      indexLabelFontFamily: "Verdana",
-      color: "#62C9C3",
-      type: "bar",
+      type: "doughnut",
+      innerRadius: 70,
+      showInLegend: true,
+      toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+      indexLabel: "{name} - #percent%",
       dataPoints: [
-        { y: 21, label: "21%", indexLabel: "Project P01" },
-        { y: 25, label: "25%", indexLabel: "Project P02" },
-        { y: 33, label: "33%", indexLabel: "Project P03" },
-        { y: 36, label: "36%", indexLabel: "Project P04" },
-        { y: 42, label: "42%", indexLabel: "Project P05" }
+        { y: 450, name: "Food" },
+        { y: 120, name: "Insurance" },
+        { y: 300, name: "Travelling" },
+        { y: 800, name: "Housing" },
+        { y: 150, name: "Education" },
+        { y: 150, name: "Shopping"},
+        { y: 250, name: "Others" }
       ]
     }]
-  };
+  });
+  chart.render();
   
-  $("#chartContainer").CanvasJSChart(options);
+  function explodePie (e) {
+    if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+      e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+    } else {
+      e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+    }
+    e.chart.render();
+  }
+  
   }
 }
 
-showSSS()
+function chart02(){
+
+  var chart = new CanvasJS.Chart("chartContainer02", {
+    animationEnabled: true,
+    exportEnabled: true,
+    theme: "light1", // "light1", "light2", "dark1", "dark2"
+    title:{
+      text: "Simple Column Chart with Index Labels"
+    },
+    data: [{
+      type: "column", //change type to bar, line, area, pie, etc
+      //indexLabel: "{y}", //Shows y value on all Data Points
+      indexLabelFontColor: "#5A5757",
+      indexLabelPlacement: "outside",
+      dataPoints: [
+        { x: 10, y: 71 },
+        { x: 20, y: 55 },
+        { x: 30, y: 50 },
+        { x: 40, y: 65 },
+        { x: 50, y: 92, indexLabel: "Highest" },
+        { x: 60, y: 68 },
+        { x: 70, y: 38 },
+        { x: 80, y: 71 },
+        { x: 90, y: 54 },
+        { x: 100, y: 60 },
+        { x: 110, y: 36 },
+        { x: 120, y: 49 },
+        { x: 130, y: 21, indexLabel: "Lowest" }
+      ]
+    }]
+  });
+  chart.render();
+  
+}
+
+chart01();
+chart02();
