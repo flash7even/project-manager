@@ -27,124 +27,7 @@ let showBillsWin
         label: 'Menu',
             submenu: [
               {
-                label:'Add Project',
-                click() {
-                  if (!addProjectWin) {
-                    addProjectWin = new Window({
-                      file: path.join('src', 'add_project.html'),
-                      width: 1000,
-                      height: 700,
-                      // close with the main window
-                      parent: mainWindow,
-                      webPreferences: {
-                        nodeIntegration: true
-                      }
-                    })
-                
-                    // showProjectsWin.webContents.openDevTools()
-                
-                    // cleanup
-                    addProjectWin.on('closed', () => {
-                      addProjectWin = null
-                    })
-                  }
-                }
-              },
-              {
-                label:'Add Transaction',
-                click() {
-                  if (!addTransactionWin) {
-                    addTransactionWin = new Window({
-                      file: path.join('src', 'add_transaction.html'),
-                      width: 1000,
-                      height: 700,
-                      // close with the main window
-                      parent: mainWindow,
-                      webPreferences: {
-                        nodeIntegration: true
-                      }
-                    })
-                
-                    // addTransactionWin.webContents.openDevTools()
-                
-                    // cleanup
-                    addTransactionWin.on('closed', () => {
-                      addTransactionWin = null
-                    })
-                  }
-                }
-              },
-              {
-                label:'Project List',
-                click() {
-                  if (!showProjectsWin) {
-                    showProjectsWin = new Window({
-                      file: path.join('src', 'show_projects.html'),
-                      width: 1000,
-                      height: 700,
-                      // close with the main window
-                      parent: mainWindow,
-                      webPreferences: {
-                        nodeIntegration: true
-                      }
-                    })
-                
-                    // showProjectsWin.webContents.openDevTools()
-                
-                    // cleanup
-                    showProjectsWin.on('closed', () => {
-                      showProjectsWin = null
-                    })
-                  }
-                }
-              },
-              {
-                label:'Bill History',
-                click() {
-                  if (!showBillsWin) {
-                    showBillsWin = new Window({
-                      file: path.join('src', 'show_bills.html'),
-                      width: 1000,
-                      height: 700,
-                      // close with the main window
-                      parent: mainWindow,
-                      webPreferences: {
-                        nodeIntegration: true
-                      }
-                    })
-                
-                    // showBillsWin.webContents.openDevTools()
-                
-                    // cleanup
-                    showBillsWin.on('closed', () => {
-                      showBillsWin = null
-                    })
-                  }
-                }
-              },
-              {
-                label:'Transaction History',
-                click() {
-                  if (!showTransactionsWin) {
-                    showTransactionsWin = new Window({
-                      file: path.join('src', 'show_transactions.html'),
-                      width: 1000,
-                      height: 700,
-                      // close with the main window
-                      parent: mainWindow,
-                      webPreferences: {
-                        nodeIntegration: true
-                      }
-                    })
-                
-                    // showTransactionsWin.webContents.openDevTools()
-                
-                    // cleanup
-                    showTransactionsWin.on('closed', () => {
-                      showTransactionsWin = null
-                    })
-                  }
-                }
+                  label:'About'
               },
               {type:'separator'},
               {
@@ -154,6 +37,140 @@ let showBillsWin
                   } 
               }
         ]
+    },
+    {
+      label: 'Project',
+      submenu: [
+        {
+          label:'Add Project',
+          click() {
+            if (!addProjectWin) {
+              addProjectWin = new Window({
+                file: path.join('src', 'add_project.html'),
+                width: 1000,
+                height: 700,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              // showProjectsWin.webContents.openDevTools()
+          
+              // cleanup
+              addProjectWin.on('closed', () => {
+                addProjectWin = null
+              })
+            }
+          }
+        },
+        {
+          label:'Project List',
+          click() {
+            if (!showProjectsWin) {
+              showProjectsWin = new Window({
+                file: path.join('src', 'show_projects.html'),
+                width: 1000,
+                height: 700,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              // showProjectsWin.webContents.openDevTools()
+          
+              // cleanup
+              showProjectsWin.on('closed', () => {
+                showProjectsWin = null
+              })
+            }
+          }
+        }
+      ]
+    },
+    {
+      label: 'Transactions',
+      submenu: [
+        {
+          label:'Add Transaction',
+          click() {
+            if (!addTransactionWin) {
+              addTransactionWin = new Window({
+                file: path.join('src', 'add_transaction.html'),
+                width: 1000,
+                height: 700,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              // addTransactionWin.webContents.openDevTools()
+          
+              // cleanup
+              addTransactionWin.on('closed', () => {
+                addTransactionWin = null
+              })
+            }
+          }
+        },
+        {
+          label:'Transaction History',
+          click() {
+            if (!showTransactionsWin) {
+              showTransactionsWin = new Window({
+                file: path.join('src', 'show_transactions.html'),
+                width: 1000,
+                height: 700,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              // showTransactionsWin.webContents.openDevTools()
+          
+              // cleanup
+              showTransactionsWin.on('closed', () => {
+                showTransactionsWin = null
+              })
+            }
+          }
+        }
+      ]
+    },
+    {
+      label: 'Bills',
+      submenu: [{
+        label:'Bill History',
+        click() {
+          if (!showBillsWin) {
+            showBillsWin = new Window({
+              file: path.join('src', 'show_bills.html'),
+              width: 1000,
+              height: 700,
+              // close with the main window
+              parent: mainWindow,
+              webPreferences: {
+                nodeIntegration: true
+              }
+            })
+        
+            // showBillsWin.webContents.openDevTools()
+        
+            // cleanup
+            showBillsWin.on('closed', () => {
+              showBillsWin = null
+            })
+          }
+        }
+      }
+      ]
     }
   ])
   Menu.setApplicationMenu(menu); 

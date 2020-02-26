@@ -24,6 +24,21 @@ async function getProjectList() {
   return project_list
 }
 
+async function getProjectStat() {
+  var page = 0
+  var project_list = []
+  while(1){
+    var post_url = host_name + '/api/project/stats/' + page.toString()
+    console.log("post_url: " + post_url)
+    let res = await axios.post(post_url, {});
+    var cur_list = res.data
+    if(cur_list.length == 0) break;
+    project_list = project_list.concat(cur_list)
+    page++
+  }
+  return project_list
+}
+
 async function showAllProjects() {
   let project_list = await getProjectList();
   console.log(JSON.stringify(project_list))
@@ -61,34 +76,73 @@ async function findProjectDataDT(){
   return dt_list
 }
 
-async function showAllProjectsDT(){
-  let dt_list = await findProjectDataDT();
-  $(function(){
-    $("#projectListTable").dataTable({
-      "aaData": dt_list,
-      "aoColumnDefs":[{
-            "sTitle":"Site name"
-          , "aTargets": [ "site_name" ]
-      },{
-            "aTargets": [ 0 ]
-          , "bSortable": false
-          , "mRender": function ( url, type, full )  {
-              return  '<a href="'+url+'">' + url + '</a>';
-          }
-      },{
-            "aTargets": [ 1 ]
-          , "bSortable": true
-      },{
-            "aTargets":[ 3 ]
-          , "sType": "date"
-          , "mRender": function(date, type, full) {
-              return new Date(date).toDateString()
-          }  
-      }]
-    });
-  })
+  async function showAllProjectsDT(){
+    let dt_list = await findProjectDataDT();
+    $(function(){
+      $("#projectListTable").dataTable({
+        "aaData": dt_list,
+        "aoColumnDefs":[{
+              "sTitle":"Site name"
+            , "aTargets": [ "site_name" ]
+        },{
+              "aTargets": [ 0 ]
+            , "bSortable": false
+            , "mRender": function ( url, type, full )  {
+                return  '<a href="'+url+'">' + url + '</a>';
+            }
+        },{
+              "aTargets": [ 1 ]
+            , "bSortable": true
+        },{
+              "aTargets":[ 3 ]
+            , "sType": "date"
+            , "mRender": function(date, type, full) {
+                return new Date(date).toDateString()
+            }  
+        }]
+      });
+    })
+}
+
+async function findProjectDataCanvas(){
+  let project_list = await getProjectStat();
+  console.log(JSON.stringify(project_list))
+
+  var dt_list = []
+  var idx = 0
+  for(idx = 0;idx<project_list.length;idx++){
+    var project = project_list[idx]
+    var tran_data = { label: project['project_name'], y: project['project_value_percentage'] }
+    dt_list.push(tran_data)
+  }
+  return dt_list
+}
+
+async function showProjectValueChart(){
+  let dt_list = await findProjectDataCanvas();
+  var chart = new CanvasJS.Chart("projectValueChart", {
+    animationEnabled: true,
+    theme: "light2", // "light1", "light2", "dark1", "dark2"
+    title: {
+      text: "Project Statistics"
+    },
+    axisY: {
+      title: "Value Percentage (in %)",
+      includeZero: false
+    },
+    axisX: {
+      title: "Projects"
+    },
+    data: [{
+      type: "column",
+      yValueFormatString: "#,##0.0#\"%\"",
+      dataPoints: dt_list
+    }]
+  });
+  chart.render();
 }
 
 showAllProjectsDT()
+showProjectValueChart()
 
 
