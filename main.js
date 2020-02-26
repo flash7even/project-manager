@@ -14,7 +14,7 @@ function main () {
   mainWindow = new Window({
     file: path.join('src', 'index.html')
   })
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
 let addProjectWin
 let addTransactionWin

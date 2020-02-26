@@ -1,8 +1,6 @@
 'use strict'
 
 const electron = require('electron')
-alert('App Start')
-
 
 function chart01(){
   window.onload = function () {
