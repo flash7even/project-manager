@@ -87,12 +87,13 @@ async function findProjectDataDT(){
         },{
               "aTargets": [ 0 ]
             , "bSortable": false
+            /*
             , "mRender": function ( url, type, full )  {
                 return  '<a href="'+url+'">' + url + '</a>';
             }
+            */
         },{
               "aTargets": [ 1 ]
-            , "bSortable": true
         },{
               "aTargets":[ 3 ]
             , "sType": "date"

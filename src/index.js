@@ -1,17 +1,70 @@
 'use strict'
 
 const electron = require('electron')
+const path = require('path')
+const remote = electron.remote
+const ipc = electron.ipcRenderer
 
-function chart01(){
-  window.onload = function () {
+const axios = require('axios');
 
-  var chart = new CanvasJS.Chart("chartContainer01", {
+var host_name = 'http://tarangopc:5000'
+
+
+async function getProjectStat() {
+  var page = 0
+  var project_list = []
+  while(1){
+    var post_url = host_name + '/api/project/stats/' + page.toString()
+    console.log("post_url: " + post_url)
+    let res = await axios.post(post_url, {});
+    var cur_list = res.data
+    if(cur_list.length == 0) break;
+    project_list = project_list.concat(cur_list)
+    page++
+  }
+  return project_list
+}
+
+async function findTransactionAmountStatCanvas(){
+  let project_list = await getProjectStat();
+  console.log(JSON.stringify(project_list))
+
+  var dt_list = []
+  var idx = 0
+  for(idx = 0;idx<project_list.length;idx++){
+    var trans_stat = project_list[idx]
+    var tran_data = { y: trans_stat['transaction_stat']['transaction_amount'], name: trans_stat['project_name'] }
+    dt_list.push(tran_data)
+  }
+  console.log(JSON.stringify(dt_list))
+  return dt_list
+}
+
+async function findTransactionCountStatCanvas(){
+  let project_list = await getProjectStat();
+  console.log(JSON.stringify(project_list))
+
+  var dt_list = []
+  var idx = 0
+  for(idx = 0;idx<project_list.length;idx++){
+    var trans_stat = project_list[idx]
+    var tran_data = { y: trans_stat['transaction_stat']['transaction_count'], label: trans_stat['project_name'] }
+    dt_list.push(tran_data)
+  }
+  console.log(JSON.stringify(dt_list))
+  return dt_list
+}
+
+async function showTransactionAmountStat(){
+  var dt_list = await findTransactionAmountStatCanvas()
+
+  var chart = new CanvasJS.Chart("chartTransactionAmountStat", {
     theme: "white",
     exportFileName: "Doughnut Chart",
     exportEnabled: true,
     animationEnabled: true,
     title:{
-      text: "Monthly Expense"
+      text: "Transaction Amount Stats"
     },
     legend:{
       cursor: "pointer",
@@ -21,17 +74,9 @@ function chart01(){
       type: "doughnut",
       innerRadius: 70,
       showInLegend: true,
-      toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+      toolTipContent: "<b>{name}</b>: {y} BDT (#percent%)",
       indexLabel: "{name} - #percent%",
-      dataPoints: [
-        { y: 450, name: "Food" },
-        { y: 120, name: "Insurance" },
-        { y: 300, name: "Travelling" },
-        { y: 800, name: "Housing" },
-        { y: 150, name: "Education" },
-        { y: 150, name: "Shopping"},
-        { y: 250, name: "Others" }
-      ]
+      dataPoints: dt_list
     }]
   });
   chart.render();
@@ -44,44 +89,31 @@ function chart01(){
     }
     e.chart.render();
   }
-  
-  }
 }
 
-function chart02(){
+async function showTransactionCountStat(){
+  var dt_list = await findTransactionCountStatCanvas()
 
-  var chart = new CanvasJS.Chart("chartContainer02", {
+  var chart = new CanvasJS.Chart("chartTransactionCountStat", {
     animationEnabled: true,
-    exportEnabled: true,
-    theme: "light1", // "light1", "light2", "dark1", "dark2"
+    theme: "light2", // "light1", "light2", "dark1", "dark2"
     title:{
-      text: "Simple Column Chart with Index Labels"
+      text: "Transaction Count Stats"
     },
-    data: [{
-      type: "column", //change type to bar, line, area, pie, etc
-      //indexLabel: "{y}", //Shows y value on all Data Points
-      indexLabelFontColor: "#5A5757",
-      indexLabelPlacement: "outside",
-      dataPoints: [
-        { x: 10, y: 71 },
-        { x: 20, y: 55 },
-        { x: 30, y: 50 },
-        { x: 40, y: 65 },
-        { x: 50, y: 92, indexLabel: "Highest" },
-        { x: 60, y: 68 },
-        { x: 70, y: 38 },
-        { x: 80, y: 71 },
-        { x: 90, y: 54 },
-        { x: 100, y: 60 },
-        { x: 110, y: 36 },
-        { x: 120, y: 49 },
-        { x: 130, y: 21, indexLabel: "Lowest" }
-      ]
+    axisY: {
+      title: "Transaction Count"
+    },
+    data: [{        
+      type: "column",  
+      showInLegend: true, 
+      legendMarkerColor: "grey",
+      legendText: "",
+      dataPoints: dt_list
     }]
   });
   chart.render();
   
 }
 
-chart01();
-chart02();
+showTransactionAmountStat();
+showTransactionCountStat();
