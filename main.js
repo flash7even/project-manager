@@ -19,6 +19,7 @@ function main () {
 let addProjectWin
 let addTransactionWin
 let showProjectsWin
+let updateShowProjectsWin
 let showTransactionsWin
 let addBillWin
 let showBillsWin
@@ -69,9 +70,9 @@ let showBillsWin
         {
           label:'Update Project',
           click() {
-            if (!addProjectWin) {
-              addProjectWin = new Window({
-                file: path.join('src', 'update_project.html'),
+            if (!updateShowProjectsWin) {
+              updateShowProjectsWin = new Window({
+                file: path.join('src', 'update_show_projects.html'),
                 width: 1000,
                 height: 700,
                 // close with the main window
@@ -81,11 +82,11 @@ let showBillsWin
                 }
               })
           
-              // showProjectsWin.webContents.openDevTools()
+              updateShowProjectsWin.webContents.openDevTools()
           
               // cleanup
-              addProjectWin.on('closed', () => {
-                addProjectWin = null
+              updateShowProjectsWin.on('closed', () => {
+                updateShowProjectsWin = null
               })
             }
           }

@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Projects</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' />
+  </head>
+  <body>
+  </br>
+  </br>
+    <div class="container">
+      <div class="row">
+        <table class="table" id="projectListTable">
+          <thead>
+            <tr><th class="site_name">Project Name</th><th>Description </th><th>Project Value</th><th>Last Updated</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>
+                <button onclick="JavaScript:updateProject(event, 12345)" type="button" class="btn btn-success"><i class="fas fa-edit"></i>Update</button>
+                <button type="button" class="btn btn-danger"><i class="fas fa-edit"></i>Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="update_show_projects.js"></script>
+  </body>
+  </html>
