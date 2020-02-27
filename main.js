@@ -67,6 +67,30 @@ let showBillsWin
           }
         },
         {
+          label:'Update Project',
+          click() {
+            if (!addProjectWin) {
+              addProjectWin = new Window({
+                file: path.join('src', 'update_project.html'),
+                width: 1000,
+                height: 700,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              // showProjectsWin.webContents.openDevTools()
+          
+              // cleanup
+              addProjectWin.on('closed', () => {
+                addProjectWin = null
+              })
+            }
+          }
+        },
+        {
           label:'Project List',
           click() {
             if (!showProjectsWin) {
@@ -147,7 +171,7 @@ let showBillsWin
     },
     {
       label: 'Bills',
-      submenu: [
+      submenu: [  
         {
           label:'Add Bill',
           click() {
@@ -208,6 +232,10 @@ ipcMain.on('after-transaction', (event, message) => {
 
 ipcMain.on('after-project-creation', (event, message) => {
   mainWindow.send('after-project-creation-complete', message)
+})
+
+ipcMain.on('after-bill', (event, message) => {
+  mainWindow.send('after-bill-complete', message)
 })
 
 app.on('ready', main)

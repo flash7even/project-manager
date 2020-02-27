@@ -117,3 +117,21 @@ async function showTransactionCountStat(){
 
 showTransactionAmountStat();
 showTransactionCountStat();
+
+function updatePageAfterAnyEvent(message){
+  showTransactionAmountStat();
+  showTransactionCountStat();
+  alert(message)
+}
+
+ipc.on('after-project-creation-complete', function (event, message) {
+  updatePageAfterAnyEvent(message);
+})
+
+ipc.on('after-transaction-complete', function (event, message) {
+  updatePageAfterAnyEvent(message);
+})
+
+ipc.on('after-bill-complete', function (event, message) {
+  updatePageAfterAnyEvent(message);
+})
