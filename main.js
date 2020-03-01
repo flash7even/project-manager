@@ -261,10 +261,15 @@ ipcMain.on('call-project-update', (event, message) => {
       }
     })
 
-    mainWindow.send('update-project-index', message)
+    //mainWindow.send('update-project-index', message)
     console.log('project-update send to renderer')
 
-    updateProjectWin.webContents.openDevTools()
+    // updateProjectWin.webContents.openDevTools()
+
+    
+    updateProjectWin.webContents.on('did-finish-load', () => {
+      updateProjectWin.webContents.send('update-project', message);
+    });
 
     // cleanup
     updateProjectWin.on('closed', () => {

@@ -46,7 +46,6 @@ async function sendUpdateProjectForm(event) {
 
 ipc.on('update-project', function (event, message) {
   console.log('update-project: (update_project.js) ' + message)
-  alert(message)
   var project_id = document.getElementById('project_id')
   project_id.value = message
 })
