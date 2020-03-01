@@ -50,11 +50,21 @@ async function sendAddTransactionForm(event) {
     let transaction_id = document.getElementById("transaction_id").value;
     let amount = document.getElementById("amount").value;
     let project_name = document.getElementById("projectListInTransaction").value;
+    let mode_of_payment = document.getElementById("mode_of_payment").value;
+    let payment_by = document.getElementById("payment_by").value;
+    let cheque_no = document.getElementById("cheque_no").value;
+    let description = document.getElementById("description").value;
+    let status = document.getElementById("status").value;
 
     var transaction_data = {
       'transaction_id': transaction_id,
       'amount': amount,
-      'project_name': project_name
+      'project_name': project_name,
+      'mode_of_payment': mode_of_payment,
+      'payment_by': payment_by,
+      'cheque_no': cheque_no,
+      'description': description,
+      'status': status,
     }
     
     let data = await addTransactionToServer(transaction_data);

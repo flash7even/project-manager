@@ -3,22 +3,18 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Add Transaction</title>
+    <title>Update Transaction</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' />
   </head>
 
   <body>
-    </br>
     <div class="container">
-      <div class="row">
-        <form name="ipcForm" onSubmit="JavaScript:sendAddTransactionForm(event)">
-          <div class="form-group">
-              <label for="pwd">Transaction ID</label>
-              <input type="text" name="transaction_id" id="transaction_id" class="form-control" placeholder="Enter a Transaction ID" required>
-          </div>
+      <label id ="transaction_id" hidden>Label</label>
+      <div class="row" id = 'update_project_form'>
+        <form id = 'project_update_submit_form' name="ipcForm" onSubmit="JavaScript:sendUpdateTransactionForm(event)">
           <div class="form-group">
               <label for="pwd">Amount</label>
-              <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount" required>
+              <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount">
           </div>
           <div class="form-group">
               <label for="pwd">Mode of Payment</label>
@@ -43,17 +39,12 @@
                 <option value="due">due</option>
               </select>
           </div>
-          <div class="form-group">
-            <label for="sel1">Select Project:</label>
-            <select class="form-control" id="projectListInTransaction">
-            </select>
-          </div>
           <input type="submit" value="Submit">
         </form>
       </div>
     </div>
 
-    <script src="add_transaction.js"></script>
+    <script src="update_transaction.js"></script>
   </body>
 
 </html>

@@ -55,7 +55,17 @@ async function findTransactionDataDT(){
 
   for(idx = 0;idx<transaction_list.length;idx++){
     var transaction = transaction_list[idx]
-    var tran_data = [transaction['transaction_id'], transaction['amount'], transaction['project_name'], "2013-10-15 10:30:00"]
+    var tran_data = [
+      transaction['transaction_id'],
+      transaction['amount'],
+      transaction['project_name'],
+      transaction['updated_at'],
+      transaction['mode_of_payment'],
+      transaction['payment_by'],
+      transaction['cheque_no'],
+      transaction['description'],
+      transaction['status'],
+    ]
     dt_list.push(tran_data)
   }
   return dt_list

@@ -18,6 +18,8 @@ let showTransactionsWin
 let addBillWin
 let showBillsWin
 let updateProjectWin
+let updateTransactionWin
+let updateShowTransactionWin
 
 function main () {
   mainWindow = new Window({
@@ -146,6 +148,30 @@ function main () {
           }
         },
         {
+          label:'Update Transaction',
+          click() {
+            if (!updateShowTransactionWin) {
+              updateShowTransactionWin = new Window({
+                file: path.join('src', 'update_show_transactions.html'),
+                width: 1000,
+                height: 700,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              // updateShowTransactionWin.webContents.openDevTools()
+          
+              // cleanup
+              updateShowTransactionWin.on('closed', () => {
+                updateShowTransactionWin = null
+              })
+            }
+          }
+        },
+        {
           label:'Transaction History',
           click() {
             if (!showTransactionsWin) {
@@ -232,6 +258,10 @@ ipcMain.on('after-transaction', (event, message) => {
   mainWindow.send('after-transaction-complete', message)
 })
 
+ipcMain.on('after-transaction-update', (event, message) => {
+  mainWindow.send('after-transaction-update-complete', message)
+})
+
 ipcMain.on('after-project-creation', (event, message) => {
   mainWindow.send('after-project-creation-complete', message)
 })
@@ -242,11 +272,6 @@ ipcMain.on('after-project-update', (event, message) => {
 
 ipcMain.on('after-bill', (event, message) => {
   mainWindow.send('after-bill-complete', message)
-})
-
-ipcMain.on('update-project-from-index', (event, message) => {
-  console.log('update-project-from-index: (main.js) ' + message)
-  updateProjectWin.send('update-project', message)
 })
 
 ipcMain.on('call-project-update', (event, message) => {
@@ -270,6 +295,31 @@ ipcMain.on('call-project-update', (event, message) => {
     // cleanup
     updateProjectWin.on('closed', () => {
       updateProjectWin = null
+    })
+  }
+})
+
+ipcMain.on('call-transaction-update', (event, message) => {
+  if(!updateTransactionWin){
+    updateTransactionWin = new Window({
+      file: path.join('src', 'update_transaction.html'),
+      width: 1000,
+      height: 700,
+      // close with the main window
+      parent: mainWindow,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+
+    // updateProjectWin.webContents.openDevTools()
+    updateTransactionWin.webContents.on('did-finish-load', () => {
+      updateTransactionWin.webContents.send('update-transaction', message);
+    });
+
+    // cleanup
+    updateTransactionWin.on('closed', () => {
+      updateTransactionWin = null
     })
   }
 })
