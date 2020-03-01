@@ -48,6 +48,26 @@ async function showAllTransactions() {
   console.log(JSON.stringify(transaction_list))
 
   var html = ''
+
+  var thead = `<thead>
+                <tr>
+                  <th># </th>
+                  <th class="site_name">Transaction ID</th>
+                  <th>Amount </th>
+                  <th>Project Name</th>
+                  <th>Mode of Payment</th>
+                  <th>Payment By</th>
+                  <th>Cheque No</th>
+                  <th>Description</th>
+                  <th>Payment Status</th>
+                  <th>Options</th>
+                </tr>
+              </thead>`
+  
+  html += thead
+
+  html += `<tbody>`
+
   var idx = 0
 
   for(idx = 0;idx<transaction_list.length;idx++){
@@ -69,6 +89,7 @@ async function showAllTransactions() {
     cur_transaction += '</tr>'
     html += cur_transaction
   }
+  html += `</tbody>`
   var transactionListTable = document.getElementById('transactionListTable')
   transactionListTable.innerHTML = html
 }

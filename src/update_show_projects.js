@@ -48,6 +48,21 @@ async function showAllProjects() {
   console.log(JSON.stringify(project_list))
 
   var html = ''
+
+  var thead = `<thead>
+                <tr>
+                  <th># </th>
+                  <th class="site_name">Project Name</th>
+                  <th>Description </th>
+                  <th>Project Value</th>
+                  <th>Options</th>
+                </tr>
+              </thead>`
+  
+  html += thead
+
+  html += `<tbody>`
+
   var idx = 0
 
   for(idx = 0;idx<project_list.length;idx++){
@@ -64,6 +79,9 @@ async function showAllProjects() {
     cur_project += '</tr>'
     html += cur_project
   }
+
+  html += `</tbody>`
+
   var projectListTable = document.getElementById('projectListTable')
   projectListTable.innerHTML = html
 }
