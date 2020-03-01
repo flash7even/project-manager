@@ -135,3 +135,8 @@ ipc.on('after-transaction-complete', function (event, message) {
 ipc.on('after-bill-complete', function (event, message) {
   updatePageAfterAnyEvent(message);
 })
+
+ipc.on('update-project-index', function (event, message) {
+  alert('update-project-from-index: ' + message)
+  ipc.send('update-project-from-index', message)
+})

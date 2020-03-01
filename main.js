@@ -10,12 +10,6 @@ require('electron-reload')(__dirname)
 
 let mainWindow
 
-function main () {
-  mainWindow = new Window({
-    file: path.join('src', 'index.html')
-  })
-  //mainWindow.webContents.openDevTools()
-
 let addProjectWin
 let addTransactionWin
 let showProjectsWin
@@ -23,6 +17,13 @@ let updateShowProjectsWin
 let showTransactionsWin
 let addBillWin
 let showBillsWin
+let updateProjectWin
+
+function main () {
+  mainWindow = new Window({
+    file: path.join('src', 'index.html')
+  })
+  //mainWindow.webContents.openDevTools()
 
   var menu = Menu.buildFromTemplate([
     {
@@ -237,6 +238,39 @@ ipcMain.on('after-project-creation', (event, message) => {
 
 ipcMain.on('after-bill', (event, message) => {
   mainWindow.send('after-bill-complete', message)
+})
+
+ipcMain.on('update-project-from-index', (event, message) => {
+  console.log('update-project-from-index: ' + message)
+  updateProjectWin.send('update-project', message)
+})
+
+ipcMain.on('call-project-update', (event, message) => {
+  
+  console.log('ipc main received')
+  console.log(message)
+  if(!updateProjectWin){
+    updateProjectWin = new Window({
+      file: path.join('src', 'update_project.html'),
+      width: 1000,
+      height: 700,
+      // close with the main window
+      parent: mainWindow,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+
+    mainWindow.send('update-project-index', message)
+    console.log('project-update send to renderer')
+
+    updateProjectWin.webContents.openDevTools()
+
+    // cleanup
+    updateProjectWin.on('closed', () => {
+      updateProjectWin = null
+    })
+  }
 })
 
 app.on('ready', main)

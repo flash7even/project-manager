@@ -9,11 +9,14 @@ const axios = require('axios');
 
 var host_name = 'http://tarangopc:5000'
 
-async function updateProject(event, msg=null) {
-  alert('Called here')
-  alert(msg)
+async function updateProjectEvent(project_id) {
+  ipc.send('call-project-update', project_id)
 }
 
+async function deleteProjectEvent(project_id) {
+  alert('Called deleteProject')
+  alert(project_id)
+}
 
 async function getProjectList() {
   var page = 0
@@ -44,9 +47,10 @@ async function showAllProjects() {
     cur_project += `<td>${project['project_name']}</td>`
     cur_project += `<td>${project['description']}</td>`
     cur_project += `<td>${project['project_value']}</td>`
-    var btn1 = `<button onclick="JavaScript:updateProject(event, ${project['id']})" type="button" class="btn btn-success"><i class="fas fa-edit"></i>Update</button>`
-    var btn2 = `<button onclick="JavaScript:deleteProject(event, ${project['id']})" type="button" class="btn btn-danger"><i class="fas fa-edit"></i>Delete</button>`
-    cur_project += `<td>${btn1+btn2}</td>`
+    var project_id = project['id']
+    var btn1 = '<input type="button" onClick="updateProjectEvent(\'' + project_id + '\')" value="Update"/>'
+    var btn2 = '<input type="button" onClick="deleteProjectEvent(\'' + project_id + '\')" value="Delete"/>'
+    cur_project += `<td>${btn1+' '+btn2}</td>`
     cur_project += '</tr>'
     html += cur_project
   }
