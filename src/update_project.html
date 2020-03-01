@@ -9,12 +9,9 @@
 
   <body>
     <div class="container">
+      <label id ="project_id" hidden>Label</label>
       <div class="row" id = 'update_project_form'>
-        <form id = 'project_update_submit_form' name="ipcForm">
-          <div class="form-group">
-              <label for="pwd">Project ID</label>
-              <input type="text" name="project_id" id="project_id" class="form-control">
-          </div>
+        <form id = 'project_update_submit_form' name="ipcForm" onSubmit="JavaScript:sendUpdateProjectForm(event)">
           <div class="form-group">
               <label for="pwd">Project Name</label>
               <input type="text" name="project_name" id="project_name" class="form-control" placeholder="Enter a Project Name">

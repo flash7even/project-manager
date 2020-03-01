@@ -137,6 +137,7 @@ ipc.on('after-bill-complete', function (event, message) {
 })
 
 ipc.on('update-project-index', function (event, message) {
-  alert('update-project-from-index: ' + message)
+  //alert('update-project-index: (index.js) ')
+  console.log('update-project-index: (index.js) ' + message)
   ipc.send('update-project-from-index', message)
 })

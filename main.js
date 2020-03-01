@@ -241,7 +241,7 @@ ipcMain.on('after-bill', (event, message) => {
 })
 
 ipcMain.on('update-project-from-index', (event, message) => {
-  console.log('update-project-from-index: ' + message)
+  console.log('update-project-from-index: (main.js) ' + message)
   updateProjectWin.send('update-project', message)
 })
 

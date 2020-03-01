@@ -18,8 +18,8 @@ async function updateProjectToServer(project_data) {
 }
 
 async function sendUpdateProjectForm(event) {
-  alert('sendUpdateProjectForm called')
-  alert('project id: ' + project_id)
+  var project_id = document.getElementById('project_id').value
+  alert(project_id)
   /*
     event.preventDefault() // stop the form from submitting
     let project_name = document.getElementById("project_name").value;
@@ -45,41 +45,8 @@ async function sendUpdateProjectForm(event) {
 }
 
 ipc.on('update-project', function (event, message) {
-  alert('update-project: ' + message);
-  var x = document.getElementById("project_update_submit_form");
-  var onSubmit = '"JavaScript:sendUpdateProjectForm(event, \'' + message + '\')"'
-  x.setAttribute("onSubmit", onSubmit);
-  //x.setAttribute("onSubmit", "JavaScript:sendUpdateProjectForm(event)");
-  return
-
-  var x = document.getElementById("update_project_form");
-  var createform = document.createElement('form'); // Create New Element Form
-  createform.setAttribute("onSubmit", "JavaScript:sendUpdateProjectForm(event)"); // Setting Action Attribute on Form
-  createform.setAttribute("name", "ipcForm"); // Setting Method Attribute on Form
-  x.appendChild(createform);
-
-  var heading = document.createElement('h2'); // Heading of Form
-  heading.innerHTML = "Update Project";
-  createform.appendChild(heading);
-
-  var linebreak = document.createElement('br');
-  createform.appendChild(linebreak);
-
-  var namelabel = document.createElement('label'); // Create Label for Name Field
-  namelabel.innerHTML = "Your Name : "; // Set Field Labels
-  createform.appendChild(namelabel);
-
-  var inputelement = document.createElement('input'); // Create Input Field for Name
-  inputelement.setAttribute("type", "text");
-  inputelement.setAttribute("name", "dname");
-  createform.appendChild(inputelement);
-
-  var linebreak = document.createElement('br');
-  createform.appendChild(linebreak);
-
-  var submitelement = document.createElement('input'); // Append Submit Button
-  submitelement.setAttribute("type", "submit");
-  submitelement.setAttribute("name", "dsubmit");
-  submitelement.setAttribute("value", "Submit");
-  createform.appendChild(submitelement);
+  console.log('update-project: (update_project.js) ' + message)
+  alert(message)
+  var project_id = document.getElementById('project_id')
+  project_id.value = message
 })
