@@ -236,6 +236,10 @@ ipcMain.on('after-project-creation', (event, message) => {
   mainWindow.send('after-project-creation-complete', message)
 })
 
+ipcMain.on('after-project-update', (event, message) => {
+  mainWindow.send('after-project-update-complete', message)
+})
+
 ipcMain.on('after-bill', (event, message) => {
   mainWindow.send('after-bill-complete', message)
 })
@@ -246,9 +250,6 @@ ipcMain.on('update-project-from-index', (event, message) => {
 })
 
 ipcMain.on('call-project-update', (event, message) => {
-  
-  console.log('ipc main received')
-  console.log(message)
   if(!updateProjectWin){
     updateProjectWin = new Window({
       file: path.join('src', 'update_project.html'),
@@ -261,12 +262,7 @@ ipcMain.on('call-project-update', (event, message) => {
       }
     })
 
-    //mainWindow.send('update-project-index', message)
-    console.log('project-update send to renderer')
-
     // updateProjectWin.webContents.openDevTools()
-
-    
     updateProjectWin.webContents.on('did-finish-load', () => {
       updateProjectWin.webContents.send('update-project', message);
     });

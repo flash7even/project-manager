@@ -128,16 +128,14 @@ ipc.on('after-project-creation-complete', function (event, message) {
   updatePageAfterAnyEvent(message);
 })
 
+ipc.on('after-project-update-complete', function (event, message) {
+  updatePageAfterAnyEvent(message);
+})
+
 ipc.on('after-transaction-complete', function (event, message) {
   updatePageAfterAnyEvent(message);
 })
 
 ipc.on('after-bill-complete', function (event, message) {
   updatePageAfterAnyEvent(message);
-})
-
-ipc.on('update-project-index', function (event, message) {
-  //alert('update-project-index: (index.js) ')
-  console.log('update-project-index: (index.js) ' + message)
-  ipc.send('update-project-from-index', message)
 })

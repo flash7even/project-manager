@@ -9,13 +9,23 @@ const axios = require('axios');
 
 var host_name = 'http://tarangopc:5000'
 
+async function deleteProjectToServer(project_id) {
+    var put_url = host_name + '/api/project/' + project_id
+    let res = await axios.delete(put_url);
+    return res
+}
+
 async function updateProjectEvent(project_id) {
   ipc.send('call-project-update', project_id)
+  var window = remote.getCurrentWindow();
+  window.close();
 }
 
 async function deleteProjectEvent(project_id) {
-  alert('Called deleteProject')
-  alert(project_id)
+  var response = await deleteProjectToServer(project_id)
+  alert(JSON.stringify(response.data))
+  var window = remote.getCurrentWindow();
+  window.close();
 }
 
 async function getProjectList() {
@@ -59,3 +69,9 @@ async function showAllProjects() {
 }
 
 showAllProjects()
+
+ipc.on('update-project', function (event, message) {
+  console.log('update-project: (update_project.js) ' + message)
+  var project_id = document.getElementById('project_id')
+  project_id.value = message
+})
