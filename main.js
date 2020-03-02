@@ -85,7 +85,7 @@ function main () {
                 }
               })
           
-              updateShowProjectsWin.webContents.openDevTools()
+              // updateShowProjectsWin.webContents.openDevTools()
           
               // cleanup
               updateShowProjectsWin.on('closed', () => {
@@ -95,7 +95,7 @@ function main () {
           }
         },
         {
-          label:'Project List',
+          label:'Project Stats',
           click() {
             if (!showProjectsWin) {
               showProjectsWin = new Window({
@@ -172,7 +172,7 @@ function main () {
           }
         },
         {
-          label:'Transaction History',
+          label:'Transaction Stats',
           click() {
             if (!showTransactionsWin) {
               showTransactionsWin = new Window({
@@ -225,7 +225,7 @@ function main () {
           }
         },
         {
-        label:'Bill History',
+        label:'Bill Stats',
         click() {
           if (!showBillsWin) {
             showBillsWin = new Window({
