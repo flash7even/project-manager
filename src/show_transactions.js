@@ -9,6 +9,8 @@ const axios = require('axios');
 
 var host_name = 'http://tarangopc:5000'
 
+let data_table_height = '200px'
+
 async function getTransactionList() {
   var page = 0
   var transaction_list = []
@@ -101,30 +103,16 @@ async function findWeeklyTransactionStatsCanvas(){
 async function showAllTransactionsDT(){
   let dt_list = await findTransactionDataDT();
   
-  $(function(){
-    $("#transactionListTable").dataTable({
-      "aaData": dt_list,
-      "aoColumnDefs":[{
-            "sTitle":"Site name"
-          , "aTargets": [ "site_name" ]
-      },{
-            "aTargets": [ 0 ]
-          , "bSortable": false
-          , "mRender": function ( url, type, full )  {
-              return  '<a href="'+url+'">' + url + '</a>';
-          }
-      },{
-            "aTargets": [ 1 ]
-          , "bSortable": true
-      },{
-            "aTargets":[ 3 ]
-          , "sType": "date"
-          , "mRender": function(date, type, full) {
-              return new Date(date).toDateString()
-          }  
-      }]
-    });
-  })
+  $("#transactionListTable").dataTable({
+    "aaData": dt_list,
+    paging: true,
+    scrollY: data_table_height,
+    scrollCollapse: true,
+    dom: 'Bfrtip',
+    buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+    ]
+  });
 }
 
 async function weeklyTransactionStat(){
@@ -134,7 +122,7 @@ async function weeklyTransactionStat(){
     animationEnabled: true,
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     title:{
-      text: "Weekly Transaction Stats"
+      text: ""
     },
     axisY: {
       title: "Amount in BDT"

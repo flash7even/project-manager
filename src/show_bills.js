@@ -8,6 +8,7 @@ const ipc = electron.ipcRenderer
 const axios = require('axios');
 
 var host_name = 'http://tarangopc:5000'
+let data_table_height = '200px'
 
 async function getBillList() {
   var page = 0
@@ -89,32 +90,17 @@ async function findWeeklyBillStatsCanvas(){
 
 async function showAllBillsDT(){
   let dt_list = await findBillDataDT();
-  $(function(){
-    $("#billsTable").dataTable({
-      "aaData": dt_list,
-      "aoColumnDefs":[{
-            "sTitle":"Site name"
-          , "aTargets": [ "site_name" ]
-      },{
-            "aTargets": [ 0 ]
-          , "bSortable": false
-          , "mRender": function ( url, type, full )  {
-              return  '<a href="'+url+'">' + url + '</a>';
-          }
-      },{
-            "aTargets": [ 1 ]
-          , "bSortable": true
-      },{
-            "aTargets":[ 3 ]
-          , "sType": "date"
-          , "mRender": function(date, type, full) {
-              return new Date(date).toDateString()
-          }  
-      }]
-    });
-  })
+  $("#billsTable").dataTable({
+    "aaData": dt_list,
+    paging: true,
+    scrollY: data_table_height,
+    scrollCollapse: true,
+    dom: 'Bfrtip',
+    buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+    ]
+  });
 }
-
 
 async function weeklyBillStat(){
   let dt_list = await findWeeklyBillStatsCanvas();

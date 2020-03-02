@@ -8,6 +8,7 @@ const ipc = electron.ipcRenderer
 const axios = require('axios');
 
 var host_name = 'http://tarangopc:5000'
+let data_table_height = '200px'
 
 async function getProjectList() {
   var page = 0
@@ -80,28 +81,16 @@ async function findProjectDataDT(){
 
   async function showAllProjectsDT(){
     let dt_list = await findProjectDataDT();
-    $(function(){
-      $("#projectListTable").dataTable({
-        "aaData": dt_list,
-        "aoColumnDefs":[{
-              "sTitle":"Site name"
-            , "aTargets": [ "site_name" ]
-        },{
-              "aTargets": [ 0 ]
-            , "bSortable": false
-            /*
-            , "mRender": function ( url, type, full )  {
-                return  '<a href="'+url+'">' + url + '</a>';
-            }
-            */
-        },{
-              "aTargets": [ 1 ]
-        },{
-              "aTargets":[ 3 ]
-            , "sType": "date"
-        }]
-      });
-    })
+    $("#projectListTable").dataTable({
+      "aaData": dt_list,
+      paging: true,
+      scrollY: data_table_height,
+      scrollCollapse: true,
+      dom: 'Bfrtip',
+      buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
+    });
 }
 
 async function findProjectDataCanvas(){
@@ -128,7 +117,7 @@ async function showProjectOverallChart(){
   var chart = new CanvasJS.Chart("projectOverallChart", {
     animationEnabled: true,
     title:{
-      text: "Overall Project Stats"
+      text: ""
     },
     axisY: {
       title: "Medals"

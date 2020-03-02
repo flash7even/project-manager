@@ -22,6 +22,9 @@ let updateProjectWin
 let updateTransactionWin
 let updateShowTransactionWin
 
+let submenu_win_width = 1200
+let submenu_win_height = 700
+
 function main () {
   mainWindow = new Window({
     file: path.join('src', 'index.html')
@@ -38,8 +41,8 @@ function main () {
                     if (!aboutWin) {
                       aboutWin = new Window({
                         file: path.join('src', 'about.html'),
-                        width: 1000,
-                        height: 700,
+                        width: submenu_win_width,
+                        height: submenu_win_height,
                         // close with the main window
                         parent: mainWindow,
                         webPreferences: {
@@ -74,8 +77,8 @@ function main () {
             if (!addProjectWin) {
               addProjectWin = new Window({
                 file: path.join('src', 'add_project.html'),
-                width: 1000,
-                height: 700,
+                width: submenu_win_width,
+                height: submenu_win_height,
                 // close with the main window
                 parent: mainWindow,
                 webPreferences: {
@@ -98,8 +101,8 @@ function main () {
             if (!updateShowProjectsWin) {
               updateShowProjectsWin = new Window({
                 file: path.join('src', 'update_show_projects.html'),
-                width: 1000,
-                height: 700,
+                width: submenu_win_width,
+                height: submenu_win_height,
                 // close with the main window
                 parent: mainWindow,
                 webPreferences: {
@@ -122,8 +125,8 @@ function main () {
             if (!showProjectsWin) {
               showProjectsWin = new Window({
                 file: path.join('src', 'show_projects.html'),
-                width: 1000,
-                height: 700,
+                width: submenu_win_width,
+                height: submenu_win_height,
                 // close with the main window
                 parent: mainWindow,
                 webPreferences: {
@@ -151,8 +154,8 @@ function main () {
             if (!addTransactionWin) {
               addTransactionWin = new Window({
                 file: path.join('src', 'add_transaction.html'),
-                width: 1000,
-                height: 700,
+                width: submenu_win_width,
+                height: submenu_win_height,
                 // close with the main window
                 parent: mainWindow,
                 webPreferences: {
@@ -175,8 +178,8 @@ function main () {
             if (!updateShowTransactionWin) {
               updateShowTransactionWin = new Window({
                 file: path.join('src', 'update_show_transactions.html'),
-                width: 1000,
-                height: 700,
+                width: submenu_win_width,
+                height: submenu_win_height,
                 // close with the main window
                 parent: mainWindow,
                 webPreferences: {
@@ -199,8 +202,8 @@ function main () {
             if (!showTransactionsWin) {
               showTransactionsWin = new Window({
                 file: path.join('src', 'show_transactions.html'),
-                width: 1000,
-                height: 700,
+                width: submenu_win_width,
+                height: submenu_win_height,
                 // close with the main window
                 parent: mainWindow,
                 webPreferences: {
@@ -228,8 +231,8 @@ function main () {
             if (!addBillWin) {
               addBillWin = new Window({
                 file: path.join('src', 'add_bill.html'),
-                width: 1000,
-                height: 700,
+                width: submenu_win_width,
+                height: submenu_win_height,
                 // close with the main window
                 parent: mainWindow,
                 webPreferences: {
@@ -252,8 +255,8 @@ function main () {
           if (!showBillsWin) {
             showBillsWin = new Window({
               file: path.join('src', 'show_bills.html'),
-              width: 1000,
-              height: 700,
+              width: submenu_win_width,
+              height: submenu_win_height,
               // close with the main window
               parent: mainWindow,
               webPreferences: {
@@ -271,7 +274,7 @@ function main () {
         }
       }
       ]
-    },
+    }
   ])
   Menu.setApplicationMenu(menu); 
 }
@@ -300,8 +303,8 @@ ipcMain.on('call-project-update', (event, message) => {
   if(!updateProjectWin){
     updateProjectWin = new Window({
       file: path.join('src', 'update_project.html'),
-      width: 1000,
-      height: 700,
+      width: submenu_win_width,
+      height: submenu_win_height,
       // close with the main window
       parent: mainWindow,
       webPreferences: {
@@ -325,8 +328,8 @@ ipcMain.on('call-transaction-update', (event, message) => {
   if(!updateTransactionWin){
     updateTransactionWin = new Window({
       file: path.join('src', 'update_transaction.html'),
-      width: 1000,
-      height: 700,
+      width: submenu_win_width,
+      height: submenu_win_height,
       // close with the main window
       parent: mainWindow,
       webPreferences: {
