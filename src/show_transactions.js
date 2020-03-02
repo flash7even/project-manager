@@ -72,6 +72,7 @@ async function findTransactionDataDT(){
       transaction['updated_at'],
       transaction['mode_of_payment'],
       transaction['payment_by'],
+      transaction['payment_date'],
       transaction['cheque_no'],
       transaction['description'],
       transaction['status'],

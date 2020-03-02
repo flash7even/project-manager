@@ -15,16 +15,26 @@ async function addProjectToServer(project_data) {
     return res
 }
 
+async function dateTimeToEpoch(date_time){
+  var someDate = new Date(dateString);
+  var epoch_time = someDate.date_time();
+  alert(epoch_time)
+}
+
 async function sendAddProjectForm(event) {
     event.preventDefault() // stop the form from submitting
     let project_name = document.getElementById("project_name").value;
     let description = document.getElementById("description").value;
     let project_value = document.getElementById("project_value").value;
+    let commencement_date = document.getElementById("commencement_date").value;
+    let termination_date = document.getElementById("termination_date").value;
 
     var project_data = {
       'project_name': project_name,
       'description': description,
-      'project_value': project_value
+      'project_value': project_value,
+      'commencement_date': commencement_date,
+      'termination_date': termination_date,
     }
     
     let data = await addProjectToServer(project_data);
@@ -37,8 +47,6 @@ async function sendAddProjectForm(event) {
     var window = remote.getCurrentWindow();
     window.close();
 }
-
-
 
 
 

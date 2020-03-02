@@ -24,6 +24,7 @@ async function sendUpdateTransactionForm(event) {
   let description = document.getElementById("description").value;
   let status = document.getElementById("status").value;
   let transaction_id = document.getElementById("transaction_id").value;
+  let payment_date = document.getElementById("payment_date").value;
 
   var transaction_data = {
     'amount': amount,
@@ -32,6 +33,7 @@ async function sendUpdateTransactionForm(event) {
     'cheque_no': cheque_no,
     'description': description,
     'status': status,
+    'payment_date': payment_date,
   }
   
   let data = await updateTransactionToServer(transaction_data, transaction_id);

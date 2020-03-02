@@ -55,6 +55,7 @@ async function sendAddTransactionForm(event) {
     let cheque_no = document.getElementById("cheque_no").value;
     let description = document.getElementById("description").value;
     let status = document.getElementById("status").value;
+    let payment_date = document.getElementById("payment_date").value;
 
     var transaction_data = {
       'transaction_id': transaction_id,
@@ -65,6 +66,7 @@ async function sendAddTransactionForm(event) {
       'cheque_no': cheque_no,
       'description': description,
       'status': status,
+      'payment_date': payment_date,
     }
     
     let data = await addTransactionToServer(transaction_data);

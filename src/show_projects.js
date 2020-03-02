@@ -53,6 +53,8 @@ async function showAllProjects() {
     cur_project += `<td>${project['project_name']}</td>`
     cur_project += `<td>${project['description']}</td>`
     cur_project += `<td>${project['project_value']}</td>`
+    cur_project += `<td>${project['commencement_date']}</td>`
+    cur_project += `<td>${project['termination_date']}</td>`
     cur_project += '</tr>'
     html += cur_project
   }
@@ -70,7 +72,7 @@ async function findProjectDataDT(){
 
   for(idx = 0;idx<project_list.length;idx++){
     var project = project_list[idx]
-    var tran_data = [project['project_name'], project['description'], project['project_value'], "2013-10-15 10:30:00"]
+    var tran_data = [project['project_name'], project['description'], project['project_value'], project['commencement_date'], project['termination_date']]
     dt_list.push(tran_data)
   }
   return dt_list
@@ -97,9 +99,6 @@ async function findProjectDataDT(){
         },{
               "aTargets":[ 3 ]
             , "sType": "date"
-            , "mRender": function(date, type, full) {
-                return new Date(date).toDateString()
-            }  
         }]
       });
     })

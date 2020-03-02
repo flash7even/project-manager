@@ -57,6 +57,7 @@ async function showAllTransactions() {
                   <th>Project Name</th>
                   <th>Mode of Payment</th>
                   <th>Payment By</th>
+                  <th>Payment Date</th>
                   <th>Cheque No</th>
                   <th>Description</th>
                   <th>Payment Status</th>
@@ -79,6 +80,7 @@ async function showAllTransactions() {
     cur_transaction += `<td>${transaction['project_name']}</td>`
     cur_transaction += `<td>${transaction['mode_of_payment']}</td>`
     cur_transaction += `<td>${transaction['payment_by']}</td>`
+    cur_transaction += `<td>${transaction['payment_date']}</td>`
     cur_transaction += `<td>${transaction['cheque_no']}</td>`
     cur_transaction += `<td>${transaction['description']}</td>`
     cur_transaction += `<td>${transaction['status']}</td>`

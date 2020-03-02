@@ -55,6 +55,8 @@ async function showAllProjects() {
                   <th class="site_name">Project Name</th>
                   <th>Description </th>
                   <th>Project Value</th>
+                  <th>Commencement Date</th>
+                  <th>Termination Date</th>
                   <th>Options</th>
                 </tr>
               </thead>`
@@ -72,6 +74,8 @@ async function showAllProjects() {
     cur_project += `<td>${project['project_name']}</td>`
     cur_project += `<td>${project['description']}</td>`
     cur_project += `<td>${project['project_value']}</td>`
+    cur_project += `<td>${project['commencement_date']}</td>`
+    cur_project += `<td>${project['termination_date']}</td>`
     var project_id = project['id']
     var btn1 = '<input type="button" onClick="updateProjectEvent(\'' + project_id + '\')" value="Update"/>'
     var btn2 = '<input type="button" onClick="deleteProjectEvent(\'' + project_id + '\')" value="Delete"/>'
