@@ -11,6 +11,7 @@ require('electron-reload')(__dirname)
 let mainWindow
 
 let addProjectWin
+let aboutWin
 let addTransactionWin
 let showProjectsWin
 let updateShowProjectsWin
@@ -32,7 +33,28 @@ function main () {
         label: 'Menu',
             submenu: [
               {
-                  label:'About'
+                  label:'About',
+                  click() {
+                    if (!aboutWin) {
+                      aboutWin = new Window({
+                        file: path.join('src', 'about.html'),
+                        width: 1000,
+                        height: 700,
+                        // close with the main window
+                        parent: mainWindow,
+                        webPreferences: {
+                          nodeIntegration: true
+                        }
+                      })
+                  
+                      // aboutWin.webContents.openDevTools()
+                  
+                      // cleanup
+                      aboutWin.on('closed', () => {
+                        aboutWin = null
+                      })
+                    }
+                  }
               },
               {type:'separator'},
               {

@@ -3,6 +3,8 @@
   <title>Bill History</title>
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' />
   <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body>
   <br>
@@ -11,12 +13,20 @@
     <div class="row">
       <table id="billsTable">
         <thead>
-          <tr><th class="site_name">Name</th><th>Url </th><th>Type</th><th>Last modified</th></tr>
+          <tr>
+            <th class="site_name">Name</th>
+            <th>Url </th>
+            <th>Type</th>
+            <th>Last modified</th>
+          </tr>
         </thead>
         <tbody>
         </tbody>
       </table>
   </div>
+  <div class="row">
+    <div id="weeklyBillStatChart" style="height: 300px; width: 100%;"></div>
+  </div> 
 </div>
   <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
   <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>

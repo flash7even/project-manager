@@ -24,6 +24,16 @@ async function getBillList() {
   return bill_list
 }
 
+async function getWeeklyBillStat() {
+  var no_of_weeks = 7
+  var bill_list = []
+  var post_url = host_name + '/api/bill/statsperweek/' + no_of_weeks.toString()
+  console.log("post_url: " + post_url)
+  let res = await axios.post(post_url, {});
+  var bill_list = res.data
+  return bill_list
+}
+
 async function showAllBills() {
   let bill_list = await getBillList();
   console.log(JSON.stringify(bill_list))
@@ -46,7 +56,6 @@ async function showAllBills() {
   billListTable.innerHTML = html
 }
 
-
 async function findBillDataDT(){
   let bill_list = await getBillList();
   console.log(JSON.stringify(bill_list))
@@ -58,6 +67,22 @@ async function findBillDataDT(){
     var bill = bill_list[idx]
     var tran_data = [bill['bill_id'], bill['amount'], bill['project_name'], "2013-10-15 10:30:00"]
     dt_list.push(tran_data)
+  }
+  return dt_list
+}
+
+async function findWeeklyBillStatsCanvas(){
+  let week_list = await getWeeklyBillStat();
+
+  console.log(JSON.stringify(week_list))
+
+  var dt_list = []
+  var idx1 = 0
+  for(idx1 = 0;idx1<week_list.length;idx1++){
+    var week_data = week_list[idx1]
+    var week_name = 'week_' + (idx1+1).toString()
+    var tran_data1 = { label: week_name, y: parseFloat(week_data['total_amount_of_bills']) }
+    dt_list.push(tran_data1)
   }
   return dt_list
 }
@@ -90,4 +115,29 @@ async function showAllBillsDT(){
   })
 }
 
+
+async function weeklyBillStat(){
+  let dt_list = await findWeeklyBillStatsCanvas();
+
+  var chart = new CanvasJS.Chart("weeklyBillStatChart", {
+    animationEnabled: true,
+    theme: "light2", // "light1", "light2", "dark1", "dark2"
+    title:{
+      text: "Weekly Bill Stats"
+    },
+    axisY: {
+      title: "Amount in BDT"
+    },
+    data: [{        
+      type: "column",  
+      showInLegend: true, 
+      legendMarkerColor: "grey",
+      legendText: "1 USD = 85 BDT",
+      dataPoints: dt_list
+    }]
+  });
+  chart.render();
+}
+
 showAllBillsDT()
+weeklyBillStat()

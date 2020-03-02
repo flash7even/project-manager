@@ -24,6 +24,16 @@ async function getTransactionList() {
   return transaction_list
 }
 
+async function getWeeklyTransactionStat() {
+  var no_of_weeks = 7
+  var transaction_list = []
+  var post_url = host_name + '/api/transaction/statsperweek/' + no_of_weeks.toString()
+  console.log("post_url: " + post_url)
+  let res = await axios.post(post_url, {});
+  var transaction_list = res.data
+  return transaction_list
+}
+
 async function showAllTransactions() {
   let transaction_list = await getTransactionList();
   console.log(JSON.stringify(transaction_list))
@@ -71,8 +81,25 @@ async function findTransactionDataDT(){
   return dt_list
 }
 
+async function findWeeklyTransactionStatsCanvas(){
+  let week_list = await getWeeklyTransactionStat();
+
+  console.log(JSON.stringify(week_list))
+
+  var dt_list = []
+  var idx1 = 0
+  for(idx1 = 0;idx1<week_list.length;idx1++){
+    var week_data = week_list[idx1]
+    var week_name = 'week_' + (idx1+1).toString()
+    var tran_data1 = { label: week_name, y: parseFloat(week_data['total_amount_of_transactions']) }
+    dt_list.push(tran_data1)
+  }
+  return dt_list
+}
+
 async function showAllTransactionsDT(){
   let dt_list = await findTransactionDataDT();
+  
   $(function(){
     $("#transactionListTable").dataTable({
       "aaData": dt_list,
@@ -99,4 +126,28 @@ async function showAllTransactionsDT(){
   })
 }
 
+async function weeklyTransactionStat(){
+  let dt_list = await findWeeklyTransactionStatsCanvas();
+
+  var chart = new CanvasJS.Chart("weeklyTransactionStatChart", {
+    animationEnabled: true,
+    theme: "light2", // "light1", "light2", "dark1", "dark2"
+    title:{
+      text: "Weekly Transaction Stats"
+    },
+    axisY: {
+      title: "Amount in BDT"
+    },
+    data: [{        
+      type: "column",  
+      showInLegend: true, 
+      legendMarkerColor: "grey",
+      legendText: "1 USD = 85 BDT",
+      dataPoints: dt_list
+    }]
+  });
+  chart.render();
+}
+
 showAllTransactionsDT()
+weeklyTransactionStat()
