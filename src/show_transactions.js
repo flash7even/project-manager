@@ -32,7 +32,7 @@ async function viewProjectInTransactionForm() {
 
   var html = ''
   var idx = 0
-
+  html += `<option>ALL</option>`
   for(idx = 0;idx<project_list.length;idx++){
     var project = project_list[idx]
     html += `<option>${project['project_name']}</option>`
@@ -136,6 +136,7 @@ async function showAllTransactionsDT(search_params){
   $("#transactionListTable").dataTable({
     "aaData": dt_list,
     paging: true,
+    destroy: true,
     scrollY: data_table_height,
     scrollCollapse: true,
     dom: 'Bfrtip',
