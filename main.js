@@ -211,7 +211,7 @@ function main () {
                 }
               })
           
-              // showTransactionsWin.webContents.openDevTools()
+              showTransactionsWin.webContents.openDevTools()
           
               // cleanup
               showTransactionsWin.on('closed', () => {

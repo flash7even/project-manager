@@ -11,13 +11,43 @@ var host_name = 'http://tarangopc:5000'
 
 let data_table_height = '200px'
 
-async function getTransactionList() {
+async function getProjectList() {
+  var page = 0
+  var project_list = []
+  while(1){
+    var post_url = host_name + '/api/project/search/' + page.toString()
+    console.log("post_url: " + post_url)
+    let res = await axios.post(post_url, {});
+    var cur_list = res.data
+    if(cur_list.length == 0) break;
+    project_list = project_list.concat(cur_list)
+    page++
+  }
+  return project_list
+}
+
+async function viewProjectInTransactionForm() {
+  let project_list = await getProjectList();
+  console.log(JSON.stringify(project_list))
+
+  var html = ''
+  var idx = 0
+
+  for(idx = 0;idx<project_list.length;idx++){
+    var project = project_list[idx]
+    html += `<option>${project['project_name']}</option>`
+  }
+  var projectListInTransaction = document.getElementById('projectListInTransaction')
+  projectListInTransaction.innerHTML = html
+}
+
+async function getTransactionList(search_params = {}) {
   var page = 0
   var transaction_list = []
   while(page == 0){
     var post_url = host_name + '/api/transaction/search/' + page.toString()
     console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
+    let res = await axios.post(post_url, search_params);
     var cur_list = res.data
     if(cur_list.length == 0) break;
     transaction_list = transaction_list.concat(cur_list)
@@ -58,8 +88,8 @@ async function showAllTransactions() {
   transactionListTable.innerHTML = html
 }
 
-async function findTransactionDataDT(){
-  let transaction_list = await getTransactionList();
+async function findTransactionDataDT(search_params){
+  let transaction_list = await getTransactionList(search_params);
   console.log(JSON.stringify(transaction_list))
 
   var dt_list = []
@@ -100,8 +130,8 @@ async function findWeeklyTransactionStatsCanvas(){
   return dt_list
 }
 
-async function showAllTransactionsDT(){
-  let dt_list = await findTransactionDataDT();
+async function showAllTransactionsDT(search_params){
+  let dt_list = await findTransactionDataDT(search_params);
   
   $("#transactionListTable").dataTable({
     "aaData": dt_list,
@@ -115,9 +145,7 @@ async function showAllTransactionsDT(){
   });
 }
 
-async function weeklyTransactionStat(){
-  let dt_list = await findWeeklyTransactionStatsCanvas();
-
+async function weeklyTransactionStat(dt_list){
   var chart = new CanvasJS.Chart("weeklyTransactionStatChart", {
     animationEnabled: true,
     theme: "light2", // "light1", "light2", "dark1", "dark2"
@@ -138,5 +166,31 @@ async function weeklyTransactionStat(){
   chart.render();
 }
 
-showAllTransactionsDT()
+async function sendAdvancedTransactionReport(event) {
+  event.preventDefault() // stop the form from submitting
+  
+  let project_name = document.getElementById("projectListInTransaction").value;
+  let status = document.getElementById("status").value;
+  let amount_min = document.getElementById("amount_min").value;
+  let amount_max = document.getElementById("amount_max").value;
+  let payment_date_start = document.getElementById("payment_date_start").value;
+  let payment_date_end = document.getElementById("payment_date_end").value;
+  let mode_of_payment = document.getElementById("mode_of_payment").value;
+
+  var search_params = {
+    'project_name': project_name,
+    'status': status,
+    'amount_min': amount_min,
+    'amount_max': amount_max,
+    'payment_date_start': payment_date_start,
+    'payment_date_end': payment_date_end,
+    'mode_of_payment': mode_of_payment,
+  }
+  
+  await showAllTransactionsDT(search_params)
+}
+
+viewProjectInTransactionForm()
+let search_params = {}
+showAllTransactionsDT(search_params)
 weeklyTransactionStat()
