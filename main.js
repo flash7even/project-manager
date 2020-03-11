@@ -21,6 +21,7 @@ let showBillsWin
 let updateProjectWin
 let updateTransactionWin
 let updateShowTransactionWin
+let addPaymentMethodWin
 
 let submenu_win_width = 1200
 let submenu_win_height = 700
@@ -274,7 +275,36 @@ function main () {
         }
       }
       ]
-    }
+    },
+    {
+      label: 'Payment Method',
+      submenu: [
+        {
+          label:'Add Payment Method',
+          click() {
+            if (!addPaymentMethodWin) {
+              addPaymentMethodWin = new Window({
+                file: path.join('src', 'add_payment_method.html'),
+                width: submenu_win_width,
+                height: submenu_win_height,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              // addPaymentMethodWin.webContents.openDevTools()
+          
+              // cleanup
+              addPaymentMethodWin.on('closed', () => {
+                addPaymentMethodWin = null
+              })
+            }
+          }
+        }
+      ]
+    },
   ])
   Menu.setApplicationMenu(menu); 
 }
@@ -289,6 +319,10 @@ ipcMain.on('after-transaction-update', (event, message) => {
 
 ipcMain.on('after-project-creation', (event, message) => {
   mainWindow.send('after-project-creation-complete', message)
+})
+
+ipcMain.on('after-payment-method-creation', (event, message) => {
+  mainWindow.send('after-payment-method-creation-complete', message)
 })
 
 ipcMain.on('after-project-update', (event, message) => {

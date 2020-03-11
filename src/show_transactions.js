@@ -185,7 +185,7 @@ async function sendAdvancedTransactionReport(event) {
     'amount_max': amount_max,
     'payment_date_start': payment_date_start,
     'payment_date_end': payment_date_end,
-    'mode_of_payment': mode_of_payment,
+    'mode_of_payment': mode_of_payment
   }
   
   await showAllTransactionsDT(search_params)

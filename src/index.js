@@ -124,6 +124,10 @@ function updatePageAfterAnyEvent(message){
   alert(message)
 }
 
+ipc.on('after-payment-method-creation-complete', function (event, message) {
+  updatePageAfterAnyEvent(message);
+})
+
 ipc.on('after-project-creation-complete', function (event, message) {
   updatePageAfterAnyEvent(message);
 })
