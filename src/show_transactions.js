@@ -26,6 +26,38 @@ async function getProjectList() {
   return project_list
 }
 
+async function getPaymentMethodList() {
+  var page = 0
+  var payment_method_list = []
+  while(1){
+    var post_url = host_name + '/api/payment/method/search/' + page.toString()
+    console.log("post_url: " + post_url)
+    let res = await axios.post(post_url, {});
+    var cur_list = res.data
+    if(cur_list.length == 0) break;
+    payment_method_list = payment_method_list.concat(cur_list)
+    page++
+  }
+  return payment_method_list
+}
+
+async function viewPaymentMethodInTransactionForm() {
+  let payment_method_list = await getPaymentMethodList();
+  console.log(JSON.stringify(payment_method_list))
+
+  var html = ''
+  var idx = 0
+
+  html += `<option>ALL</option>`
+
+  for(idx = 0;idx<payment_method_list.length;idx++){
+    var pm = payment_method_list[idx]
+    html += `<option>${pm['payment_method_name']}</option>`
+  }
+  var paymentMethodListInTransaction = document.getElementById('mode_of_payment')
+  paymentMethodListInTransaction.innerHTML = html
+}
+
 async function viewProjectInTransactionForm() {
   let project_list = await getProjectList();
   console.log(JSON.stringify(project_list))
@@ -192,6 +224,7 @@ async function sendAdvancedTransactionReport(event) {
 }
 
 viewProjectInTransactionForm()
+viewPaymentMethodInTransactionForm()
 let search_params = {}
 showAllTransactionsDT(search_params)
 weeklyTransactionStat()
