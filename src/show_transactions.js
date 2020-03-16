@@ -173,8 +173,31 @@ async function showAllTransactionsDT(search_params){
     scrollCollapse: true,
     dom: 'Bfrtip',
     buttons: [
-        'copy', 'csv', 'excel', 'pdf', 'print'
-    ]
+      // Options: 'copy', 'csv', 'excel', 'pdf', 'print',
+      {
+          extend: 'excel',
+          exportOptions: {
+              columns: ':visible'
+          }
+      },
+      {
+          extend: 'csv',
+          exportOptions: {
+              columns: ':visible'
+          }
+      },
+      {
+          extend: 'copy',
+          exportOptions: {
+              columns: ':visible'
+          }
+      },
+      'colvis'
+      ],
+      columnDefs: [ {
+          targets: -1,
+          visible: false
+      } ]
   });
 }
 

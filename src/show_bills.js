@@ -156,12 +156,36 @@ async function showAllBillsDT(search_params){
   $("#billsTable").dataTable({
     "aaData": dt_list,
     paging: true,
+    destroy: true,
     scrollY: data_table_height,
     scrollCollapse: true,
     dom: 'Bfrtip',
     buttons: [
-        'copy', 'csv', 'excel', 'pdf', 'print'
-    ]
+      // Options: 'copy', 'csv', 'excel', 'pdf', 'print',
+      {
+          extend: 'excel',
+          exportOptions: {
+              columns: ':visible'
+          }
+      },
+      {
+          extend: 'csv',
+          exportOptions: {
+              columns: ':visible'
+          }
+      },
+      {
+          extend: 'copy',
+          exportOptions: {
+              columns: ':visible'
+          }
+      },
+      'colvis'
+      ],
+      columnDefs: [ {
+          targets: -1,
+          visible: false
+      } ]
   });
 }
 
