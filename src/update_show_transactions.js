@@ -15,6 +15,12 @@ async function deleteTransactionToServer(transaction_id) {
     return res
 }
 
+async function updateTransactionStatusToServer(transaction_id, status) {
+    var put_url = host_name + '/api/transaction/status/' + transaction_id + '/' + status
+    let res = await axios.put(put_url);
+    return res
+}
+
 async function updateTransactionEvent(transaction_id) {
   ipc.send('call-transaction-update', transaction_id)
   var window = remote.getCurrentWindow();
@@ -25,7 +31,15 @@ async function deleteTransactionEvent(transaction_id) {
   var response = await deleteTransactionToServer(transaction_id)
   alert(JSON.stringify(response.data))
   var window = remote.getCurrentWindow();
-  window.close();
+  window.reload();
+}
+
+async function updateTransactionStatusEvent(transaction_id) {
+  var status = 'inactive'
+  var response = await updateTransactionStatusToServer(transaction_id, status)
+  alert(JSON.stringify(response.data))
+  var window = remote.getCurrentWindow();
+  window.reload();
 }
 
 async function getTransactionList() {
@@ -85,9 +99,10 @@ async function showAllTransactions() {
     cur_transaction += `<td>${transaction['description']}</td>`
     cur_transaction += `<td>${transaction['status']}</td>`
     var transaction_id = transaction['id']
-    var btn1 = '<input type="button" onClick="updateTransactionEvent(\'' + transaction_id + '\')" value="Update"/>'
-    var btn2 = '<input type="button" onClick="deleteTransactionEvent(\'' + transaction_id + '\')" value="Delete"/>'
-    cur_transaction += `<td>${btn1+' '+btn2}</td>`
+    //var btn1 = '<input type="button" onClick="updateTransactionEvent(\'' + transaction_id + '\')" value="Update"/>'
+    var btn2 = '<input type="button" onClick="updateTransactionStatusEvent(\'' + transaction_id + '\')" value="Inactive"/>'
+    var btn3 = '<input type="button" onClick="deleteTransactionEvent(\'' + transaction_id + '\')" value="Delete"/>'
+    cur_transaction += `<td>${btn2 + ' ' + btn3}</td>`
     cur_transaction += '</tr>'
     html += cur_transaction
   }
