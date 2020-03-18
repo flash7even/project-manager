@@ -30,7 +30,7 @@ function main () {
   mainWindow = new Window({
     file: path.join('src', 'index.html')
   })
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   var menu = Menu.buildFromTemplate([
     {
@@ -164,7 +164,7 @@ function main () {
                 }
               })
           
-              // addTransactionWin.webContents.openDevTools()
+              addTransactionWin.webContents.openDevTools()
           
               // cleanup
               addTransactionWin.on('closed', () => {
@@ -188,7 +188,7 @@ function main () {
                 }
               })
           
-              // updateShowTransactionWin.webContents.openDevTools()
+              updateShowTransactionWin.webContents.openDevTools()
           
               // cleanup
               updateShowTransactionWin.on('closed', () => {

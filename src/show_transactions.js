@@ -88,16 +88,6 @@ async function getTransactionList(search_params = {}) {
   return transaction_list
 }
 
-async function getWeeklyTransactionStat() {
-  var no_of_weeks = 7
-  var transaction_list = []
-  var post_url = host_name + '/api/transaction/statsperweek/' + no_of_weeks.toString()
-  console.log("post_url: " + post_url)
-  let res = await axios.post(post_url, {});
-  var transaction_list = res.data
-  return transaction_list
-}
-
 async function showAllTransactions() {
   let transaction_list = await getTransactionList();
   console.log(JSON.stringify(transaction_list))
@@ -201,27 +191,6 @@ async function showAllTransactionsDT(search_params){
   });
 }
 
-async function weeklyTransactionStat(dt_list){
-  var chart = new CanvasJS.Chart("weeklyTransactionStatChart", {
-    animationEnabled: true,
-    theme: "light2", // "light1", "light2", "dark1", "dark2"
-    title:{
-      text: ""
-    },
-    axisY: {
-      title: "Amount in BDT"
-    },
-    data: [{        
-      type: "column",  
-      showInLegend: true, 
-      legendMarkerColor: "grey",
-      legendText: "1 USD = 85 BDT",
-      dataPoints: dt_list
-    }]
-  });
-  chart.render();
-}
-
 async function sendAdvancedTransactionReport(event) {
   event.preventDefault() // stop the form from submitting
   
@@ -250,4 +219,3 @@ viewProjectInTransactionForm()
 viewPaymentMethodInTransactionForm()
 let search_params = {}
 showAllTransactionsDT(search_params)
-weeklyTransactionStat()

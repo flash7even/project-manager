@@ -9,6 +9,54 @@ const axios = require('axios');
 
 var host_name = 'http://tarangopc:5000'
 
+async function getWeeklyTransactionStat() {
+  var no_of_weeks = 7
+  var transaction_list = []
+  var post_url = host_name + '/api/transaction/statsperweek/' + no_of_weeks.toString()
+  console.log("post_url: " + post_url)
+  let res = await axios.post(post_url, {});
+  var transaction_list = res.data
+  return transaction_list
+}
+
+
+async function findWeeklyTransactionStatsCanvas(){
+  let week_list = await getWeeklyTransactionStat();
+
+  console.log(JSON.stringify(week_list))
+
+  var dt_list = []
+  var idx1 = 0
+  for(idx1 = 0;idx1<week_list.length;idx1++){
+    var week_data = week_list[idx1]
+    var week_name = 'week_' + (idx1+1).toString()
+    var tran_data1 = { label: week_name, y: parseFloat(week_data['total_amount_of_transactions']) }
+    dt_list.push(tran_data1)
+  }
+  return dt_list
+}
+
+
+async function weeklyTransactionStat(dt_list){
+  var chart = new CanvasJS.Chart("weeklyTransactionStatChart", {
+    animationEnabled: true,
+    theme: "light2", // "light1", "light2", "dark1", "dark2"
+    title:{
+      text: ""
+    },
+    axisY: {
+      title: "Amount in BDT"
+    },
+    data: [{        
+      type: "column",  
+      showInLegend: true, 
+      legendMarkerColor: "grey",
+      legendText: "1 USD = 85 BDT",
+      dataPoints: dt_list
+    }]
+  });
+  chart.render();
+}
 
 async function getProjectStat() {
   var page = 0
@@ -117,10 +165,13 @@ async function showTransactionCountStat(){
 
 showTransactionAmountStat();
 showTransactionCountStat();
+//var wts_dt_list = await findWeeklyTransactionStatsCanvas()
+//weeklyTransactionStat(wts_dt_list)
 
 function updatePageAfterAnyEvent(message){
   showTransactionAmountStat();
   showTransactionCountStat();
+  weeklyTransactionStat()
   alert(message)
 }
 
