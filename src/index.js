@@ -180,7 +180,7 @@ async function divisionWiseProjectTransactionStat(){
   var chart = new CanvasJS.Chart("divisionWiseProjectTransactionStatChart", {
     animationEnabled: true,
     title:{
-      text: "Per Project Transaction in Intervals"
+      text: "Project Transactions Per Interval"
     },
     axisY :{
       valueFormatString: "#0,.",

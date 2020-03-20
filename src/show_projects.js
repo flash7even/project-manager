@@ -50,7 +50,6 @@ async function showAllProjects() {
   for(idx = 0;idx<project_list.length;idx++){
     var project = project_list[idx]
     var cur_project = '<tr>'
-    cur_project += `<th scope="row">${idx.toString()}</th>`
     cur_project += `<td>${project['project_name']}</td>`
     cur_project += `<td>${project['description']}</td>`
     cur_project += `<td>${project['project_value']}</td>`
@@ -84,12 +83,36 @@ async function findProjectDataDT(){
     $("#projectListTable").dataTable({
       "aaData": dt_list,
       paging: true,
+      destroy: true,
       scrollY: data_table_height,
       scrollCollapse: true,
       dom: 'Bfrtip',
       buttons: [
-          'copy', 'csv', 'excel', 'pdf', 'print'
-      ]
+        // Options: 'copy', 'csv', 'excel', 'pdf', 'print',
+        {
+            extend: 'excel',
+            exportOptions: {
+                columns: ':visible'
+            }
+        },
+        {
+            extend: 'csv',
+            exportOptions: {
+                columns: ':visible'
+            }
+        },
+        {
+            extend: 'copy',
+            exportOptions: {
+                columns: ':visible'
+            }
+        },
+        'colvis'
+        ],
+        columnDefs: [ {
+            targets: -1,
+            visible: false
+        } ]
     });
 }
 
