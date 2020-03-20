@@ -22,6 +22,7 @@ let updateProjectWin
 let updateTransactionWin
 let updateShowTransactionWin
 let addPaymentMethodWin
+let paymentMethodListWin
 
 let submenu_win_width = 1200
 let submenu_win_height = 700
@@ -121,7 +122,7 @@ function main () {
           }
         },
         {
-          label:'Project Stats',
+          label:'Project Statistics',
           click() {
             if (!showProjectsWin) {
               showProjectsWin = new Window({
@@ -200,7 +201,7 @@ function main () {
         },
         */
         {
-          label:'Transaction Stats',
+          label:'Transaction Report',
           click() {
             if (!showTransactionsWin) {
               showTransactionsWin = new Window({
@@ -253,7 +254,7 @@ function main () {
           }
         },
         {
-        label:'Bill Stats',
+        label:'Bill Report',
         click() {
           if (!showBillsWin) {
             showBillsWin = new Window({
@@ -301,6 +302,30 @@ function main () {
               // cleanup
               addPaymentMethodWin.on('closed', () => {
                 addPaymentMethodWin = null
+              })
+            }
+          }
+        },
+        {
+          label:'Payment Method List',
+          click() {
+            if (!paymentMethodListWin) {
+              paymentMethodListWin = new Window({
+                file: path.join('src', 'show_payment_methods.html'),
+                width: submenu_win_width,
+                height: submenu_win_height,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              // paymentMethodListWin.webContents.openDevTools()
+          
+              // cleanup
+              paymentMethodListWin.on('closed', () => {
+                paymentMethodListWin = null
               })
             }
           }

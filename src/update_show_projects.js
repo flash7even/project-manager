@@ -25,7 +25,7 @@ async function deleteProjectEvent(project_id) {
   var response = await deleteProjectToServer(project_id)
   alert(JSON.stringify(response.data))
   var window = remote.getCurrentWindow();
-  window.close();
+  window.reload();
 }
 
 async function getProjectList() {
