@@ -75,6 +75,7 @@ async function showAllTransactions() {
                   <th>Cheque No</th>
                   <th>Description</th>
                   <th>Payment Status</th>
+                  <th>Update</th>
                   <th>Inactive</th>
                   <th>Delete</th>
                 </tr>
@@ -100,9 +101,10 @@ async function showAllTransactions() {
     cur_transaction += `<td>${transaction['description']}</td>`
     cur_transaction += `<td>${transaction['status']}</td>`
     var transaction_id = transaction['id']
-    //var btn1 = '<input type="button" onClick="updateTransactionEvent(\'' + transaction_id + '\')" value="Update"/>'
+    var btn1 = '<input type="button" onClick="updateTransactionEvent(\'' + transaction_id + '\')" value="Update"/>'
     var btn2 = '<input type="button" onClick="updateTransactionStatusEvent(\'' + transaction_id + '\')" value="Inactive"/>'
     var btn3 = '<input type="button" onClick="deleteTransactionEvent(\'' + transaction_id + '\')" value="Delete"/>'
+    cur_transaction += `<td>${btn1}</td>`
     cur_transaction += `<td>${btn2}</td>`
     cur_transaction += `<td>${btn3}</td>`
     cur_transaction += '</tr>'

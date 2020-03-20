@@ -173,6 +173,7 @@ function main () {
             }
           }
         },
+        /*
         {
           label:'Update Transaction',
           click() {
@@ -197,6 +198,7 @@ function main () {
             }
           }
         },
+        */
         {
           label:'Transaction Stats',
           click() {

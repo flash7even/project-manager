@@ -204,7 +204,8 @@ divisionWiseProjectTransactionStat();
 
 function updatePageAfterAnyEvent(message){
   showTransactionAmountStat();
-  weeklyTransactionStat()
+  weeklyTransactionStat();
+  divisionWiseProjectTransactionStat();
   alert(message)
 }
 
