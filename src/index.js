@@ -8,9 +8,10 @@ const ipc = electron.ipcRenderer
 const axios = require('axios');
 
 var host_name = 'http://tarangopc:5000'
+let divisions = 5
 
 async function getWeeklyTransactionStat() {
-  var no_of_weeks = 7
+  var no_of_weeks = 15
   var transaction_list = []
   var post_url = host_name + '/api/transaction/statsperweek/' + no_of_weeks.toString()
   console.log("post_url: " + post_url)
@@ -19,6 +20,53 @@ async function getWeeklyTransactionStat() {
   return transaction_list
 }
 
+async function getDivisionalProjectWiseTransactionStat() {
+  var data_resp = []
+  var post_url = host_name + '/api/transaction/statsperweek/perproject/' + divisions.toString()
+  console.log("post_url: " + post_url)
+  let res = await axios.post(post_url, {});
+  var data_resp = res.data
+  return data_resp
+}
+
+async function findDivisionalProjectWiseTransactionStat() {
+  let data = await getDivisionalProjectWiseTransactionStat();
+  var dt_list = []
+
+  var project_len = data['project_list'].length
+  var idx = 0
+  for(idx = 0;idx<project_len;idx++){
+    var dataPointsList = [
+      {
+        'x': 0,
+        'y': 0
+      }
+    ];
+    var div = 0;
+    for(div = 0;div<divisions;div++){
+      var xval = div+1
+      var yval = data['data_list_per_division'][div]['project_data_list'][idx]['amount_sum']
+      var point = {
+        'x': xval,
+        'y': yval
+      }
+      dataPointsList.push(point);
+    }
+    var pdata = {        
+      type: "stackedArea",
+      showInLegend: true,
+      toolTipContent: "<span><strong>{name}: </strong></span> {y}",
+      name: data['project_list'][idx]['project_name'],
+      dataPoints: dataPointsList
+    }
+    dt_list.push(pdata)
+  }
+  var dt_ret = {
+    'dt_list': dt_list,
+    'interval_duration': data['interval_duration']
+  }
+  return dt_ret
+}
 
 async function findWeeklyTransactionStatsCanvas(){
   let week_list = await getWeeklyTransactionStat();
@@ -29,29 +77,29 @@ async function findWeeklyTransactionStatsCanvas(){
   var idx1 = 0
   for(idx1 = 0;idx1<week_list.length;idx1++){
     var week_data = week_list[idx1]
-    var week_name = 'week_' + (idx1+1).toString()
+    var week_name = (idx1+1).toString()
     var tran_data1 = { label: week_name, y: parseFloat(week_data['total_amount_of_transactions']) }
     dt_list.push(tran_data1)
   }
   return dt_list
 }
 
-
-async function weeklyTransactionStat(dt_list){
+async function weeklyTransactionStat(){
+  var dt_list = await findWeeklyTransactionStatsCanvas()
   var chart = new CanvasJS.Chart("weeklyTransactionStatChart", {
     animationEnabled: true,
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     title:{
-      text: ""
+      text: "Weekly Transaction Stats"
     },
     axisY: {
-      title: "Amount in BDT"
+      title: "BDT"
     },
     data: [{        
       type: "column",  
       showInLegend: true, 
       legendMarkerColor: "grey",
-      legendText: "1 USD = 85 BDT",
+      legendText: "Weeks",
       dataPoints: dt_list
     }]
   });
@@ -82,21 +130,6 @@ async function findTransactionAmountStatCanvas(){
   for(idx = 0;idx<project_list.length;idx++){
     var trans_stat = project_list[idx]
     var tran_data = { y: trans_stat['transaction_stat']['transaction_amount'], name: trans_stat['project_name'] }
-    dt_list.push(tran_data)
-  }
-  console.log(JSON.stringify(dt_list))
-  return dt_list
-}
-
-async function findTransactionCountStatCanvas(){
-  let project_list = await getProjectStat();
-  console.log(JSON.stringify(project_list))
-
-  var dt_list = []
-  var idx = 0
-  for(idx = 0;idx<project_list.length;idx++){
-    var trans_stat = project_list[idx]
-    var tran_data = { y: trans_stat['transaction_stat']['transaction_count'], label: trans_stat['project_name'] }
     dt_list.push(tran_data)
   }
   console.log(JSON.stringify(dt_list))
@@ -139,38 +172,38 @@ async function showTransactionAmountStat(){
   }
 }
 
-async function showTransactionCountStat(){
-  var dt_list = await findTransactionCountStatCanvas()
+async function divisionWiseProjectTransactionStat(){
+  var data_ret = await findDivisionalProjectWiseTransactionStat()
+  var dt_list = data_ret['dt_list']
+  var chart_title = "1 interval = " + data_ret['interval_duration'].toString() + ' days'
 
-  var chart = new CanvasJS.Chart("chartTransactionCountStat", {
+  var chart = new CanvasJS.Chart("divisionWiseProjectTransactionStatChart", {
     animationEnabled: true,
-    theme: "light2", // "light1", "light2", "dark1", "dark2"
     title:{
-      text: "Transaction Count Stats"
+      text: "Per Project Transaction in Intervals"
     },
-    axisY: {
-      title: "Transaction Count"
+    axisY :{
+      valueFormatString: "#0,.",
+      suffix: "k"
     },
-    data: [{        
-      type: "column",  
-      showInLegend: true, 
-      legendMarkerColor: "grey",
-      legendText: "",
-      dataPoints: dt_list
-    }]
+    axisX: {
+      title: chart_title
+    },
+    toolTip: {
+      shared: true
+    },
+    data: dt_list
   });
   chart.render();
   
 }
 
 showTransactionAmountStat();
-showTransactionCountStat();
-//var wts_dt_list = await findWeeklyTransactionStatsCanvas()
-//weeklyTransactionStat(wts_dt_list)
+weeklyTransactionStat();
+divisionWiseProjectTransactionStat();
 
 function updatePageAfterAnyEvent(message){
   showTransactionAmountStat();
-  showTransactionCountStat();
   weeklyTransactionStat()
   alert(message)
 }
