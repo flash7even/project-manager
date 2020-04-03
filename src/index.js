@@ -8,7 +8,7 @@ const ipc = electron.ipcRenderer
 const axios = require('axios');
 
 var host_name = 'http://tarangopc:5000'
-let divisions = 5
+let divisions = 10
 
 async function getWeeklyTransactionStat() {
   var no_of_weeks = 15

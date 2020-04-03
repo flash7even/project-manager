@@ -24,14 +24,14 @@ let updateShowTransactionWin
 let addPaymentMethodWin
 let paymentMethodListWin
 
-let submenu_win_width = 1200
-let submenu_win_height = 700
+let submenu_win_width = 1350
+let submenu_win_height = 780
 
 function main () {
   mainWindow = new Window({
     file: path.join('src', 'index.html')
   })
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 
   var menu = Menu.buildFromTemplate([
     {
@@ -122,7 +122,7 @@ function main () {
           }
         },
         {
-          label:'Project Statistics',
+          label:'Project Report',
           click() {
             if (!showProjectsWin) {
               showProjectsWin = new Window({
@@ -165,7 +165,7 @@ function main () {
                 }
               })
           
-              addTransactionWin.webContents.openDevTools()
+              //addTransactionWin.webContents.openDevTools()
           
               // cleanup
               addTransactionWin.on('closed', () => {
@@ -215,7 +215,7 @@ function main () {
                 }
               })
           
-              showTransactionsWin.webContents.openDevTools()
+              //showTransactionsWin.webContents.openDevTools()
           
               // cleanup
               showTransactionsWin.on('closed', () => {
