@@ -228,3 +228,11 @@ ipc.on('after-transaction-complete', function (event, message) {
 ipc.on('after-bill-complete', function (event, message) {
   updatePageAfterAnyEvent(message);
 })
+
+ipc.on('after-material-complete', function (event, message) {
+  updatePageAfterAnyEvent(message);
+})
+
+ipc.on('after-material-update-complete', function (event, message) {
+  updatePageAfterAnyEvent(message);
+})

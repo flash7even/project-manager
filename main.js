@@ -11,18 +11,27 @@ require('electron-reload')(__dirname)
 let mainWindow
 
 let addProjectWin
-let aboutWin
-let addTransactionWin
-let showProjectsWin
+let updateProjectWin
 let updateShowProjectsWin
-let showTransactionsWin
+let showProjectsWin
+
 let addBillWin
 let showBillsWin
-let updateProjectWin
+
+let addTransactionWin
+let showTransactionsWin
 let updateTransactionWin
 let updateShowTransactionWin
+
+let aboutWin
+
 let addPaymentMethodWin
 let paymentMethodListWin
+
+let addMaterialWin
+let showMaterialsWin
+let updateShowMaterialWin
+let updateMaterialWin
 
 let submenu_win_width = 1350
 let submenu_win_height = 780
@@ -279,6 +288,84 @@ function main () {
       }
       ]
     },
+    ,
+    {
+      label: 'Material',
+      submenu: [
+        {
+          label:'Add Material',
+          click() {
+            if (!addMaterialWin) {
+              addMaterialWin = new Window({
+                file: path.join('src', 'add_material.html'),
+                width: submenu_win_width,
+                height: submenu_win_height,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              //addMaterialWin.webContents.openDevTools()
+          
+              // cleanup
+              addMaterialWin.on('closed', () => {
+                addMaterialWin = null
+              })
+            }
+          }
+        },
+        {
+          label:'Update Material',
+          click() {
+            if (!updateShowMaterialWin) {
+              updateShowMaterialWin = new Window({
+                file: path.join('src', 'update_show_materials.html'),
+                width: submenu_win_width,
+                height: submenu_win_height,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              // updateShowMaterialWin.webContents.openDevTools()
+          
+              // cleanup
+              updateShowMaterialWin.on('closed', () => {
+                updateShowMaterialWin = null
+              })
+            }
+          }
+        },
+        {
+          label:'Material Report',
+          click() {
+            if (!showMaterialsWin) {
+              showMaterialsWin = new Window({
+                file: path.join('src', 'show_materials.html'),
+                width: submenu_win_width,
+                height: submenu_win_height,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              //showMaterialsWin.webContents.openDevTools()
+          
+              // cleanup
+              showMaterialsWin.on('closed', () => {
+                showMaterialsWin = null
+              })
+            }
+          }
+        }
+      ]
+    },
     {
       label: 'Payment Method',
       submenu: [
@@ -360,6 +447,14 @@ ipcMain.on('after-bill', (event, message) => {
   mainWindow.send('after-bill-complete', message)
 })
 
+ipcMain.on('after-material', (event, message) => {
+  mainWindow.send('after-material-complete', message)
+})
+
+ipcMain.on('after-material-update', (event, message) => {
+  mainWindow.send('after-material-update-complete', message)
+})
+
 ipcMain.on('call-project-update', (event, message) => {
   if(!updateProjectWin){
     updateProjectWin = new Window({
@@ -406,6 +501,32 @@ ipcMain.on('call-transaction-update', (event, message) => {
     // cleanup
     updateTransactionWin.on('closed', () => {
       updateTransactionWin = null
+    })
+  }
+})
+
+
+ipcMain.on('call-material-update', (event, message) => {
+  if(!updateMaterialWin){
+    updateMaterialWin = new Window({
+      file: path.join('src', 'update_material.html'),
+      width: submenu_win_width,
+      height: submenu_win_height,
+      // close with the main window
+      parent: mainWindow,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+
+    // updateMaterialWin.webContents.openDevTools()
+    updateMaterialWin.webContents.on('did-finish-load', () => {
+      updateMaterialWin.webContents.send('update-material', message);
+    });
+
+    // cleanup
+    updateMaterialWin.on('closed', () => {
+      updateMaterialWin = null
     })
   }
 })
