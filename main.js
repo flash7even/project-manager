@@ -33,6 +33,11 @@ let showMaterialsWin
 let updateShowMaterialWin
 let updateMaterialWin
 
+let addBoqWin
+let showBoqsWin
+let updateShowBoqWin
+let updateBoqWin
+
 let submenu_win_width = 1350
 let submenu_win_height = 780
 
@@ -367,6 +372,59 @@ function main () {
       ]
     },
     {
+      label: 'BOQ',
+      submenu: [
+        {
+          label:'Add BOQ',
+          click() {
+            if (!addBoqWin) {
+              addBoqWin = new Window({
+                file: path.join('src', 'add_boq.html'),
+                width: submenu_win_width,
+                height: submenu_win_height,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              //addBoqWin.webContents.openDevTools()
+          
+              // cleanup
+              addBoqWin.on('closed', () => {
+                addBoqWin = null
+              })
+            }
+          }
+        },
+        {
+          label:'Boq Report',
+          click() {
+            if (!showBoqsWin) {
+              showBoqsWin = new Window({
+                file: path.join('src', 'show_boqs.html'),
+                width: submenu_win_width,
+                height: submenu_win_height,
+                // close with the main window
+                parent: mainWindow,
+                webPreferences: {
+                  nodeIntegration: true
+                }
+              })
+          
+              //showBoqsWin.webContents.openDevTools()
+          
+              // cleanup
+              showBoqsWin.on('closed', () => {
+                showBoqsWin = null
+              })
+            }
+          }
+        }
+      ]
+    },
+    {
       label: 'Payment Method',
       submenu: [
         {
@@ -455,6 +513,14 @@ ipcMain.on('after-material-update', (event, message) => {
   mainWindow.send('after-material-update-complete', message)
 })
 
+ipcMain.on('after-boq', (event, message) => {
+  mainWindow.send('after-boq-complete', message)
+})
+
+ipcMain.on('after-boq-update', (event, message) => {
+  mainWindow.send('after-boq-update-complete', message)
+})
+
 ipcMain.on('call-project-update', (event, message) => {
   if(!updateProjectWin){
     updateProjectWin = new Window({
@@ -527,6 +593,32 @@ ipcMain.on('call-material-update', (event, message) => {
     // cleanup
     updateMaterialWin.on('closed', () => {
       updateMaterialWin = null
+    })
+  }
+})
+
+
+ipcMain.on('call-boq-update', (event, message) => {
+  if(!updateBoqWin){
+    updateBoqWin = new Window({
+      file: path.join('src', 'update_boq.html'),
+      width: submenu_win_width,
+      height: submenu_win_height,
+      // close with the main window
+      parent: mainWindow,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+
+    // updateBoqWin.webContents.openDevTools()
+    updateBoqWin.webContents.on('did-finish-load', () => {
+      updateBoqWin.webContents.send('update-boq', message);
+    });
+
+    // cleanup
+    updateBoqWin.on('closed', () => {
+      updateBoqWin = null
     })
   }
 })

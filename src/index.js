@@ -236,3 +236,11 @@ ipc.on('after-material-complete', function (event, message) {
 ipc.on('after-material-update-complete', function (event, message) {
   updatePageAfterAnyEvent(message);
 })
+
+ipc.on('after-boq-complete', function (event, message) {
+  updatePageAfterAnyEvent(message);
+})
+
+ipc.on('after-boq-update-complete', function (event, message) {
+  updatePageAfterAnyEvent(message);
+})
