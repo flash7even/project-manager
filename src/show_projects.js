@@ -51,10 +51,15 @@ async function showAllProjects() {
     var project = project_list[idx]
     var cur_project = '<tr>'
     cur_project += `<td>${project['project_name']}</td>`
-    cur_project += `<td>${project['description']}</td>`
     cur_project += `<td>${project['project_value']}</td>`
+    cur_project += `<td>${project['department']}</td>`
+    cur_project += `<td>${project['noa_date']}</td>`
+    cur_project += `<td>${project['contract_signing_date']}</td>`
     cur_project += `<td>${project['commencement_date']}</td>`
-    cur_project += `<td>${project['termination_date']}</td>`
+    cur_project += `<td>${project['completion_date']}</td>`
+    cur_project += `<td>${project['adjusted_completion_date']}</td>`
+    cur_project += `<td>${project['handover_date']}</td>`
+    cur_project += `<td>${project['remarks']}</td>`
     cur_project += '</tr>'
     html += cur_project
   }
@@ -72,7 +77,18 @@ async function findProjectDataDT(){
 
   for(idx = 0;idx<project_list.length;idx++){
     var project = project_list[idx]
-    var tran_data = [project['project_name'], project['description'], project['project_value'], project['commencement_date'], project['termination_date']]
+    var tran_data = [
+      project['project_name'],
+      project['project_value'],
+      project['department'],
+      project['noa_date'],
+      project['contract_signing_date'],
+      project['commencement_date'],
+      project['completion_date'],
+      project['adjusted_completion_date'],
+      project['handover_date'],
+      project['remarks'],
+    ]
     dt_list.push(tran_data)
   }
   return dt_list

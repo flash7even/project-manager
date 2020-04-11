@@ -150,7 +150,7 @@ function main () {
                 }
               })
           
-              // showProjectsWin.webContents.openDevTools()
+              showProjectsWin.webContents.openDevTools()
           
               // cleanup
               showProjectsWin.on('closed', () => {

@@ -51,13 +51,19 @@ async function showAllProjects() {
 
   var thead = `<thead>
                 <tr>
-                  <th># </th>
-                  <th class="site_name">Project Name</th>
-                  <th>Description </th>
-                  <th>Project Value</th>
-                  <th>Commencement Date</th>
-                  <th>Termination Date</th>
-                  <th>Options</th>
+                  <th>Project Name</th>
+                  <th>#</th>
+                  <th>Project Value </th>
+                  <th>Department </th>
+                  <th>Date of NOA </th>
+                  <th>Contract Signing Date </th>
+                  <th>Commencement Date </th>
+                  <th>Initial Completion Date </th>
+                  <th>Adjusted Completion Date </th>
+                  <th>Handover Date </th>
+                  <th>Remarks </th>
+                  <th>Update </th>
+                  <th>Delete </th>
                 </tr>
               </thead>`
   
@@ -72,14 +78,20 @@ async function showAllProjects() {
     var cur_project = '<tr>'
     cur_project += `<th scope="row">${idx.toString()}</th>`
     cur_project += `<td>${project['project_name']}</td>`
-    cur_project += `<td>${project['description']}</td>`
     cur_project += `<td>${project['project_value']}</td>`
+    cur_project += `<td>${project['department']}</td>`
+    cur_project += `<td>${project['noa_date']}</td>`
+    cur_project += `<td>${project['contract_signing_date']}</td>`
     cur_project += `<td>${project['commencement_date']}</td>`
-    cur_project += `<td>${project['termination_date']}</td>`
+    cur_project += `<td>${project['completion_date']}</td>`
+    cur_project += `<td>${project['adjusted_completion_date']}</td>`
+    cur_project += `<td>${project['handover_date']}</td>`
+    cur_project += `<td>${project['remarks']}</td>`
     var project_id = project['id']
     var btn1 = '<input type="button" onClick="updateProjectEvent(\'' + project_id + '\')" value="Update"/>'
     var btn2 = '<input type="button" onClick="deleteProjectEvent(\'' + project_id + '\')" value="Delete"/>'
-    cur_project += `<td>${btn1+' '+btn2}</td>`
+    cur_project += `<td>${btn1}</td>`
+    cur_project += `<td>${btn2}</td>`
     cur_project += '</tr>'
     html += cur_project
   }

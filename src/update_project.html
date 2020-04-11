@@ -14,15 +14,39 @@
         <form id = 'project_update_submit_form' name="ipcForm" onSubmit="JavaScript:sendUpdateProjectForm(event)">
           <div class="form-group">
               <label for="pwd">Project Name</label>
-              <input type="text" name="project_name" id="project_name" class="form-control" placeholder="Enter a Project Name">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Description</label>
-              <input type="text" name="description" id="description" class="form-control" placeholder="Enter Description">
+              <input type="text" name="project_name" id="project_name" class="form-control" placeholder="">
           </div>
           <div class="form-group">
               <label for="pwd">Project Value</label>
-              <input type="text" name="project_value" id="project_value" class="form-control" placeholder="Enter Project Value">
+              <input type="float" name="project_value" id="project_value" class="form-control" placeholder="">
+          </div>
+          <div class="form-group">
+              <label for="pwd">Department</label>
+              <input type="text" name="department" id="department" class="form-control" placeholder="">
+          </div>
+          <div class="form-group">
+              <label for="date">Date of NOA</label>
+              <input type="date" name="noa_date" id="noa_date" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="date">Contract Signing Date</label>
+              <input type="date" name="contract_signing_date" id="contract_signing_date" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="date">Commencement Date</label>
+              <input type="date" name="commencement_date" id="commencement_date" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="date">Handover Date</label>
+              <input type="date" name="handover_date" id="handover_date" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="pwd">Time Extension</label>
+              <input type="integer" name="time_extension" id="time_extension" class="form-control" placeholder="Number of Days">
+          </div>
+          <div class="form-group">
+              <label for="pwd">Remarks</label>
+              <input type="text" name="remarks" id="remarks" class="form-control" placeholder="">
           </div>
           <input type="submit" value="Submit">
         </form>

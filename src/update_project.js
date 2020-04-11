@@ -17,15 +17,18 @@ async function updateProjectToServer(project_data, project_id) {
 
 async function sendUpdateProjectForm(event) {
   event.preventDefault() // stop the form from submitting
-  let project_name = document.getElementById("project_name").value;
   let project_id = document.getElementById("project_id").value;
-  let description = document.getElementById("description").value;
-  let project_value = document.getElementById("project_value").value;
 
   var project_data = {
-    'project_name': project_name,
-    'description': description,
-    'project_value': project_value
+    'project_name': document.getElementById("project_name").value,
+    'project_value': document.getElementById("project_value").value,
+    'department': document.getElementById("department").value,
+    'noa_date': document.getElementById("noa_date").value,
+    'contract_signing_date': document.getElementById("contract_signing_date").value,
+    'commencement_date': document.getElementById("commencement_date").value,
+    'handover_date': document.getElementById("handover_date").value,
+    'time_extension': document.getElementById("time_extension").value,
+    'remarks': document.getElementById("remarks").value,
   }
   
   let data = await updateProjectToServer(project_data, project_id);

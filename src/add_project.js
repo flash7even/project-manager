@@ -23,18 +23,17 @@ async function dateTimeToEpoch(date_time){
 
 async function sendAddProjectForm(event) {
     event.preventDefault() // stop the form from submitting
-    let project_name = document.getElementById("project_name").value;
-    let description = document.getElementById("description").value;
-    let project_value = document.getElementById("project_value").value;
-    let commencement_date = document.getElementById("commencement_date").value;
-    let termination_date = document.getElementById("termination_date").value;
 
     var project_data = {
-      'project_name': project_name,
-      'description': description,
-      'project_value': project_value,
-      'commencement_date': commencement_date,
-      'termination_date': termination_date,
+      'project_name': document.getElementById("project_name").value,
+      'project_value': document.getElementById("project_value").value,
+      'department': document.getElementById("department").value,
+      'noa_date': document.getElementById("noa_date").value,
+      'contract_signing_date': document.getElementById("contract_signing_date").value,
+      'commencement_date': document.getElementById("commencement_date").value,
+      'completion_date': document.getElementById("completion_date").value,
+      'handover_date': document.getElementById("handover_date").value,
+      'remarks': document.getElementById("remarks").value,
     }
     
     let data = await addProjectToServer(project_data);
@@ -47,6 +46,3 @@ async function sendAddProjectForm(event) {
     var window = remote.getCurrentWindow();
     window.close();
 }
-
-
-
