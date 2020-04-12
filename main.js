@@ -38,8 +38,8 @@ let showBoqsWin
 let updateShowBoqWin
 let updateBoqWin
 
-let submenu_win_width = 1350
-let submenu_win_height = 780
+let submenu_win_width = 1050
+let submenu_win_height = 750
 
 function main () {
   mainWindow = new Window({
