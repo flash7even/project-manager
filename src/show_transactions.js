@@ -88,28 +88,6 @@ async function getTransactionList(search_params = {}) {
   return transaction_list
 }
 
-async function showAllTransactions() {
-  let transaction_list = await getTransactionList();
-  console.log(JSON.stringify(transaction_list))
-
-  var html = ''
-  var idx = 0
-
-  for(idx = 0;idx<transaction_list.length;idx++){
-    var transaction = transaction_list[idx]
-    var cur_transaction = '<tr>'
-    cur_transaction += `<th scope="row">${idx.toString()}</th>`
-    cur_transaction += `<td>${transaction['transaction_id']}</td>`
-    cur_transaction += `<td>${transaction['amount']}</td>`
-    cur_transaction += `<td>${transaction['project_name']}</td>`
-    cur_transaction += '</tr>'
-    html += cur_transaction
-  }
-  // set list html to the todo items
-  var transactionListTable = document.getElementById('transactionListTable')
-  transactionListTable.innerHTML = html
-}
-
 async function findTransactionDataDT(search_params){
   let transaction_list = await getTransactionList(search_params);
   console.log(JSON.stringify(transaction_list))
@@ -121,15 +99,21 @@ async function findTransactionDataDT(search_params){
     var transaction = transaction_list[idx]
     var tran_data = [
       transaction['transaction_id'],
-      transaction['amount'],
       transaction['project_name'],
-      transaction['updated_at'],
-      transaction['mode_of_payment'],
-      transaction['payment_by'],
       transaction['payment_date'],
-      transaction['cheque_no'],
+      transaction['transaction_type'],
       transaction['description'],
+      transaction['amount'],
+      transaction['mode_of_payment'],
+      transaction['bank_name'],
+      transaction['account_no'],
+      transaction['payment_by'],
+      transaction['payment_to'],
+      transaction['voucher_no'],
       transaction['status'],
+      transaction['reference'],
+      transaction['vat'],
+      transaction['ait'],
     ]
     dt_list.push(tran_data)
   }

@@ -77,26 +77,22 @@ async function addBillToServer(bill_data) {
 
 async function sendAddBillForm(event) {
     event.preventDefault() // stop the form from submitting
-    let bill_id = document.getElementById("bill_id").value;
-    let amount = document.getElementById("amount").value;
-    let project_name = document.getElementById("projectListInBill").value;
-    let mode_of_payment = document.getElementById("mode_of_payment").value;
-    let payment_by = document.getElementById("payment_by").value;
-    let cheque_no = document.getElementById("cheque_no").value;
-    let description = document.getElementById("description").value;
-    let status = document.getElementById("status").value;
-    let payment_date = document.getElementById("payment_date").value;
 
     var bill_data = {
-      'bill_id': bill_id,
-      'amount': amount,
-      'project_name': project_name,
-      'mode_of_payment': mode_of_payment,
-      'payment_by': payment_by,
-      'cheque_no': cheque_no,
-      'description': description,
-      'status': status,
-      'payment_date': payment_date,
+      'project_name': document.getElementById("projectListInBill").value,
+      'submission_date': document.getElementById("submission_date").value,
+      'bill_type': document.getElementById("bill_type").value,
+      'description': document.getElementById("description").value,
+      'amount_claimed': document.getElementById("amount_claimed").value,
+      'amount_received': document.getElementById("amount_received").value,
+      'mode_of_payment': document.getElementById("mode_of_payment").value,
+      'bank_name': document.getElementById("bank_name").value,
+      'account_no': document.getElementById("account_no").value,
+      'reference': document.getElementById("reference").value,
+      'payment_received_date': document.getElementById("payment_received_date").value,
+      'status': document.getElementById("status").value,
+      'vat': document.getElementById("vat").value,
+      'ait': document.getElementById("ait").value,
     }
     
     let data = await addBillToServer(bill_data);

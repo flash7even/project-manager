@@ -88,28 +88,6 @@ async function getBillList(search_params = {}) {
   return bill_list
 }
 
-async function showAllBills() {
-  let bill_list = await getBillList();
-  console.log(JSON.stringify(bill_list))
-
-  var html = ''
-  var idx = 0
-
-  for(idx = 0;idx<bill_list.length;idx++){
-    var bill = bill_list[idx]
-    var cur_bill = '<tr>'
-    cur_bill += `<th scope="row">${idx.toString()}</th>`
-    cur_bill += `<td>${bill['bill_id']}</td>`
-    cur_bill += `<td>${bill['amount']}</td>`
-    cur_bill += `<td>${bill['project_name']}</td>`
-    cur_bill += '</tr>'
-    html += cur_bill
-  }
-  // set list html to the todo items
-  var billListTable = document.getElementById('billListTable')
-  billListTable.innerHTML = html
-}
-
 async function findBillDataDT(search_params){
   let bill_list = await getBillList(search_params);
   console.log(JSON.stringify(bill_list))
@@ -121,15 +99,20 @@ async function findBillDataDT(search_params){
     var bill = bill_list[idx]
     var tran_data = [
       bill['bill_id'],
-      bill['amount'],
       bill['project_name'],
-      bill['updated_at'],
-      bill['mode_of_payment'],
-      bill['payment_by'],
-      bill['payment_date'],
-      bill['cheque_no'],
+      bill['submission_date'],
+      bill['bill_type'],
       bill['description'],
+      bill['amount_claimed'],
+      bill['amount_received'],
+      bill['mode_of_payment'],
+      bill['bank_name'],
+      bill['account_no'],
       bill['status'],
+      bill['reference'],
+      bill['payment_received_date'],
+      bill['vat'],
+      bill['ait'],
     ]
     dt_list.push(tran_data)
   }

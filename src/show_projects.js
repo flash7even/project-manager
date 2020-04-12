@@ -40,34 +40,6 @@ async function getProjectStat() {
   return project_list
 }
 
-async function showAllProjects() {
-  let project_list = await getProjectList();
-  console.log(JSON.stringify(project_list))
-
-  var html = ''
-  var idx = 0
-
-  for(idx = 0;idx<project_list.length;idx++){
-    var project = project_list[idx]
-    var cur_project = '<tr>'
-    cur_project += `<td>${project['project_name']}</td>`
-    cur_project += `<td>${project['project_value']}</td>`
-    cur_project += `<td>${project['department']}</td>`
-    cur_project += `<td>${project['noa_date']}</td>`
-    cur_project += `<td>${project['contract_signing_date']}</td>`
-    cur_project += `<td>${project['commencement_date']}</td>`
-    cur_project += `<td>${project['completion_date']}</td>`
-    cur_project += `<td>${project['adjusted_completion_date']}</td>`
-    cur_project += `<td>${project['handover_date']}</td>`
-    cur_project += `<td>${project['remarks']}</td>`
-    cur_project += '</tr>'
-    html += cur_project
-  }
-  // set list html to the todo items
-  var projectListTable = document.getElementById('projectListTable')
-  projectListTable.innerHTML = html
-}
-
 async function findProjectDataDT(){
   let project_list = await getProjectList();
   console.log(JSON.stringify(project_list))
@@ -79,6 +51,7 @@ async function findProjectDataDT(){
     var project = project_list[idx]
     var tran_data = [
       project['project_name'],
+      project['project_id'],
       project['project_value'],
       project['department'],
       project['noa_date'],
