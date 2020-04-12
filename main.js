@@ -9,12 +9,6 @@ const Window = require('./Window')
 require('electron-reload')(__dirname)
 
 let mainWindow
-let updateProjectWin
-let updateMaterialWin
-let updateBoqWin
-
-let submenu_win_width = 1300
-let submenu_win_height = 800
 
 function main () {
   mainWindow = new Window({
