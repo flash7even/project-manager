@@ -161,43 +161,73 @@ function main () {
 }
 
 ipcMain.on('after-transaction', (event, message) => {
-  mainWindow.send('after-transaction-complete', message)
+  mainWindow.loadFile('src/index.html');
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('after-transaction-complete', message)
+  });
 })
 
 ipcMain.on('after-transaction-update', (event, message) => {
-  mainWindow.send('after-transaction-update-complete', message)
+  mainWindow.loadFile('src/index.html');
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('after-transaction-update-complete', message)
+  });
 })
 
 ipcMain.on('after-project-creation', (event, message) => {
-  mainWindow.send('after-project-creation-complete', message)
+  mainWindow.loadFile('src/index.html');
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('after-project-creation-complete', message)
+  });
 })
 
 ipcMain.on('after-payment-method-creation', (event, message) => {
-  mainWindow.send('after-payment-method-creation-complete', message)
+  mainWindow.loadFile('src/index.html');
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('after-payment-method-creation-complete', message)
+  });
 })
 
 ipcMain.on('after-project-update', (event, message) => {
-  mainWindow.send('after-project-update-complete', message)
+  mainWindow.loadFile('src/index.html');
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('after-project-update-complete', message)
+  });
 })
 
 ipcMain.on('after-bill', (event, message) => {
-  mainWindow.send('after-bill-complete', message)
+  mainWindow.loadFile('src/index.html');
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('after-bill-complete', message)
+  });
 })
 
 ipcMain.on('after-material', (event, message) => {
-  mainWindow.send('after-material-complete', message)
+  mainWindow.loadFile('src/index.html');
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('after-material-complete', message)
+  });
 })
 
 ipcMain.on('after-material-update', (event, message) => {
-  mainWindow.send('after-material-update-complete', message)
+  mainWindow.loadFile('src/index.html');
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('after-material-update-complete', message)
+  });
 })
 
 ipcMain.on('after-boq', (event, message) => {
-  mainWindow.send('after-boq-complete', message)
+  mainWindow.loadFile('src/index.html');
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('after-boq-complete', message)
+  });
 })
 
 ipcMain.on('after-boq-update', (event, message) => {
-  mainWindow.send('after-boq-update-complete', message)
+  mainWindow.loadFile('src/index.html');
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('after-boq-update-complete', message)
+  });
 })
 
 ipcMain.on('call-project-update', (event, message) => {

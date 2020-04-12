@@ -23,8 +23,6 @@ async function updateTransactionStatusToServer(transaction_id, status) {
 
 async function updateTransactionEvent(transaction_id) {
   ipc.send('call-transaction-update', transaction_id)
-  var window = remote.getCurrentWindow();
-  window.close();
 }
 
 async function deleteTransactionEvent(transaction_id) {

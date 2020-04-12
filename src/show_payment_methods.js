@@ -17,8 +17,6 @@ async function deletePaymentMethodToServer(payment_method_id) {
 
 async function updatePaymentMethodEvent(payment_method_id) {
   ipc.send('call-payment-method-update', payment_method_id)
-  var window = remote.getCurrentWindow();
-  window.close();
 }
 
 async function deletePaymentMethodEvent(payment_method_id) {

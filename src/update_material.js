@@ -39,9 +39,6 @@ async function sendUpdateMaterialForm(event) {
     message = 'Material Update Failed'
   }
   ipc.send('after-material-update', message)
-
-  var window = remote.getCurrentWindow();
-  window.close();
 }
 
 ipc.on('update-material', function (event, message) {

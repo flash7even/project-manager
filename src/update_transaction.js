@@ -42,9 +42,6 @@ async function sendUpdateTransactionForm(event) {
     message = 'Transaction Update Failed'
   }
   ipc.send('after-transaction-update', message)
-
-  var window = remote.getCurrentWindow();
-  window.close();
 }
 
 ipc.on('update-transaction', function (event, message) {
