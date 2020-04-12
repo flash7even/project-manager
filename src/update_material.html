@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <title>Update Material</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' />
+    <link rel='stylesheet' href="../assets/css/form.css"
   </head>
 
   <body>
     <div class="container">
       <label id ="material_id" hidden>Label</label>
       <div class="row" id = 'update_project_form'>
-        <form id = 'project_update_submit_form' name="ipcForm" onSubmit="JavaScript:sendUpdateMaterialForm(event)">
+        <form id = 'project_update_submit_form' class="form-style-9" name="ipcForm" onSubmit="JavaScript:sendUpdateMaterialForm(event)">
           <div class="form-group">
               <label for="pwd">Name of The Material</label>
               <input type="text" name="material_name" id="material_name" class="form-control" placeholder="Enter The Material Name" >

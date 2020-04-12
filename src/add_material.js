@@ -49,7 +49,6 @@ async function sendAddMaterialForm(event) {
     event.preventDefault() // stop the form from submitting
 
     var material_data = {
-      'material_id': document.getElementById("material_id").value,
       'material_name': document.getElementById("material_name").value,
       'project_name': document.getElementById("projectListInMaterial").value,
       'unit': document.getElementById("unit").value,

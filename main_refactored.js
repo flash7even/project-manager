@@ -201,18 +201,79 @@ ipcMain.on('after-boq-update', (event, message) => {
 })
 
 ipcMain.on('call-project-update', (event, message) => {
-  mainWindow.loadFile('src/update_project.html');
-  mainWindow.webContents.send('update-project', message);
+  if(!updateProjectWin){
+    updateProjectWin = new Window({
+      file: path.join('src', 'update_project.html'),
+      width: submenu_win_width,
+      height: submenu_win_height,
+      // close with the main window
+      parent: mainWindow,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+
+    // updateProjectWin.webContents.openDevTools()
+    updateProjectWin.webContents.on('did-finish-load', () => {
+      updateProjectWin.webContents.send('update-project', message);
+    });
+
+    // cleanup
+    updateProjectWin.on('closed', () => {
+      updateProjectWin = null
+    })
+  }
 })
 
 ipcMain.on('call-material-update', (event, message) => {
-  mainWindow.loadFile('src/update_material.html');
-  mainWindow.webContents.send('update-material', message);
+  if(!updateMaterialWin){
+    updateMaterialWin = new Window({
+      file: path.join('src', 'update_material.html'),
+      width: submenu_win_width,
+      height: submenu_win_height,
+      // close with the main window
+      parent: mainWindow,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+
+    // updateMaterialWin.webContents.openDevTools()
+    updateMaterialWin.webContents.on('did-finish-load', () => {
+      updateMaterialWin.webContents.send('update-material', message);
+    });
+
+    // cleanup
+    updateMaterialWin.on('closed', () => {
+      updateMaterialWin = null
+    })
+  }
 })
 
+
 ipcMain.on('call-boq-update', (event, message) => {
-  mainWindow.loadFile('src/update_boq.html');
-  mainWindow.webContents.send('update-boq', message);
+  if(!updateBoqWin){
+    updateBoqWin = new Window({
+      file: path.join('src', 'update_boq.html'),
+      width: submenu_win_width,
+      height: submenu_win_height,
+      // close with the main window
+      parent: mainWindow,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+
+    // updateBoqWin.webContents.openDevTools()
+    updateBoqWin.webContents.on('did-finish-load', () => {
+      updateBoqWin.webContents.send('update-boq', message);
+    });
+
+    // cleanup
+    updateBoqWin.on('closed', () => {
+      updateBoqWin = null
+    })
+  }
 })
 
 app.on('ready', main)

@@ -17,8 +17,6 @@ async function deleteMaterialToServer(material_id) {
 
 async function updateMaterialEvent(material_id) {
   ipc.send('call-material-update', material_id)
-  var window = remote.getCurrentWindow();
-  window.close();
 }
 
 async function deleteMaterialEvent(material_id) {

@@ -17,8 +17,6 @@ async function deleteProjectToServer(project_id) {
 
 async function updateProjectEvent(project_id) {
   ipc.send('call-project-update', project_id)
-  var window = remote.getCurrentWindow();
-  window.close();
 }
 
 async function deleteProjectEvent(project_id) {
