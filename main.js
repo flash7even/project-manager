@@ -21,6 +21,12 @@ function main () {
         label: 'Menu',
             submenu: [
               {
+                  label:'Home',
+                  click() {
+                    mainWindow.loadFile('src/index.html');
+                  }
+              },
+              {
                   label:'About',
                   click() {
                     mainWindow.loadFile('src/about.html');

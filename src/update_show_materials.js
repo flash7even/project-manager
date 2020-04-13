@@ -55,10 +55,6 @@ async function showAllMaterials() {
                   <th>Project Name</th>
                   <th>Unit</th>
                   <th>Unit Price</th>
-                  <th>Quantity</th>
-                  <th>Total Price</th>
-                  <th>Supplier Name</th>
-                  <th>Voucher</th>
                   <th>Stock</th>
                   <th>Remarks</th>
                   <th>Update</th>
@@ -81,10 +77,6 @@ async function showAllMaterials() {
     cur_material += `<td>${material['project_name']}</td>`
     cur_material += `<td>${material['unit']}</td>`
     cur_material += `<td>${material['unit_price']}</td>`
-    cur_material += `<td>${material['quantity']}</td>`
-    cur_material += `<td>${material['total_price']}</td>`
-    cur_material += `<td>${material['supplier_name']}</td>`
-    cur_material += `<td>${material['voucher']}</td>`
     cur_material += `<td>${material['stock']}</td>`
     cur_material += `<td>${material['remarks']}</td>`
     var material_id = material['id']
