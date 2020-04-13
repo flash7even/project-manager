@@ -5,21 +5,7 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
-
-var host_name = 'http://tarangopc:5000'
-
-async function addProjectToServer(project_data) {
-    var post_url = host_name + '/api/project/'
-    let res = await axios.post(post_url, project_data);
-    return res
-}
-
-async function dateTimeToEpoch(date_time){
-  var someDate = new Date(dateString);
-  var epoch_time = someDate.date_time();
-  alert(epoch_time)
-}
+const project_server = require('../services/project_services')
 
 async function sendAddProjectForm(event) {
     event.preventDefault() // stop the form from submitting
@@ -36,7 +22,7 @@ async function sendAddProjectForm(event) {
       'remarks': document.getElementById("remarks").value,
     }
     
-    let data = await addProjectToServer(project_data);
+    let data = await project_server.addProjectToServer(project_data);
     var message = 'Project Created Successfully'
     if(data.status != 200 && data.status != 201){
       message = 'Project Creation Failed'

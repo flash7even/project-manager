@@ -5,15 +5,7 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
-
-var host_name = 'http://tarangopc:5000'
-
-async function addPaymentMethodToServer(pm_data) {
-    var post_url = host_name + '/api/payment/method/'
-    let res = await axios.post(post_url, pm_data);
-    return res
-}
+const payment_method_server = require('../services/payment_method_services')
 
 async function sendAddPaymentMethodForm(event) {
     event.preventDefault() // stop the form from submitting
@@ -25,7 +17,7 @@ async function sendAddPaymentMethodForm(event) {
       'description': description
     }
     
-    let data = await addPaymentMethodToServer(pm_data);
+    let data = await payment_method_server.addPaymentMethodToServer(pm_data);
     var message = 'Payment Method Created Successfully'
     if(data.status != 200 && data.status != 201){
       message = 'Payment Method Creation Failed'

@@ -5,22 +5,13 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
-
-var host_name = 'http://tarangopc:5000'
-
-async function updateMaterialToServer(material_data, material_id) {
-    var put_url = host_name + '/api/material/' + material_id
-    let res = await axios.put(put_url, material_data);
-    return res
-}
+const material_server = require('../services/material_services')
 
 async function sendUpdateMaterialForm(event) {
   event.preventDefault() // stop the form from submitting
   let material_id = document.getElementById("material_id").value
 
   var material_data = {
-    'material_id': material_id,
     'material_name': document.getElementById("material_name").value,
     'project_name': document.getElementById("projectListInMaterial").value,
     'unit': document.getElementById("unit").value,
@@ -33,7 +24,7 @@ async function sendUpdateMaterialForm(event) {
     'remarks': document.getElementById("remarks").value,
   }
   
-  let data = await updateMaterialToServer(material_data, material_id);
+  let data = await material_server.updateMaterialToServer(material_data, material_id);
   var message = 'Material Updated Successfully'
   if(data.status != 200 && data.status != 201){
     message = 'Material Update Failed'

@@ -5,44 +5,20 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
-
-var host_name = 'http://tarangopc:5000'
-
-async function deletePaymentMethodToServer(payment_method_id) {
-    var put_url = host_name + '/api/payment/method/' + payment_method_id
-    let res = await axios.delete(put_url);
-    return res
-}
+const payment_method_server = require('../services/payment_method_services')
 
 async function updatePaymentMethodEvent(payment_method_id) {
   ipc.send('call-payment-method-update', payment_method_id)
 }
 
 async function deletePaymentMethodEvent(payment_method_id) {
-  var response = await deletePaymentMethodToServer(payment_method_id)
-  alert(JSON.stringify(response.data))
+  var response = await payment_method_server.deletePaymentMethodToServer(payment_method_id)
   var window = remote.getCurrentWindow();
   window.reload();
 }
 
-async function getPaymentMethodList() {
-  var page = 0
-  var payment_method_list = []
-  while(1){
-    var post_url = host_name + '/api/payment/method/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    payment_method_list = payment_method_list.concat(cur_list)
-    page++
-  }
-  return payment_method_list
-}
-
 async function showAllPaymentMethods() {
-  let payment_method_list = await getPaymentMethodList();
+  let payment_method_list = await payment_method_server.getPaymentMethodList();
   console.log(JSON.stringify(payment_method_list))
 
   var html = ''

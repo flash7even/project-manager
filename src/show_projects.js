@@ -5,44 +5,12 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
+const project_server = require('../services/project_services')
 
-var host_name = 'http://tarangopc:5000'
 let data_table_height = '200px'
 
-async function getProjectList() {
-  var page = 0
-  var project_list = []
-  while(1){
-    var post_url = host_name + '/api/project/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    project_list = project_list.concat(cur_list)
-    page++
-  }
-  return project_list
-}
-
-async function getProjectStat() {
-  var page = 0
-  var project_list = []
-  while(1){
-    var post_url = host_name + '/api/project/stats/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    project_list = project_list.concat(cur_list)
-    page++
-  }
-  return project_list
-}
-
 async function findProjectDataDT(){
-  let project_list = await getProjectList();
-  console.log(JSON.stringify(project_list))
+  let project_list = await project_server.getProjectList();
 
   var dt_list = []
   var idx = 0
@@ -106,7 +74,7 @@ async function findProjectDataDT(){
 }
 
 async function findProjectDataCanvas(){
-  let project_list = await getProjectStat();
+  let project_list = await project_server.getProjectStat();
   console.log(JSON.stringify(project_list))
 
   var dt_list = [[], [], []]

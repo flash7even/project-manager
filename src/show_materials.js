@@ -5,28 +5,12 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
+const material_server = require('../services/material_services')
 
-var host_name = 'http://tarangopc:5000'
 let data_table_height = '200px'
 
-async function getMaterialList() {
-  var page = 0
-  var material_list = []
-  while(1){
-    var post_url = host_name + '/api/material/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    material_list = material_list.concat(cur_list)
-    page++
-  }
-  return material_list
-}
-
 async function findMaterialDataDT(){
-  let material_list = await getMaterialList();
+  let material_list = await material_server.getMaterialList();
   console.log(JSON.stringify(material_list))
 
   var dt_list = []

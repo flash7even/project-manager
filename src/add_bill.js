@@ -5,42 +5,12 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
-
-var host_name = 'http://tarangopc:5000'
-
-async function getProjectList() {
-  var page = 0
-  var project_list = []
-  while(1){
-    var post_url = host_name + '/api/project/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    project_list = project_list.concat(cur_list)
-    page++
-  }
-  return project_list
-}
-
-async function getPaymentMethodList() {
-  var page = 0
-  var payment_method_list = []
-  while(1){
-    var post_url = host_name + '/api/payment/method/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    payment_method_list = payment_method_list.concat(cur_list)
-    page++
-  }
-  return payment_method_list
-}
+const project_server = require('../services/project_services')
+const bill_server = require('../services/bill_services')
+const payment_method_server = require('../services/payment_method_services')
 
 async function viewProjectInBillForm() {
-  let project_list = await getProjectList();
+  let project_list = await project_server.getProjectList();
   console.log(JSON.stringify(project_list))
 
   var html = ''
@@ -55,7 +25,7 @@ async function viewProjectInBillForm() {
 }
 
 async function viewPaymentMethodInBillForm() {
-  let payment_method_list = await getPaymentMethodList();
+  let payment_method_list = await payment_method_server.getPaymentMethodList();
   console.log(JSON.stringify(payment_method_list))
 
   var html = ''
@@ -67,12 +37,6 @@ async function viewPaymentMethodInBillForm() {
   }
   var paymentMethodListInBill = document.getElementById('mode_of_payment')
   paymentMethodListInBill.innerHTML = html
-}
-
-async function addBillToServer(bill_data) {
-    var post_url = host_name + '/api/bill/'
-    let res = await axios.post(post_url, bill_data);
-    return res
 }
 
 async function sendAddBillForm(event) {
@@ -95,7 +59,7 @@ async function sendAddBillForm(event) {
       'ait': document.getElementById("ait").value,
     }
     
-    let data = await addBillToServer(bill_data);
+    let data = await bill_server.addBillToServer(bill_data);
     var message = 'Bill Successfull'
     if(data.status != 200 && data.status != 201){
       message = 'Bill Failed'

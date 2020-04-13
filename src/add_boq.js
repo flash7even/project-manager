@@ -5,27 +5,11 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
-
-var host_name = 'http://tarangopc:5000'
-
-async function getProjectList() {
-  var page = 0
-  var project_list = []
-  while(1){
-    var post_url = host_name + '/api/project/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    project_list = project_list.concat(cur_list)
-    page++
-  }
-  return project_list
-}
+const project_server = require('../services/project_services')
+const boq_server = require('../services/boq_services')
 
 async function viewProjectInBoqForm() {
-  let project_list = await getProjectList();
+  let project_list = await project_server.getProjectList();
   console.log(JSON.stringify(project_list))
 
   var html = ''
@@ -39,17 +23,10 @@ async function viewProjectInBoqForm() {
   projectListInBoq.innerHTML = html
 }
 
-async function addBoqToServer(boq_data) {
-    var post_url = host_name + '/api/boq/'
-    let res = await axios.post(post_url, boq_data);
-    return res
-}
-
 async function sendAddBoqForm(event) {
     event.preventDefault() // stop the form from submitting
 
     var boq_data = {
-      'boq_id': document.getElementById("boq_id").value,
       'description': document.getElementById("description").value,
       'project_name': document.getElementById("projectListInBoq").value,
       'unit': document.getElementById("unit").value,
@@ -64,7 +41,7 @@ async function sendAddBoqForm(event) {
       'stock_in_hand': document.getElementById("stock_in_hand").value,
     }
     
-    let data = await addBoqToServer(boq_data);
+    let data = await boq_server.addBoqToServer(boq_data);
     var message = 'Boq Successfull'
     if(data.status != 200 && data.status != 201){
       message = 'Boq Failed'

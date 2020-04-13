@@ -5,32 +5,12 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
+const project_server = require('../services/project_services')
+const transaction_server = require('../services/transaction_services')
 
-var host_name = 'http://tarangopc:5000'
-let divisions = 10
-
-async function getWeeklyTransactionStat() {
-  var no_of_weeks = 15
-  var transaction_list = []
-  var post_url = host_name + '/api/transaction/statsperweek/' + no_of_weeks.toString()
-  console.log("post_url: " + post_url)
-  let res = await axios.post(post_url, {});
-  var transaction_list = res.data
-  return transaction_list
-}
-
-async function getDivisionalProjectWiseTransactionStat() {
-  var data_resp = []
-  var post_url = host_name + '/api/transaction/statsperweek/perproject/' + divisions.toString()
-  console.log("post_url: " + post_url)
-  let res = await axios.post(post_url, {});
-  var data_resp = res.data
-  return data_resp
-}
 
 async function findDivisionalProjectWiseTransactionStat() {
-  let data = await getDivisionalProjectWiseTransactionStat();
+  let data = await transaction_server.getDivisionalProjectWiseTransactionStat();
   var dt_list = []
 
   var project_len = data['project_list'].length
@@ -43,7 +23,7 @@ async function findDivisionalProjectWiseTransactionStat() {
       }
     ];
     var div = 0;
-    for(div = 0;div<divisions;div++){
+    for(div = 0;div<transaction_server.divisions;div++){
       var xval = div+1
       var yval = data['data_list_per_division'][div]['project_data_list'][idx]['amount_sum']
       var point = {
@@ -69,7 +49,7 @@ async function findDivisionalProjectWiseTransactionStat() {
 }
 
 async function findWeeklyTransactionStatsCanvas(){
-  let week_list = await getWeeklyTransactionStat();
+  let week_list = await transaction_server.getWeeklyTransactionStat();
 
   console.log(JSON.stringify(week_list))
 
@@ -106,23 +86,8 @@ async function weeklyTransactionStat(){
   chart.render();
 }
 
-async function getProjectStat() {
-  var page = 0
-  var project_list = []
-  while(1){
-    var post_url = host_name + '/api/project/stats/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    project_list = project_list.concat(cur_list)
-    page++
-  }
-  return project_list
-}
-
 async function findTransactionAmountStatCanvas(){
-  let project_list = await getProjectStat();
+  let project_list = await project_server.getProjectStat();
   console.log(JSON.stringify(project_list))
 
   var dt_list = []

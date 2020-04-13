@@ -5,15 +5,8 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
+const project_server = require('../services/project_services')
 
-var host_name = 'http://tarangopc:5000'
-
-async function updateProjectToServer(project_data, project_id) {
-    var put_url = host_name + '/api/project/' + project_id
-    let res = await axios.put(put_url, project_data);
-    return res
-}
 
 async function sendUpdateProjectForm(event) {
   event.preventDefault() // stop the form from submitting
@@ -31,7 +24,7 @@ async function sendUpdateProjectForm(event) {
     'remarks': document.getElementById("remarks").value,
   }
   
-  let data = await updateProjectToServer(project_data, project_id);
+  let data = await project_server.updateProjectToServer(project_data, project_id);
   var message = 'Project Updated Successfully'
   if(data.status != 200 && data.status != 201){
     message = 'Project Update Failed'

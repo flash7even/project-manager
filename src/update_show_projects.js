@@ -5,44 +5,20 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
-
-var host_name = 'http://tarangopc:5000'
-
-async function deleteProjectToServer(project_id) {
-    var put_url = host_name + '/api/project/' + project_id
-    let res = await axios.delete(put_url);
-    return res
-}
+const project_server = require('../services/project_services')
 
 async function updateProjectEvent(project_id) {
   ipc.send('call-project-update', project_id)
 }
 
 async function deleteProjectEvent(project_id) {
-  var response = await deleteProjectToServer(project_id)
-  alert(JSON.stringify(response.data))
+  var response = await project_server.deleteProjectToServer(project_id)
   var window = remote.getCurrentWindow();
   window.reload();
 }
 
-async function getProjectList() {
-  var page = 0
-  var project_list = []
-  while(1){
-    var post_url = host_name + '/api/project/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    project_list = project_list.concat(cur_list)
-    page++
-  }
-  return project_list
-}
-
 async function showAllProjects() {
-  let project_list = await getProjectList();
+  let project_list = await project_server.getProjectList();
   console.log(JSON.stringify(project_list))
 
   var html = ''

@@ -5,44 +5,20 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
-
-var host_name = 'http://tarangopc:5000'
-
-async function deleteMaterialToServer(material_id) {
-    var put_url = host_name + '/api/material/' + material_id
-    let res = await axios.delete(put_url);
-    return res
-}
+const material_server = require('../services/material_services')
 
 async function updateMaterialEvent(material_id) {
   ipc.send('call-material-update', material_id)
 }
 
 async function deleteMaterialEvent(material_id) {
-  var response = await deleteMaterialToServer(material_id)
-  alert(JSON.stringify(response.data))
+  var response = await material_server.deleteMaterialToServer(material_id)
   var window = remote.getCurrentWindow();
   window.reload();
 }
 
-async function getMaterialList() {
-  var page = 0
-  var material_list = []
-  while(1){
-    var post_url = host_name + '/api/material/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    material_list = material_list.concat(cur_list)
-    page++
-  }
-  return material_list
-}
-
 async function showAllMaterials() {
-  let material_list = await getMaterialList();
+  let material_list = await material_server.getMaterialList();
   console.log(JSON.stringify(material_list))
 
   var html = ''

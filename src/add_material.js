@@ -5,27 +5,11 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
-
-var host_name = 'http://tarangopc:5000'
-
-async function getProjectList() {
-  var page = 0
-  var project_list = []
-  while(1){
-    var post_url = host_name + '/api/project/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    project_list = project_list.concat(cur_list)
-    page++
-  }
-  return project_list
-}
+const project_server = require('../services/project_services')
+const material_server = require('../services/material_services')
 
 async function viewProjectInMaterialForm() {
-  let project_list = await getProjectList();
+  let project_list = await project_server.getProjectList();
   console.log(JSON.stringify(project_list))
 
   var html = ''
@@ -37,12 +21,6 @@ async function viewProjectInMaterialForm() {
   }
   var projectListInMaterial = document.getElementById('projectListInMaterial')
   projectListInMaterial.innerHTML = html
-}
-
-async function addMaterialToServer(material_data) {
-    var post_url = host_name + '/api/material/'
-    let res = await axios.post(post_url, material_data);
-    return res
 }
 
 async function sendAddMaterialForm(event) {
@@ -61,7 +39,7 @@ async function sendAddMaterialForm(event) {
       'remarks': document.getElementById("remarks").value,
     }
     
-    let data = await addMaterialToServer(material_data);
+    let data = await material_server.addMaterialToServer(material_data);
     var message = 'Material Successfull'
     if(data.status != 200 && data.status != 201){
       message = 'Material Failed'

@@ -5,28 +5,12 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
+const boq_server = require('../services/boq_services')
 
-var host_name = 'http://tarangopc:5000'
 let data_table_height = '200px'
 
-async function getBoqList() {
-  var page = 0
-  var boq_list = []
-  while(1){
-    var post_url = host_name + '/api/boq/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    boq_list = boq_list.concat(cur_list)
-    page++
-  }
-  return boq_list
-}
-
 async function findBoqDataDT(){
-  let boq_list = await getBoqList();
+  let boq_list = await boq_server.getBoqList();
   console.log(JSON.stringify(boq_list))
 
   var dt_list = []

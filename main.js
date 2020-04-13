@@ -14,7 +14,7 @@ function main () {
   mainWindow = new Window({
     file: path.join('src', 'index.html')
   })
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   var menu = Menu.buildFromTemplate([
     {
@@ -232,17 +232,23 @@ ipcMain.on('after-boq-update', (event, message) => {
 
 ipcMain.on('call-project-update', (event, message) => {
   mainWindow.loadFile('src/update_project.html');
-  mainWindow.webContents.send('update-project', message);
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('update-project', message)
+  });
 })
 
 ipcMain.on('call-material-update', (event, message) => {
   mainWindow.loadFile('src/update_material.html');
-  mainWindow.webContents.send('update-material', message);
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('update-material', message)
+  });
 })
 
 ipcMain.on('call-boq-update', (event, message) => {
   mainWindow.loadFile('src/update_boq.html');
-  mainWindow.webContents.send('update-boq', message);
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.send('update-boq', message)
+  });
 })
 
 app.on('ready', main)

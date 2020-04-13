@@ -5,44 +5,15 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
-const axios = require('axios');
-
-var host_name = 'http://tarangopc:5000'
+const project_server = require('../services/project_services')
+const bill_server = require('../services/bill_services')
+const payment_method_server = require('../services/payment_method_services')
 
 let data_table_height = '200px'
 
-async function getProjectList() {
-  var page = 0
-  var project_list = []
-  while(1){
-    var post_url = host_name + '/api/project/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    project_list = project_list.concat(cur_list)
-    page++
-  }
-  return project_list
-}
-
-async function getPaymentMethodList() {
-  var page = 0
-  var payment_method_list = []
-  while(1){
-    var post_url = host_name + '/api/payment/method/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    payment_method_list = payment_method_list.concat(cur_list)
-    page++
-  }
-  return payment_method_list
-}
 
 async function viewPaymentMethodInBillForm() {
-  let payment_method_list = await getPaymentMethodList();
+  let payment_method_list = await payment_method_server.getPaymentMethodList();
   console.log(JSON.stringify(payment_method_list))
 
   var html = ''
@@ -59,7 +30,7 @@ async function viewPaymentMethodInBillForm() {
 }
 
 async function viewProjectInBillForm() {
-  let project_list = await getProjectList();
+  let project_list = await project_server.getProjectList();
   console.log(JSON.stringify(project_list))
 
   var html = ''
@@ -73,23 +44,8 @@ async function viewProjectInBillForm() {
   projectListInBill.innerHTML = html
 }
 
-async function getBillList(search_params = {}) {
-  var page = 0
-  var bill_list = []
-  while(page == 0){
-    var post_url = host_name + '/api/bill/search/' + page.toString()
-    console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, search_params);
-    var cur_list = res.data
-    if(cur_list.length == 0) break;
-    bill_list = bill_list.concat(cur_list)
-    page++
-  }
-  return bill_list
-}
-
 async function findBillDataDT(search_params){
-  let bill_list = await getBillList(search_params);
+  let bill_list = await bill_server.getBillList(search_params);
   console.log(JSON.stringify(bill_list))
 
   var dt_list = []
@@ -119,21 +75,6 @@ async function findBillDataDT(search_params){
   return dt_list
 }
 
-async function findWeeklyBillStatsCanvas(){
-  let week_list = await getWeeklyBillStat();
-
-  console.log(JSON.stringify(week_list))
-
-  var dt_list = []
-  var idx1 = 0
-  for(idx1 = 0;idx1<week_list.length;idx1++){
-    var week_data = week_list[idx1]
-    var week_name = 'week_' + (idx1+1).toString()
-    var tran_data1 = { label: week_name, y: parseFloat(week_data['total_amount_of_bills']) }
-    dt_list.push(tran_data1)
-  }
-  return dt_list
-}
 
 async function showAllBillsDT(search_params){
   let dt_list = await findBillDataDT(search_params);
