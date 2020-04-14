@@ -68,6 +68,10 @@ async function weeklyTransactionStat(){
   var dt_list = await findWeeklyTransactionStatsCanvas()
   var chart = new CanvasJS.Chart("weeklyTransactionStatChart", {
     animationEnabled: true,
+    exportEnabled: true,
+    zoomEnabled: true,
+    interactivityEnabled: true,
+    backgroundColor: "#EFF2FA",
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     title:{
       text: "Weekly Transaction Stats"
@@ -107,8 +111,12 @@ async function showTransactionAmountStat(){
   var chart = new CanvasJS.Chart("chartTransactionAmountStat", {
     theme: "white",
     exportFileName: "Doughnut Chart",
+    theme: "light2", // "light1", "light2", "dark1", "dark2"
+    backgroundColor: "#EFF2FA",
     exportEnabled: true,
+    zoomEnabled: true,
     animationEnabled: true,
+    interactivityEnabled: true,
     title:{
       text: "Transaction Amount Stats"
     },
@@ -144,6 +152,11 @@ async function divisionWiseProjectTransactionStat(){
 
   var chart = new CanvasJS.Chart("divisionWiseProjectTransactionStatChart", {
     animationEnabled: true,
+    exportEnabled: true,
+    zoomEnabled: true,
+    interactivityEnabled: true,
+    backgroundColor: "#EFF2FA",
+    theme: "light2", // "light1", "light2", "dark1", "dark2"
     title:{
       text: "Project Transactions Per Interval"
     },
