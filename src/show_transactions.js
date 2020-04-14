@@ -140,6 +140,7 @@ async function sendAdvancedTransactionReport(event) {
   let payment_date_start = document.getElementById("payment_date_start").value;
   let payment_date_end = document.getElementById("payment_date_end").value;
   let mode_of_payment = document.getElementById("mode_of_payment").value;
+  let transaction_type = document.getElementById("transaction_type").value;
 
   var search_params = {
     'project_name': project_name,
@@ -148,7 +149,8 @@ async function sendAdvancedTransactionReport(event) {
     'amount_max': amount_max,
     'payment_date_start': payment_date_start,
     'payment_date_end': payment_date_end,
-    'mode_of_payment': mode_of_payment
+    'mode_of_payment': mode_of_payment,
+    'transaction_type': transaction_type
   }
   
   await showAllTransactionsDT(search_params)

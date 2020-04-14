@@ -5,7 +5,23 @@ const path = require('path')
 const remote = electron.remote
 const ipc = electron.ipcRenderer
 
+const project_server = require('../services/project_services')
 const material_server = require('../services/material_services')
+
+async function viewProjectInMaterialForm() {
+  let project_list = await project_server.getProjectList();
+  console.log(JSON.stringify(project_list))
+
+  var html = ''
+  var idx = 0
+
+  for(idx = 0;idx<project_list.length;idx++){
+    var project = project_list[idx]
+    html += `<option>${project['project_name']}</option>`
+  }
+  var projectListInMaterial = document.getElementById('projectListInMaterial')
+  projectListInMaterial.innerHTML = html
+}
 
 async function sendUpdateMaterialForm(event) {
   event.preventDefault() // stop the form from submitting
@@ -37,3 +53,5 @@ ipc.on('update-material', function (event, message) {
   var material_id = document.getElementById('material_id')
   material_id.value = message
 })
+
+viewProjectInMaterialForm()
