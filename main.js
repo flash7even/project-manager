@@ -14,7 +14,7 @@ function main () {
   mainWindow = new Window({
     file: path.join('src', 'index.html')
   })
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   var menu = Menu.buildFromTemplate([
     {
@@ -72,12 +72,6 @@ function main () {
           click() {
             mainWindow.loadFile('src/add_transaction.html');
           }
-        },
-        {
-          label:'Transaction Report',
-          click() {
-            mainWindow.loadFile('src/show_transactions.html');
-          }
         }
       ]
     },
@@ -90,12 +84,6 @@ function main () {
             mainWindow.loadFile('src/add_bill.html');
           }
         },
-        {
-        label:'Bill Report',
-        click() {
-          mainWindow.loadFile('src/show_bills.html');
-        }
-      }
       ]
     },
     ,
@@ -109,15 +97,27 @@ function main () {
           }
         },
         {
+          label:'Add Material Stock',
+          click() {
+            mainWindow.loadFile('src/add_material_stock.html');
+          }
+        },
+        {
           label:'Update Material',
           click() {
             mainWindow.loadFile('src/update_show_materials.html');
           }
         },
         {
-          label:'Material Report',
+          label:'Material List',
           click() {
             mainWindow.loadFile('src/show_materials.html');
+          }
+        },
+        {
+          label:'Material Stock List',
+          click() {
+            mainWindow.loadFile('src/show_material_stocks.html');
           }
         }
       ]
@@ -132,7 +132,7 @@ function main () {
           }
         },
         {
-          label:'Boq Report',
+          label:'Boq List',
           click() {
             mainWindow.loadFile('src/show_boqs.html');
           }
@@ -156,6 +156,29 @@ function main () {
         }
       ]
     },
+    {
+      label: 'Reports',
+      submenu: [
+        {
+          label:'Transaction Report',
+          click() {
+            mainWindow.loadFile('src/show_transactions.html');
+          }
+        },
+        {
+          label:'Bill Report',
+          click() {
+            mainWindow.loadFile('src/show_bills.html');
+          }
+        },
+        {
+          label:'Boq Reports',
+          click() {
+            mainWindow.loadFile('src/show_boq_reports.html');
+          }
+        }
+      ]
+    }
   ])
   Menu.setApplicationMenu(menu); 
 }

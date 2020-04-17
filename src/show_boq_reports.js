@@ -28,7 +28,7 @@ async function viewProjectInBoqForm() {
 }
 
 async function findBoqDataDT(search_params){
-  let boq_list = await boq_server.getBoqList(search_params);
+  let boq_list = await boq_server.getBoqReport(search_params);
   console.log(JSON.stringify(boq_list))
 
   var dt_list = []
@@ -38,18 +38,15 @@ async function findBoqDataDT(search_params){
     var boq = boq_list[idx]
     var tran_data = [
       boq['boq_id'],
-      boq['description'],
       boq['project_name'],
       boq['material_name'],
       boq['unit'],
       boq['unit_price'],
-      boq['quantity'],
-      boq['total_price'],
-      boq['quoted_price'],
-      boq['profit'],
       boq['issue_date'],
-      boq['issue_quantity'],
-      boq['issue_voucher'],
+      boq['total_price'],
+      boq['boq_set_total_price'],
+      boq['total_quantity'],
+      boq['boq_set_total_quantity'],
       boq['stock_in_hand'],
     ]
     dt_list.push(tran_data)

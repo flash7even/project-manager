@@ -7,6 +7,7 @@ const ipc = electron.ipcRenderer
 
 const project_server = require('../services/project_services')
 const material_server = require('../services/material_services')
+const jshelper_services = require('../services/jshelper_services')
 
 async function viewProjectInMaterialForm() {
   let project_list = await project_server.getProjectList();
@@ -29,14 +30,8 @@ async function sendAddMaterialForm(event) {
     var material_data = {
       'material_name': document.getElementById("material_name").value,
       'project_name': document.getElementById("projectListInMaterial").value,
-      'unit': document.getElementById("unit").value,
-      'unit_price': document.getElementById("unit_price").value,
-      'quantity': document.getElementById("quantity").value,
-      'total_price': document.getElementById("total_price").value,
-      'supplier_name': document.getElementById("supplier_name").value,
-      'voucher': document.getElementById("voucher").value,
-      'stock': document.getElementById("stock").value,
       'remarks': document.getElementById("remarks").value,
+      'reference': 'ENTRY',
     }
     
     let data = await material_server.addMaterialToServer(material_data);

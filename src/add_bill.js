@@ -8,6 +8,7 @@ const ipc = electron.ipcRenderer
 const project_server = require('../services/project_services')
 const bill_server = require('../services/bill_services')
 const payment_method_server = require('../services/payment_method_services')
+const jshelper_services = require('../services/jshelper_services')
 
 async function viewProjectInBillForm() {
   let project_list = await project_server.getProjectList();
@@ -66,6 +67,8 @@ async function sendAddBillForm(event) {
     }
     ipc.send('after-bill', message)
 }
+
+document.getElementById("submission_date").value = jshelper_services.get_current_date();
 
 viewProjectInBillForm()
 viewPaymentMethodInBillForm()

@@ -11,7 +11,7 @@ let data_table_height = '200px'
 
 async function findMaterialDataDT(){
   var search_param = {
-    'reference': 'ENTRY'
+    'reference': 'STOCK'
   }
   let material_list = await material_server.getMaterialList(search_param);
   console.log(JSON.stringify(material_list))
@@ -25,6 +25,13 @@ async function findMaterialDataDT(){
       material['material_id'],
       material['material_name'],
       material['project_name'],
+      material['unit'],
+      material['unit_price'],
+      material['quantity'],
+      material['total_price'],
+      material['supplier_name'],
+      material['voucher'],
+      material['stock'],
       material['remarks'],
     ]
     dt_list.push(tran_data)

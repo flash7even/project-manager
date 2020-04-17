@@ -8,6 +8,7 @@ const ipc = electron.ipcRenderer
 const project_server = require('../services/project_services')
 const transaction_server = require('../services/transaction_services')
 const payment_method_server = require('../services/payment_method_services')
+const jshelper_services = require('../services/jshelper_services')
 
 
 async function viewProjectInTransactionForm() {
@@ -68,6 +69,8 @@ async function sendAddTransactionForm(event) {
     }
     ipc.send('after-transaction', message)
 }
+
+document.getElementById("payment_date").value = jshelper_services.get_current_date();
 
 viewProjectInTransactionForm()
 viewPaymentMethodInTransactionForm()

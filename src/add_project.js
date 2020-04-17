@@ -6,6 +6,7 @@ const remote = electron.remote
 const ipc = electron.ipcRenderer
 
 const project_server = require('../services/project_services')
+const jshelper_services = require('../services/jshelper_services')
 
 async function sendAddProjectForm(event) {
     event.preventDefault() // stop the form from submitting
@@ -29,3 +30,9 @@ async function sendAddProjectForm(event) {
     }
     ipc.send('after-project-creation', message)
 }
+
+document.getElementById("noa_date").value = jshelper_services.get_current_date();
+document.getElementById("contract_signing_date").value = jshelper_services.get_current_date();
+document.getElementById("commencement_date").value = jshelper_services.get_current_date();
+document.getElementById("completion_date").value = jshelper_services.get_current_date();
+document.getElementById("handover_date").value = jshelper_services.get_current_date();

@@ -7,6 +7,8 @@ const ipc = electron.ipcRenderer
 
 const project_server = require('../services/project_services')
 const boq_server = require('../services/boq_services')
+const material_server = require('../services/material_services')
+const jshelper_services = require('../services/jshelper_services')
 
 async function viewProjectInBoqForm() {
   let project_list = await project_server.getProjectList();
@@ -23,12 +25,51 @@ async function viewProjectInBoqForm() {
   projectListInBoq.innerHTML = html
 }
 
+async function viewMaterialInBoqForm() {
+  var search_param = {
+    'reference': 'ENTRY'
+  }
+  let material_list = await material_server.getMaterialList(search_param);
+  console.log(JSON.stringify(material_list))
+
+  var html = ''
+  var idx = 0
+
+  for(idx = 0;idx<material_list.length;idx++){
+    var material = material_list[idx]
+    html += `<option>${material['material_name']}</option>`
+  }
+  var materialListInBoq = document.getElementById('materialListInBoq')
+  materialListInBoq.innerHTML = html
+}
+
+async function sendUpdateBoqForm(event) {
+  event.preventDefault() // stop the form from submitting
+  var search_param = {
+    'reference': 'ENTRY',
+    'project_name': document.getElementById("projectListInBoq").value
+  }
+  let material_list = await material_server.getMaterialList(search_param);
+  console.log(JSON.stringify(material_list))
+
+  var html = ''
+  var idx = 0
+
+  for(idx = 0;idx<material_list.length;idx++){
+    var material = material_list[idx]
+    html += `<option>${material['material_name']}</option>`
+  }
+  var materialListInBoq = document.getElementById('materialListInBoq')
+  materialListInBoq.innerHTML = html
+}
+
 async function sendAddBoqForm(event) {
     event.preventDefault() // stop the form from submitting
 
     var boq_data = {
       'description': document.getElementById("description").value,
       'project_name': document.getElementById("projectListInBoq").value,
+      'material_name': document.getElementById("materialListInBoq").value,
       'unit': document.getElementById("unit").value,
       'unit_price': document.getElementById("unit_price").value,
       'quantity': document.getElementById("quantity").value,
@@ -49,4 +90,7 @@ async function sendAddBoqForm(event) {
     ipc.send('after-boq', message)
 }
 
+document.getElementById("issue_date").value = jshelper_services.get_current_date();
+
 viewProjectInBoqForm()
+viewMaterialInBoqForm()

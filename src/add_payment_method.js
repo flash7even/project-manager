@@ -6,6 +6,7 @@ const remote = electron.remote
 const ipc = electron.ipcRenderer
 
 const payment_method_server = require('../services/payment_method_services')
+const jshelper_services = require('../services/jshelper_services')
 
 async function sendAddPaymentMethodForm(event) {
     event.preventDefault() // stop the form from submitting

@@ -22,13 +22,13 @@ async function deleteMaterialToServer(material_id) {
     return res
 }
 
-async function getMaterialList() {
+async function getMaterialList(search_param) {
   var page = 0
   var material_list = []
   while(1){
     var post_url = host_name + '/api/material/search/' + page.toString()
     console.log("post_url: " + post_url)
-    let res = await axios.post(post_url, {});
+    let res = await axios.post(post_url, search_param);
     var cur_list = res.data
     if(cur_list.length == 0) break;
     material_list = material_list.concat(cur_list)

@@ -1,7 +1,7 @@
 <html>
   <head>
-    <title>Boq Report</title>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' />
+    <title>Material Report</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' >
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
@@ -14,50 +14,23 @@
   <body>
     <div class="container top-level-div">
       <div class="row">
-        <h3 style="text-align: center;">Advance Search for BOQ Report</h3>
-        <form name="ipcForm" onSubmit="JavaScript:sendAdvancedBOQReport(event)">
-            <div class="form-group col-md-12">
-              <label for="sel1">Select Project:</label>
-              <select class="form-control" id="projectListInBoq">
-              </select>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                  <label for="pwd">Starting Issue Date</label>
-                  <input type="date" name="issue_date_start" id="issue_date_start" class="form-control" placeholder="">
-              </div>
-              <div class="form-group col-md-6">
-                  <label for="pwd">End Issue Date</label>
-                  <input type="date" name="issue_date_end" id="issue_date_end" class="form-control" placeholder="">
-              </div>
-            </div>
-            <div class="form-group col-md-12">
-              <input type="submit" value="Submit">
-            </div>
-          </form>
-      </div>
-      <br>
-      <div class="row">
-        <h3 class="header-top">Boq Report</h3>
+        <h3 class="header-top">Material Stock List</h3>
       </div>
       <div class="row">
-        <table id="boqListTable" class="table table-striped table-bordered">
+        <table id="materialListTable" class="table table-striped table-bordered">
           <thead>
             <tr>
-              <th>Boq ID</th>
-              <th>Description</th>
-              <th>Project Name</th>
+              <th>Material ID</th>
               <th>Material Name</th>
+              <th>Project Name</th>
               <th>Unit</th>
               <th>Unit Price</th>
               <th>Quantity</th>
               <th>Total Price</th>
-              <th>Quoted Price</th>
-              <th>Profit</th>
-              <th>Issue Date</th>
-              <th>Issue Quantity</th>
-              <th>Issue Voucher</th>
-              <th>Stock In Hand</th>
+              <th>Supplier Name</th>
+              <th>Voucher</th>
+              <th>Stock</th>
+              <th>Remarks</th>
             </tr>
           </thead>
           <tbody>
@@ -76,6 +49,6 @@
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script>
-    <script src="show_boqs.js"></script>
+    <script src="show_materials_stocks.js"></script>
   </body>
   </html>
