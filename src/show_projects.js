@@ -100,7 +100,7 @@ async function showProjectOverallChart(){
       text: ""
     },
     axisY: {
-      title: "Medals"
+      title: ""
     },
     legend: {
       cursor:"pointer",

@@ -12,7 +12,8 @@ let mainWindow
 
 function main () {
   mainWindow = new Window({
-    file: path.join('src', 'index.html')
+    file: path.join('./', 'home.html'),
+    icon: './assets/img/icon_3.png'
   })
   mainWindow.webContents.openDevTools()
 
@@ -23,13 +24,7 @@ function main () {
               {
                   label:'Home',
                   click() {
-                    mainWindow.loadFile('src/index.html');
-                  }
-              },
-              {
-                  label:'About',
-                  click() {
-                    mainWindow.loadFile('src/about.html');
+                    mainWindow.loadFile('home.html');
                   }
               },
               {type:'separator'},
@@ -175,6 +170,18 @@ function main () {
           label:'Boq Reports',
           click() {
             mainWindow.loadFile('src/show_boq_reports.html');
+          }
+        },
+        {
+          label:'Balance Sheet',
+          click() {
+            mainWindow.loadFile('src/show_balance_sheets.html');
+          }
+        },
+        {
+          label:'Graphs',
+          click() {
+            mainWindow.loadFile('src/index.html');
           }
         }
       ]

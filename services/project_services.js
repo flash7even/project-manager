@@ -51,8 +51,17 @@ async function getProjectStat() {
   return project_list
 }
 
+async function getBalanceSheet(search_param) {
+  var post_url = host_name + '/api/project/balance/sheet'
+  console.log("post_url: " + post_url)
+  let res = await axios.post(post_url, search_param);
+  var balance_sheet = res.data
+  return balance_sheet
+}
+
 module.exports.getProjectList = getProjectList
 module.exports.getProjectStat = getProjectStat
 module.exports.addProjectToServer = addProjectToServer
 module.exports.updateProjectToServer = updateProjectToServer
 module.exports.deleteProjectToServer = deleteProjectToServer
+module.exports.getBalanceSheet = getBalanceSheet

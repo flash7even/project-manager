@@ -11,20 +11,39 @@ if (typeof module === 'object') {window.module = module; module = undefined;}
 <body>
     <div class="container top-level-div">
         <div class="row">
+            <div class="row">
+              <h3 class="" style="text-align: center;">Transaction Amount Stats</h3>
+            </div>
             <div id="chartTransactionAmountStat" style="height: 300px; width: 100%;"></div>
+            <div class="row">
+              <h5 class="" style="text-align: center;">Note: This graph shows the percentage of total transaction per project.</h5>
+            </div>
         </div>
         <br>
         <br>
         <div class="row">
+            <div class="row">
+              <h3 class="" style="text-align: center;">Project Transactions Per Interval</h3>
+            </div>
             <div id="divisionWiseProjectTransactionStatChart" style="height: 300px; width: 100%;"></div>
+            <div class="row">
+              <h5 class="" style="text-align: center;">Note: This graph shows the transaction statistics for each project in each interval  (the left most interval is the oldest interval)</h5>
+            </div>
         </div>
         <br>
         <br>
         <div class="row">
+            <div class="row">
+              <h3 class="" style="text-align: center;">Weekly Transaction Stats</h3>
+            </div>
             <div id="weeklyTransactionStatChart" style="height: 300px; width: 100%;"></div>
+            <div class="row">
+              <h5 class="" style="text-align: center;">Note: This graph shows the total transactions of the projects per week (the left most week is the most recent week)</h5>
+            </div>
         </div>
     </div>
 
     <script src="index.js"></script>
 </body>
 </html>
+

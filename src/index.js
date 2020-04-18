@@ -71,10 +71,10 @@ async function weeklyTransactionStat(){
     exportEnabled: true,
     zoomEnabled: true,
     interactivityEnabled: true,
-    backgroundColor: "#EFF2FA",
+    backgroundColor: "#FAFAFC",
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     title:{
-      text: "Weekly Transaction Stats"
+      text: ""
     },
     axisY: {
       title: "BDT"
@@ -112,13 +112,13 @@ async function showTransactionAmountStat(){
     theme: "white",
     exportFileName: "Doughnut Chart",
     theme: "light2", // "light1", "light2", "dark1", "dark2"
-    backgroundColor: "#EFF2FA",
+    backgroundColor: "#FAFAFC",
     exportEnabled: true,
     zoomEnabled: true,
     animationEnabled: true,
     interactivityEnabled: true,
     title:{
-      text: "Transaction Amount Stats"
+      text: ""
     },
     legend:{
       cursor: "pointer",
@@ -155,10 +155,10 @@ async function divisionWiseProjectTransactionStat(){
     exportEnabled: true,
     zoomEnabled: true,
     interactivityEnabled: true,
-    backgroundColor: "#EFF2FA",
+    backgroundColor: "#FAFAFC",
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     title:{
-      text: "Project Transactions Per Interval"
+      text: ""
     },
     axisY :{
       valueFormatString: "#0,.",

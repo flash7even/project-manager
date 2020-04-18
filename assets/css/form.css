@@ -1,11 +1,11 @@
 .form-style-9{
 	max-width: 650px;
-	background: #FAFAFA;
+	background: #FAFAFC;
 	padding: 30px;
 	margin: 45px auto;
 	box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.70);
 	border-radius: 3px;
-	border: 6px solid #F3F3F3;
+	border: 6px solid #FAFAFC;
 }
 .form-style-9 ul{
 	padding:0;

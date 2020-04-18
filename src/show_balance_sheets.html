@@ -1,0 +1,67 @@
+<html>
+<head>
+  <title>Transaction Report</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' >
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+  <link rel='stylesheet' href="../assets/css/window.css">
+  <link rel='stylesheet' href="../assets/css/table-2.css">
+  <script>
+    if (typeof module === 'object') {window.module = module; module = undefined;}
+  </script>
+  <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+  <div class="container top-level-div">
+    <div class="row">
+      <h3 style="text-align: center;">Advance Search for Balance Sheet</h3>
+      <form name="ipcForm" onSubmit="JavaScript:sendAdvancedBalanceSheetReport(event)">
+          <div class="form-group col-md-12">
+            <label for="sel1">Select Project:</label>
+            <select class="form-control" id="projectListInBSheet">
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="pwd">Starting Date</label>
+                <input type="date" name="payment_date_start" id="payment_date_start" class="form-control" placeholder="Enter Minimum Amount">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="pwd">End Date</label>
+                <input type="date" name="payment_date_end" id="payment_date_end" class="form-control" placeholder="Enter Maximum Amount">
+            </div>
+          </div>
+          <div class="form-group col-md-12">
+            <input type="submit" value="Submit">
+          </div>
+        </form>
+    </div>
+    <br>
+  <div class="row">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title" style="text-align: center;">Balance Sheet</h3>
+      </div>
+      <div class="panel-body">
+        <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
+      </div>
+      <table class="table table panel panel-primary" id="balanceSheetTable">
+      </table>
+    </div>
+  </div>
+  </div>
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script>
+  <script src="show_balance_sheets.js"></script>
+</body>
+</html>
