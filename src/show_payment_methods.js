@@ -48,7 +48,7 @@ async function showAllPaymentMethods() {
     cur_payment_method += `<td>${payment_method['created_at']}</td>`
     var payment_method_id = payment_method['id']
     //var btn1 = '<input type="button" onClick="updatePaymentMethodEvent(\'' + payment_method_id + '\')" value="Update"/>'
-    var btn2 = '<input type="button" onClick="deletePaymentMethodEvent(\'' + payment_method_id + '\')" value="Delete"/>'
+    var btn2 = '<input class="btn btn-info" type="button" onClick="deletePaymentMethodEvent(\'' + payment_method_id + '\')" value="Delete"/>'
     cur_payment_method += `<td>${btn2}</td>`
     cur_payment_method += '</tr>'
     html += cur_payment_method
