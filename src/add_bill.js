@@ -69,6 +69,7 @@ async function sendAddBillForm(event) {
 }
 
 document.getElementById("submission_date").value = jshelper_services.get_current_date();
+document.getElementById("payment_received_date").value = jshelper_services.get_current_date();
 
 viewProjectInBillForm()
 viewPaymentMethodInBillForm()
