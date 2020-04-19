@@ -1,7 +1,9 @@
 'use strict'
 
 const axios = require('axios');
-var host_name = 'http://tarangopc:5000'
+const config = require('./config')
+
+var host_name = config.host_name
 
 async function addPaymentMethodToServer(pm_data) {
   var post_url = host_name + '/api/payment/method/'

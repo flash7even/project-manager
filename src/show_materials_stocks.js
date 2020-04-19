@@ -7,8 +7,6 @@ const ipc = electron.ipcRenderer
 
 const material_server = require('../services/material_services')
 
-let data_table_height = '200px'
-
 async function findMaterialDataDT(){
   var search_param = {
     'reference': 'STOCK'
@@ -45,7 +43,6 @@ async function findMaterialDataDT(){
       "aaData": dt_list,
       paging: true,
       destroy: true,
-      scrollY: data_table_height,
       scrollCollapse: true,
       dom: 'Bfrtip',
       buttons: [

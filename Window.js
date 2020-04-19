@@ -7,6 +7,7 @@ const defaultProps = {
   width: 1200,
   height: 800,
   show: false,
+  fullscreen: true,
   
   // update for electron V5+
   webPreferences: {

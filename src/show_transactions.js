@@ -8,8 +8,7 @@ const ipc = electron.ipcRenderer
 const project_server = require('../services/project_services')
 const transaction_server = require('../services/transaction_services')
 const payment_method_server = require('../services/payment_method_services')
-
-let data_table_height = '200px'
+const dimensions = require('../services/dimensions')
 
 async function viewPaymentMethodInTransactionForm() {
   let payment_method_list = await payment_method_server.getPaymentMethodList();
@@ -98,7 +97,7 @@ async function showAllTransactionsDT(search_params){
     "aaData": dt_list,
     paging: true,
     destroy: true,
-    scrollY: data_table_height,
+    scrollY: dimensions.data_table_height,
     scrollCollapse: true,
     dom: 'Bfrtip',
     buttons: [

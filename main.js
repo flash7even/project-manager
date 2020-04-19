@@ -15,7 +15,7 @@ function main () {
     file: path.join('./', 'home.html'),
     icon: './assets/img/icon_3.png'
   })
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 
   var menu = Menu.buildFromTemplate([
     {
@@ -95,12 +95,6 @@ function main () {
           label:'Add Material Stock',
           click() {
             mainWindow.loadFile('src/add_material_stock.html');
-          }
-        },
-        {
-          label:'Update Material',
-          click() {
-            mainWindow.loadFile('src/update_show_materials.html');
           }
         },
         {

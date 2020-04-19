@@ -54,8 +54,8 @@ async function showAllProjects() {
     cur_project += `<td>${project['adjusted_completion_date']}</td>`
     cur_project += `<td>${project['remarks']}</td>`
     var project_id = project['id']
-    var btn1 = '<input type="button" onClick="updateProjectEvent(\'' + project_id + '\')" value="Update"/>'
-    var btn2 = '<input type="button" onClick="deleteProjectEvent(\'' + project_id + '\')" value="Delete"/>'
+    var btn1 = '<input type="button" class="btn btn-info" onClick="updateProjectEvent(\'' + project_id + '\')" value="Update"/>'
+    var btn2 = '<input type="button" class="btn btn-warning" onClick="deleteProjectEvent(\'' + project_id + '\')" value="Delete"/>'
     cur_project += `<td>${btn1}</td>`
     cur_project += `<td>${btn2}</td>`
     cur_project += '</tr>'

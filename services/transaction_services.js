@@ -1,7 +1,9 @@
 'use strict'
 
 const axios = require('axios');
-var host_name = 'http://tarangopc:5000'
+const config = require('./config')
+
+var host_name = config.host_name
 
 let divisions = 10
 

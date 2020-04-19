@@ -11,9 +11,15 @@
 
   <body>
     <div class="container top-level-div">
-      <div class="row">
+
+      <div id="" class="mainbox form-style-10">                    
+        <div class="panel panel-primary" >
+          <div class="panel-heading">
+              <div class="panel-title" style="text-align: center;">Add Material Stock Form</div>
+          </div>     
+          <div style="padding-top:30px" class="panel-body" >
+              <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
         <form name="ipcForm" class="form-style-9" onSubmit="JavaScript:sendAddMaterialForm(event)">
-          <h4 class="header-top-form">Add Material Stock Form</h4>
           <div class="form-group">
             <label for="sel1">Select Project:</label>
             <select class="form-control" id="projectListInMaterial" onchange="JavaScript:sendUpdateMaterialForm(event)">
@@ -56,11 +62,12 @@
               <label for="pwd">Remarks</label>
               <input type="text" name="remarks" id="remarks" class="form-control" placeholder="">
           </div>
-          <input type="submit" value="Submit">
+          <input class="btn btn-primary"  type="submit" value="Submit">
         </form>
-      </div>
-    </div>
-
+      </div>                     
+    </div>  
+  </div>
+</div>
     <script src="add_material_stock.js"></script>
   </body>
 
