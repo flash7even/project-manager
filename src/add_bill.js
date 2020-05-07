@@ -48,15 +48,15 @@ async function sendAddBillForm(event) {
       'submission_date': document.getElementById("submission_date").value,
       'bill_type': document.getElementById("bill_type").value,
       'description': document.getElementById("description").value,
-      'amount_claimed': document.getElementById("amount_claimed").value,
-      'amount_received': document.getElementById("amount_received").value,
+      'amount_claimed': jshelper_services.make_numeric(document.getElementById("amount_claimed").value),
+      'amount_received': jshelper_services.make_numeric(document.getElementById("amount_received").value),
       'mode_of_payment': document.getElementById("mode_of_payment").value,
       'bank_name': document.getElementById("bank_name").value,
       'account_no': document.getElementById("account_no").value,
       'reference': document.getElementById("reference").value,
       'payment_received_date': document.getElementById("payment_received_date").value,
       'status': document.getElementById("status").value,
-      'vat': document.getElementById("vat").value,
+      'vat': jshelper_services.make_numeric(document.getElementById("vat").value),
       'ait': document.getElementById("ait").value,
     }
     
@@ -67,6 +67,22 @@ async function sendAddBillForm(event) {
     }
     ipc.send('after-bill', message)
 }
+
+
+//-------- make comma separated amount field -------//
+function amount_claimed_changed(event){
+  var input = document.getElementById("amount_claimed").value.toString();
+  document.getElementById("amount_claimed").value = jshelper_services.bdt_currency_convert(input)
+}
+function amount_received_changed(event){
+  var input = document.getElementById("amount_received").value.toString();
+  document.getElementById("amount_received").value = jshelper_services.bdt_currency_convert(input)
+}
+function vat_changed(event){
+  var input = document.getElementById("vat").value.toString();
+  document.getElementById("vat").value = jshelper_services.bdt_currency_convert(input)
+}
+//-------- make comma separated amount field -------//
 
 document.getElementById("submission_date").value = jshelper_services.get_current_date();
 document.getElementById("payment_received_date").value = jshelper_services.get_current_date();

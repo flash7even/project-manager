@@ -14,7 +14,7 @@ async function sendUpdateProjectForm(event) {
 
   var project_data = {
     'project_name': document.getElementById("project_name").value,
-    'project_value': document.getElementById("project_value").value,
+    'project_value': jshelper_services.make_numeric(document.getElementById("project_value").value),
     'department': document.getElementById("department").value,
     'noa_date': document.getElementById("noa_date").value,
     'contract_signing_date': document.getElementById("contract_signing_date").value,
@@ -31,6 +31,14 @@ async function sendUpdateProjectForm(event) {
   }
   ipc.send('after-project-update', message)
 }
+
+
+//-------- make comma separated amount field -------//
+function project_value_changed(event){
+  var input = document.getElementById("project_value").value.toString();
+  document.getElementById("project_value").value = jshelper_services.bdt_currency_convert(input)
+}
+//-------- make comma separated amount field -------//
 
 ipc.on('update-project', function (event, message) {
   console.log('update-project: (update_project.js) ' + message)

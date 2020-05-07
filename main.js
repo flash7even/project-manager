@@ -15,7 +15,7 @@ function main () {
     file: path.join('./', 'home.html'),
     icon: './assets/img/icon_3.png'
   })
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   var menu = Menu.buildFromTemplate([
     {

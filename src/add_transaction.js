@@ -49,7 +49,7 @@ async function sendAddTransactionForm(event) {
       'payment_date': document.getElementById("payment_date").value,
       'transaction_type': document.getElementById("transaction_type").value,
       'description': document.getElementById("description").value,
-      'amount': document.getElementById("amount").value,
+      'amount': jshelper_services.make_numeric(document.getElementById("amount").value),
       'mode_of_payment': document.getElementById("mode_of_payment").value,
       'bank_name': document.getElementById("bank_name").value,
       'account_no': document.getElementById("account_no").value,
@@ -58,7 +58,7 @@ async function sendAddTransactionForm(event) {
       'voucher_no': document.getElementById("voucher_no").value,
       'status': document.getElementById("status").value,
       'reference': document.getElementById("reference").value,
-      'vat': document.getElementById("vat").value,
+      'vat': jshelper_services.make_numeric(document.getElementById("vat").value),
       'ait': document.getElementById("ait").value,
     }
     
@@ -69,6 +69,17 @@ async function sendAddTransactionForm(event) {
     }
     ipc.send('after-transaction', message)
 }
+
+//-------- make comma separated amount field -------//
+function amount_changed(event){
+  var input = document.getElementById("amount").value.toString();
+  document.getElementById("amount").value = jshelper_services.bdt_currency_convert(input)
+}
+function vat_changed(event){
+  var input = document.getElementById("vat").value.toString();
+  document.getElementById("vat").value = jshelper_services.bdt_currency_convert(input)
+}
+//-------- make comma separated amount field -------//
 
 document.getElementById("payment_date").value = jshelper_services.get_current_date();
 

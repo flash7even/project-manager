@@ -70,9 +70,9 @@ async function sendAddMaterialForm(event) {
       'material_name': document.getElementById("materialListInMaterial").value,
       'project_name': document.getElementById("projectListInMaterial").value,
       'unit': document.getElementById("unit").value,
-      'unit_price': document.getElementById("unit_price").value,
+      'unit_price': jshelper_services.make_numeric(document.getElementById("unit_price").value),
       'quantity': document.getElementById("quantity").value,
-      'total_price': document.getElementById("total_price").value,
+      'total_price': jshelper_services.make_numeric(document.getElementById("total_price").value),
       'supplier_name': document.getElementById("supplier_name").value,
       'voucher': document.getElementById("voucher").value,
       'stock': document.getElementById("stock").value,
@@ -87,6 +87,17 @@ async function sendAddMaterialForm(event) {
     }
     ipc.send('after-material', message)
 }
+
+//-------- make comma separated amount field -------//
+function unit_price_changed(event){
+  var input = document.getElementById("unit_price").value.toString();
+  document.getElementById("unit_price").value = jshelper_services.bdt_currency_convert(input)
+}
+function total_price_changed(event){
+  var input = document.getElementById("total_price").value.toString();
+  document.getElementById("total_price").value = jshelper_services.bdt_currency_convert(input)
+}
+//-------- make comma separated amount field -------//
 
 viewProjectInMaterialForm()
 viewMaterialInMaterialStockForm()

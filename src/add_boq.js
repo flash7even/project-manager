@@ -71,11 +71,11 @@ async function sendAddBoqForm(event) {
       'project_name': document.getElementById("projectListInBoq").value,
       'material_name': document.getElementById("materialListInBoq").value,
       'unit': document.getElementById("unit").value,
-      'unit_price': document.getElementById("unit_price").value,
+      'unit_price': jshelper_services.make_numeric(document.getElementById("unit_price").value),
       'quantity': document.getElementById("quantity").value,
-      'total_price': document.getElementById("total_price").value,
-      'quoted_price': document.getElementById("quoted_price").value,
-      'profit': document.getElementById("profit").value,
+      'total_price': jshelper_services.make_numeric(document.getElementById("total_price").value),
+      'quoted_price': jshelper_services.make_numeric(document.getElementById("quoted_price").value),
+      'profit': jshelper_services.make_numeric(document.getElementById("profit").value),
       'issue_date': document.getElementById("issue_date").value,
       'issue_quantity': document.getElementById("issue_quantity").value,
       'issue_voucher': document.getElementById("issue_voucher").value,
@@ -89,6 +89,25 @@ async function sendAddBoqForm(event) {
     }
     ipc.send('after-boq', message)
 }
+
+//-------- make comma separated amount field -------//
+function unit_price_changed(event){
+  var input = document.getElementById("unit_price").value.toString();
+  document.getElementById("unit_price").value = jshelper_services.bdt_currency_convert(input)
+}
+function total_price_changed(event){
+  var input = document.getElementById("total_price").value.toString();
+  document.getElementById("total_price").value = jshelper_services.bdt_currency_convert(input)
+}
+function profit_changed(event){
+  var input = document.getElementById("profit").value.toString();
+  document.getElementById("profit").value = jshelper_services.bdt_currency_convert(input)
+}
+function quoted_price_changed(event){
+  var input = document.getElementById("quoted_price").value.toString();
+  document.getElementById("quoted_price").value = jshelper_services.bdt_currency_convert(input)
+}
+//-------- make comma separated amount field -------//
 
 document.getElementById("issue_date").value = jshelper_services.get_current_date();
 

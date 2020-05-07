@@ -19,7 +19,7 @@
           </div>     
           <div style="padding-top:30px" class="panel-body" >
               <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-        <form name="ipcForm" class="form-style-9" onSubmit="JavaScript:sendAddTransactionForm(event)">
+        <form name="ipcForm" id="ipcForm" class="form-style-9" onSubmit="JavaScript:sendAddTransactionForm(event)">
           <div class="form-group">
             <label for="sel1">Select Project:</label>
             <select class="form-control" id="projectListInTransaction">
@@ -42,7 +42,7 @@
           </div>
           <div class="form-group">
               <label for="pwd">Amount</label>
-              <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount" required>
+              <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount" onmouseout="JavaScript:amount_changed(event)" required>
           </div>
           <div class="form-group">
               <label for="pwd">Mode of Payment</label>
@@ -82,7 +82,7 @@
           </div>
           <div class="form-group">
               <label for="pwd">VAT</label>
-              <input type="text" name="vat" id="vat" class="form-control" placeholder="">
+              <input type="text" name="vat" id="vat" class="form-control" placeholder="" onmouseout="JavaScript:vat_changed(event)">
           </div>
           <div class="form-group">
               <label for="pwd">AIT</label>
@@ -94,6 +94,7 @@
     </div>  
   </div>
 </div>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="add_transaction.js"></script>
   </body>
 
