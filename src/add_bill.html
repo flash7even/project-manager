@@ -6,13 +6,12 @@
     <title>Add Bill</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' >
     <link rel='stylesheet' href="../assets/css/window.css">
-    <link rel='stylesheet' href="../assets/css/form.css">
+    <link rel='stylesheet' href="../assets/css/view_table.css">
   </head>
 
   <body>
-    <div class="container top-level-div">
-
-      <div id="" class="mainbox form-style-10">                    
+    <br>
+      <div id="" class="mainbox form-style-10 view-table-1"  style="margin: 10%; margin-top: 0.2%;">                    
         <div class="panel panel-primary" >
           <div class="panel-heading">
               <div class="panel-title" style="text-align: center;">Add Bill Form</div>
@@ -20,78 +19,91 @@
           <div style="padding-top:30px" class="panel-body" >
               <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
         <form name="ipcForm" class="form-style-9" onSubmit="JavaScript:sendAddBillForm(event)">
-          <div class="form-group">
-            <label for="sel1">Select Project:</label>
-            <select class="form-control" id="projectListInBill">
-            </select>
+          <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="sel1">Select Project:</label>
+                  <select class="form-control" id="projectListInBill">
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="date">Submission Date</label>
+                    <input type="date" name="submission_date" id="submission_date" class="form-control">
+                </div>
           </div>
-          <div class="form-group">
-              <label for="date">Submission Date</label>
-              <input type="date" name="submission_date" id="submission_date" class="form-control">
+          <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="pwd">Bill Type</label>
+                    <select class="form-control" id="bill_type">
+                      <option value="Advanced">Advanced</option>
+                      <option value="Running">Running</option>
+                      <option value="Adjustment">Adjustment</option>
+                      <option value="Final">Final</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="pwd">Description</label>
+                    <input type="text" name="description" id="description" class="form-control" placeholder="">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="pwd">Amount Claimed</label>
+                    <input type="text" name="amount_claimed" id="amount_claimed" class="form-control" placeholder="" onmouseout="JavaScript:amount_claimed_changed(event)" required>
+                </div>
           </div>
-          <div class="form-group">
-              <label for="pwd">Bill Type</label>
-              <select class="form-control" id="bill_type">
-                <option value="Advanced">Advanced</option>
-                <option value="Running">Running</option>
-                <option value="Adjustment">Adjustment</option>
-                <option value="Final">Final</option>
-              </select>
+          <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="pwd">Amount Received</label>
+                    <input type="text" name="amount_received" id="amount_received" class="form-control" placeholder="" onmouseout="JavaScript:amount_received_changed(event)" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="pwd">Mode of Payment</label>
+                    <select class="form-control" id="mode_of_payment">
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="pwd">Bank Name</label>
+                    <input type="text" name="bank_name" id="bank_name" class="form-control" placeholder="">
+                </div>
+         </div>  
+          <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="pwd">Account No</label>
+                    <input type="text" name="account_no" id="account_no" class="form-control" placeholder="">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="pwd">Payment Status</label>
+                    <select class="form-control" id="status">
+                      <option value="PAID">PAID</option>
+                      <option value="DUE">DUE</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="pwd">Reference No</label>
+                    <input type="text" name="reference" id="reference" class="form-control" placeholder="">
+                </div>
           </div>
-          <div class="form-group">
-              <label for="pwd">Description</label>
-              <input type="text" name="description" id="description" class="form-control" placeholder="">
+          <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="date">Payment Received Date</label>
+                    <input type="date" name="payment_received_date" id="payment_received_date" class="form-control">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="pwd">VAT</label>
+                    <input type="text" name="vat" id="vat" class="form-control" placeholder="" onmouseout="JavaScript:vat_changed(event)">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="pwd">AIT</label>
+                    <input type="text" name="ait" id="ait" class="form-control" placeholder="">
+                </div>
           </div>
-          <div class="form-group">
-              <label for="pwd">Amount Claimed</label>
-              <input type="text" name="amount_claimed" id="amount_claimed" class="form-control" placeholder="" onmouseout="JavaScript:amount_claimed_changed(event)" required>
+          <div class="form-row">
+            <div class="form-group col-md-2">
+                <input class="btn btn-primary" type="submit" value="Add Bill">
+            </div>
           </div>
-          <div class="form-group">
-              <label for="pwd">Amount Received</label>
-              <input type="text" name="amount_received" id="amount_received" class="form-control" placeholder="" onmouseout="JavaScript:amount_received_changed(event)" required>
-          </div>
-          <div class="form-group">
-              <label for="pwd">Mode of Payment</label>
-              <select class="form-control" id="mode_of_payment">
-              </select>
-          </div>
-          <div class="form-group">
-              <label for="pwd">Bank Name</label>
-              <input type="text" name="bank_name" id="bank_name" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Account No</label>
-              <input type="text" name="account_no" id="account_no" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Payment Status</label>
-              <select class="form-control" id="status">
-                <option value="PAID">PAID</option>
-                <option value="DUE">DUE</option>
-              </select>
-          </div>
-          <div class="form-group">
-              <label for="pwd">Reference No</label>
-              <input type="text" name="reference" id="reference" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="date">Payment Received Date</label>
-              <input type="date" name="payment_received_date" id="payment_received_date" class="form-control">
-          </div>
-          <div class="form-group">
-              <label for="pwd">VAT</label>
-              <input type="text" name="vat" id="vat" class="form-control" placeholder="" onmouseout="JavaScript:vat_changed(event)">
-          </div>
-          <div class="form-group">
-              <label for="pwd">AIT</label>
-              <input type="text" name="ait" id="ait" class="form-control" placeholder="">
-          </div>
-          <input class="btn btn-primary"  type="submit" value="Submit">
         </form>
       </div>                     
     </div>  
   </div>
-</div>
     <script src="add_bill.js"></script>
   </body>
 

@@ -6,13 +6,12 @@
     <title>Add Project</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' >
     <link rel='stylesheet' href="../assets/css/window.css">
-    <link rel='stylesheet' href="../assets/css/form.css">
+    <link rel='stylesheet' href="../assets/css/view_table.css">
   </head>
 
   <body>
-    <div class="container top-level-div">
-
-      <div id="" class="mainbox form-style-10">                    
+      <br>
+      <div id="" class="mainbox form-style-10 view-table-1" style="margin: 10%; margin-top: 0.2%;">                    
         <div class="panel panel-primary" >
           <div class="panel-heading">
               <div class="panel-title" style="text-align: center;">Add Project Form</div>
@@ -20,48 +19,57 @@
           <div style="padding-top:30px" class="panel-body" >
               <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
               <form name="ipcForm" onSubmit="JavaScript:sendAddProjectForm(event)">
-                <div class="form-group">
-                    <label for="pwd">Project Name</label>
-                    <input type="text" name="project_name" id="project_name" class="form-control" placeholder="Enter a Project Name" required>
+                <div class="form-row">
+                      <div class="form-group col-md-4">
+                          <label for="pwd">Project Name</label>
+                          <input type="text" name="project_name" id="project_name" class="form-control" placeholder="Enter a Project Name" required>
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="pwd">Project Value</label>
+                          <input type="text" name="project_value" id="project_value" class="form-control" placeholder="Enter Project Value"  onmouseout="JavaScript:project_value_changed(event)"  required>
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="pwd">Department</label>
+                          <input type="text" name="department" id="department" class="form-control" placeholder="Enter Department" required>
+                      </div>
                 </div>
-                <div class="form-group">
-                    <label for="pwd">Project Value</label>
-                    <input type="text" name="project_value" id="project_value" class="form-control" placeholder="Enter Project Value"  onmouseout="JavaScript:project_value_changed(event)"  required>
-                </div>
-                <div class="form-group">
-                    <label for="pwd">Department</label>
-                    <input type="text" name="department" id="department" class="form-control" placeholder="Enter Department" required>
-                </div>
-                <div class="form-group">
-                    <label for="date">Date of NOA</label>
-                    <input type="date" name="noa_date" value="2000-01-01" id="noa_date" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="date">Contract Signing Date</label>
-                    <input type="date" name="contract_signing_date" value="2000-01-01" id="contract_signing_date" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="date">Commencement Date</label>
-                    <input type="date" name="commencement_date" value="2000-01-01" id="commencement_date" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="date">Completion Date</label>
-                    <input type="date" name="completion_date" value="2000-01-01" id="completion_date" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="date">Handover Date</label>
-                    <input type="date" name="handover_date" value="2000-01-01" id="handover_date" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="pwd">Remarks</label>
-                    <input type="text" name="remarks" id="remarks" class="form-control" placeholder="Enter Description">
-                </div>
-                <input class="btn btn-primary" type="submit" value="Submit">
+                <div class="form-row">
+                      <div class="form-group col-md-4">
+                          <label for="date">Date of NOA</label>
+                          <input type="date" name="noa_date" value="2000-01-01" id="noa_date" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="date">Contract Signing Date</label>
+                          <input type="date" name="contract_signing_date" value="2000-01-01" id="contract_signing_date" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="date">Commencement Date</label>
+                          <input type="date" name="commencement_date" value="2000-01-01" id="commencement_date" class="form-control">
+                      </div>
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-4">
+                          <label for="date">Completion Date</label>
+                          <input type="date" name="completion_date" value="2000-01-01" id="completion_date" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="date">Handover Date</label>
+                          <input type="date" name="handover_date" value="2000-01-01" id="handover_date" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="pwd">Remarks</label>
+                          <input type="text" name="remarks" id="remarks" class="form-control" placeholder="Enter Description">
+                      </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <input class="btn btn-primary" type="submit" value="Add Project">
+                    </div>
+                  </div>
               </form>
           </div>                     
         </div>  
       </div>
-    </div>
 
     <script src="add_project.js"></script>
   </body>

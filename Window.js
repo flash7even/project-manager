@@ -4,10 +4,10 @@ const { BrowserWindow, Menu } = require('electron')
 
 // default window settings
 const defaultProps = {
-  width: 1200,
-  height: 800,
+  width: 1600,
+  height: 900,
   show: false,
-  fullscreen: true,
+  //fullscreen: true,
   
   // update for electron V5+
   webPreferences: {

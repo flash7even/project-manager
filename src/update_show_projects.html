@@ -3,23 +3,19 @@
     <title>Project List</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
     <link rel='stylesheet' href="../assets/css/window.css">
-    <link rel='stylesheet' href="../assets/css/table-2.css">
+    <link rel='stylesheet' href="../assets/css/view_table.css">
   </head>
   <body>
-    <div class="container top-level-div">
-      <div class="row">
+    <br>
+      <div class="row view-table-1"  style="margin: 10%; margin-top: 0.2%;">
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title" style="text-align: center;">Project List</h3>
           </div>
-          <div class="panel-body">
-            <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
-          </div>
-        <table class="table table panel panel-primary" id="projectListTable">
+        <table class="table table-striped table-bordered panel panel-primary" id="projectListTable">
         </table>
         </div>
       </div>
-    </div>
     <script src="update_show_projects.js"></script>
   </body>
   </html>

@@ -6,57 +6,81 @@
     <title>Update Project</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' >
     <link rel='stylesheet' href="../assets/css/window.css">
-    <link rel='stylesheet' href="../assets/css/form.css">
-    <link rel='stylesheet' href="../assets/css/table-2.css">
+    <link rel='stylesheet' href="../assets/css/view_table.css">
   </head>
 
   <body>
-    <div class="container top-level-div">
-      <label id ="project_id" hidden>Label</label>
-      <div class="row" id = 'update_project_form'>
-        <form id = 'project_update_submit_form' class="form-style-9" name="ipcForm" onSubmit="JavaScript:sendUpdateProjectForm(event)">
-          <h4 class="header-top-form">Update Project Form</h4>
-          <div class="form-group">
-              <label for="pwd">Project Name</label>
-              <input type="text" name="project_name" id="project_name" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Project Value</label>
-              <input type="number" name="project_value" id="project_value" class="form-control" placeholder="" onmouseout="JavaScript:project_value_changed(event)">
-          </div>
-
-          <div class="form-group">
-              <label for="pwd">Department</label>
-              <input type="text" name="department" id="department" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="date">Date of NOA</label>
-              <input type="date" name="noa_date" id="noa_date" class="form-control">
-          </div>
-          <div class="form-group">
-              <label for="date">Contract Signing Date</label>
-              <input type="date" name="contract_signing_date" id="contract_signing_date" class="form-control">
-          </div>
-          <div class="form-group">
-              <label for="date">Commencement Date</label>
-              <input type="date" name="commencement_date" id="commencement_date" class="form-control">
-          </div>
-          <div class="form-group">
-              <label for="date">Handover Date</label>
-              <input type="date" name="handover_date" id="handover_date" class="form-control">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Time Extension</label>
-              <input type="number" name="time_extension" id="time_extension" class="form-control" placeholder="Number of Days">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Remarks</label>
-              <input type="text" name="remarks" id="remarks" class="form-control" placeholder="">
-          </div>
-          <input type="submit" value="Submit">
-        </form>
-      </div>
+    <br>
+    <div id="" class="mainbox form-style-10 view-table-1" style="margin: 20%; margin-top: 0.2%;">                    
+      <div class="panel panel-primary" >
+        <div class="panel-heading">
+            <div class="panel-title" style="text-align: center;">Add Project Form</div>
+        </div>     
+        <label id ="project_id" hidden>Label</label>
+        <div style="padding-top:30px" class="panel-body" >
+          <form id = 'project_update_submit_form' class="form-style-9" name="ipcForm" onSubmit="JavaScript:sendUpdateProjectForm(event)">
+            <h4 class="header-top-form">Update Project Form</h4>
+            <div class="form-group">
+                <label for="pwd">Project Name</label>
+                <input type="text" name="project_name" id="project_name" class="form-control" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Project Value</label>
+                <input type="number" name="project_value" id="project_value" class="form-control" placeholder="" onmouseout="JavaScript:project_value_changed(event)">
+            </div>
+  
+            <div class="form-group">
+                <label for="pwd">Department</label>
+                <input type="text" name="department" id="department" class="form-control" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="date">Date of NOA</label>
+                <input type="date" name="noa_date" id="noa_date" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="date">Contract Signing Date</label>
+                <input type="date" name="contract_signing_date" id="contract_signing_date" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="date">Commencement Date</label>
+                <input type="date" name="commencement_date" id="commencement_date" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="date">Handover Date</label>
+                <input type="date" name="handover_date" id="handover_date" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Time Extension</label>
+                <input type="number" name="time_extension" id="time_extension" class="form-control" placeholder="Number of Days">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Remarks</label>
+                <input type="text" name="remarks" id="remarks" class="form-control" placeholder="">
+            </div>
+            <input class="btn btn-primary" type="submit" value="Update Project">
+          </form>
+        </div>               
+      </div>  
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
 
     <script src="update_project.js"></script>
   </body>

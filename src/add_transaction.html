@@ -6,94 +6,109 @@
     <title>Add Transaction</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' >
     <link rel='stylesheet' href="../assets/css/window.css">
-    <link rel='stylesheet' href="../assets/css/form.css">
+    <link rel='stylesheet' href="../assets/css/view_table.css">
   </head>
 
-  <body>
-    <div class="container top-level-div">
 
-      <div id="" class="mainbox form-style-10">                    
+  <body>
+    <br>
+      <div id="" class="mainbox form-style-10 view-table-1"  style="margin: 10%; margin-top: 0.2%;">                    
         <div class="panel panel-primary" >
           <div class="panel-heading">
               <div class="panel-title" style="text-align: center;">Add Transaction Form</div>
           </div>     
           <div style="padding-top:30px" class="panel-body" >
               <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-        <form name="ipcForm" id="ipcForm" class="form-style-9" onSubmit="JavaScript:sendAddTransactionForm(event)">
-          <div class="form-group">
-            <label for="sel1">Select Project:</label>
-            <select class="form-control" id="projectListInTransaction">
-            </select>
-          </div>
-          <div class="form-group">
-              <label for="date">Payment Date</label>
-              <input type="date" value="2000-01-01" name="payment_date" id="payment_date" class="form-control">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Transaction Type</label>
-              <select class="form-control" id="transaction_type">
-                <option value="Debit">Debit</option>
-                <option value="Credit">Credit</option>
-              </select>
-          </div>
-          <div class="form-group">
-              <label for="pwd">Description</label>
-              <input type="text" name="description" id="description" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Amount</label>
-              <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount" onmouseout="JavaScript:amount_changed(event)" required>
-          </div>
-          <div class="form-group">
-              <label for="pwd">Mode of Payment</label>
-              <select class="form-control" id="mode_of_payment">
-              </select>
-          </div>
-          <div class="form-group">
-              <label for="pwd">Bank Name</label>
-              <input type="text" name="bank_name" id="bank_name" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Account No</label>
-              <input type="text" name="account_no" id="account_no" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Payment By</label>
-              <input type="text" name="payment_by" id="payment_by" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Payment To</label>
-              <input type="text" name="payment_to" id="payment_to" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Voucher No</label>
-              <input type="text" name="voucher_no" id="voucher_no" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Payment Status</label>
-              <select class="form-control" id="status">
-                <option value="PAID">PAID</option>
-                <option value="DUE">DUE</option>
-              </select>
-          </div>
-          <div class="form-group">
-              <label for="pwd">Reference No</label>
-              <input type="text" name="reference" id="reference" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="pwd">VAT</label>
-              <input type="text" name="vat" id="vat" class="form-control" placeholder="" onmouseout="JavaScript:vat_changed(event)">
-          </div>
-          <div class="form-group">
-              <label for="pwd">AIT</label>
-              <input type="text" name="ait" id="ait" class="form-control" placeholder="">
-          </div>
-          <input class="btn btn-primary" type="submit" value="Submit">
-        </form>
+            <form name="ipcForm" id="ipcForm" class="form-style-9" onSubmit="JavaScript:sendAddTransactionForm(event)">
+              <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="sel1">Select Project:</label>
+                    <select class="form-control" id="projectListInTransaction">
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label for="date">Payment Date</label>
+                      <input type="date" value="2000-01-01" name="payment_date" id="payment_date" class="form-control">
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label for="pwd">Transaction Type</label>
+                      <select class="form-control" id="transaction_type">
+                        <option value="Debit">Debit</option>
+                        <option value="Credit">Credit</option>
+                      </select>
+                  </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                  <label for="pwd">Description</label>
+                  <input type="text" name="description" id="description" class="form-control" placeholder="">
+              </div>
+              <div class="form-group col-md-4">
+                  <label for="pwd">Amount</label>
+                  <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount" onmouseout="JavaScript:amount_changed(event)" required>
+              </div>
+                <div class="form-group col-md-4">
+                    <label for="pwd">Mode of Payment</label>
+                    <select class="form-control" id="mode_of_payment">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                  <div class="form-group col-md-4">
+                      <label for="pwd">Bank Name</label>
+                      <input type="text" name="bank_name" id="bank_name" class="form-control" placeholder="">
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label for="pwd">Account No</label>
+                      <input type="text" name="account_no" id="account_no" class="form-control" placeholder="">
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label for="pwd">Payment By</label>
+                      <input type="text" name="payment_by" id="payment_by" class="form-control" placeholder="">
+                  </div>
+            </div>
+            <div class="form-row">
+                  <div class="form-group col-md-4">
+                      <label for="pwd">Payment To</label>
+                      <input type="text" name="payment_to" id="payment_to" class="form-control" placeholder="">
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label for="pwd">Payment Status</label>
+                      <select class="form-control" id="status">
+                        <option value="PAID">PAID</option>
+                        <option value="DUE">DUE</option>
+                      </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label for="pwd">Voucher No</label>
+                      <input type="text" name="voucher_no" id="voucher_no" class="form-control" placeholder="">
+                  </div>
+            </div>
+            <div class="form-row">
+                  <div class="form-group col-md-4">
+                      <label for="pwd">Reference No</label>
+                      <input type="text" name="reference" id="reference" class="form-control" placeholder="">
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label for="pwd">VAT</label>
+                      <input type="text" name="vat" id="vat" class="form-control" placeholder="" onmouseout="JavaScript:vat_changed(event)">
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label for="pwd">AIT</label>
+                      <input type="text" name="ait" id="ait" class="form-control" placeholder="">
+                  </div>
+              </div>
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                  <input class="btn btn-primary" type="submit" value="Add Transaction">
+              </div>
+            </div>
+          </form>
       </div>                     
     </div>  
   </div>
-</div>
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="add_transaction.js"></script>
   </body>
