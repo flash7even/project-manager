@@ -6,6 +6,7 @@ const remote = electron.remote
 const ipc = electron.ipcRenderer
 
 const project_server = require('../services/project_services')
+const jshelper_services = require('../services/jshelper_services')
 
 
 async function sendUpdateProjectForm(event) {
@@ -23,6 +24,9 @@ async function sendUpdateProjectForm(event) {
     'time_extension': document.getElementById("time_extension").value,
     'remarks': document.getElementById("remarks").value,
   }
+
+  console.log('project_data')
+  console.log(project_data)
   
   let data = await project_server.updateProjectToServer(project_data, project_id);
   var message = 'Project Updated Successfully'

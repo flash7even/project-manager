@@ -89,7 +89,7 @@ function create_update_project_window(){
         nodeIntegration: true
       }
     })
-    // updateProjectWin.webContents.openDevTools()
+    updateProjectWin.webContents.openDevTools()
     updateProjectWin.on('closed', () => {
       updateProjectWin = null
     })
@@ -671,6 +671,9 @@ ipcMain.on('after-boq-update', (event, message) => {
 
 ipcMain.on('call-project-update', (event, message) => {
   create_update_project_window();
+  updateProjectWin.webContents.on('did-finish-load', () => {
+    updateProjectWin.send('update-project', message)
+  });
 })
 
 ipcMain.on('call-material-update', (event, message) => {
