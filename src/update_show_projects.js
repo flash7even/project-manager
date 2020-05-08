@@ -32,8 +32,8 @@ async function showAllProjects() {
                   <th>Contract Signing Date </th>
                   <th>Completion Date </th>
                   <th>Remarks </th>
-                  <th>Update </th>
-                  <th>Delete </th>
+                  <th>Action </th>
+                  <th>Action </th>
                 </tr>
               </thead>`
   

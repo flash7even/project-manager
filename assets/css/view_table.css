@@ -27,3 +27,7 @@ table th {
 table td {
     font-size: 13px; 
 }
+
+.table-with-action th{
+    text-align: center;
+}

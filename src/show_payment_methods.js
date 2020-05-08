@@ -29,7 +29,7 @@ async function showAllPaymentMethods() {
                   <th>Payment Method Name</th>
                   <th>Description </th>
                   <th>Created On</th>
-                  <th>Delete</th>
+                  <th>Action</th>
                 </tr>
               </thead>`
   
