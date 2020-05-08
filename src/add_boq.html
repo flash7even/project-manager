@@ -9,9 +9,10 @@
     <link rel='stylesheet' href="../assets/css/view_table.css">
   </head>
 
+
   <body>
     <br>
-      <div id="" class="mainbox form-style-10 view-table-1"  style="margin: 30%; margin-top: 0.2%;">                    
+      <div id="" class="mainbox form-style-10 view-table-1"  style="margin: 15%; margin-top: 0.2%;">                    
         <div class="panel panel-primary" >
           <div class="panel-heading">
               <div class="panel-title" style="text-align: center;">Add BOQ Form</div>
@@ -19,61 +20,77 @@
           <div style="padding-top:30px" class="panel-body" >
               <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
         <form name="ipcForm" class="form-style-9" onSubmit="JavaScript:sendAddBoqForm(event)">
-          <div class="form-group">
-            <label for="sel1">Select Project:</label>
-            <select class="form-control" id="projectListInBoq" onchange="JavaScript:sendUpdateBoqForm(event)">
-            </select>
+          <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="sel1">Select Project:</label>
+                  <select class="form-control" id="projectListInBoq" onchange="JavaScript:sendUpdateBoqForm(event)">
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="sel1">Select Material:</label>
+                  <select class="form-control" id="materialListInBoq">
+                  </select>
+                </div>
           </div>
-          <div class="form-group">
-            <label for="sel1">Select Material:</label>
-            <select class="form-control" id="materialListInBoq">
-            </select>
+          <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="pwd">Description</label>
+                    <input type="text" name="description" id="description" class="form-control" placeholder="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="pwd">Unit</label>
+                    <input type="text" name="unit" id="unit" class="form-control" placeholder="Unit">
+                </div>
           </div>
-          <div class="form-group">
-              <label for="pwd">Description</label>
-              <input type="text" name="description" id="description" class="form-control" placeholder="">
+          <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="pwd">Unit Price</label>
+                    <input type="text" name="unit_price" id="unit_price" class="form-control" placeholder="Enter The Unit Price" onmouseout="JavaScript:unit_price_changed(event)">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="pwd">Total Quantity</label>
+                    <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Enter The Quantity">
+                </div>
           </div>
-          <div class="form-group">
-              <label for="pwd">Unit</label>
-              <input type="text" name="unit" id="unit" class="form-control" placeholder="Unit">
+          <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="pwd">Total Price</label>
+                    <input type="text" name="total_price" id="total_price" class="form-control" placeholder="Enter Total Price" onmouseout="JavaScript:total_price_changed(event)" >
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="pwd">Quoted Price</label>
+                    <input type="text" name="quoted_price" id="quoted_price" class="form-control" placeholder="Enter Quoted Price" onmouseout="JavaScript:quoted_price_changed(event)">
+                </div>
           </div>
-          <div class="form-group">
-              <label for="pwd">Unit Price</label>
-              <input type="text" name="unit_price" id="unit_price" class="form-control" placeholder="Enter The Unit Price" onmouseout="JavaScript:unit_price_changed(event)">
+          <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="pwd">Profit</label>
+                    <input type="text" name="profit" id="profit" class="form-control" placeholder="Enter The Profit" onmouseout="JavaScript:profit_changed(event)" >
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="date">Issue Date</label>
+                    <input type="date" name="issue_date" id="issue_date" class="form-control">
+                </div>
           </div>
-          <div class="form-group">
-              <label for="pwd">Total Quantity</label>
-              <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Enter The Quantity">
+          <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="pwd">Issue Quantity</label>
+                    <input type="text" name="issue_quantity" id="issue_quantity" class="form-control" placeholder="">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="pwd">Issue Voucher</label>
+                    <input type="text" name="issue_voucher" id="issue_voucher" class="form-control" placeholder="">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="pwd">Stock In Hand</label>
+                    <input type="text" name="stock_in_hand" id="stock_in_hand" class="form-control" placeholder="">
+                </div>
           </div>
-          <div class="form-group">
-              <label for="pwd">Total Price</label>
-              <input type="text" name="total_price" id="total_price" class="form-control" placeholder="Enter Total Price" onmouseout="JavaScript:total_price_changed(event)" >
+          <div class="form-row">
+            <div class="form-group col-md-2">
+                <input class="btn btn-primary" type="submit" value="Add BOQ">
+            </div>
           </div>
-          <div class="form-group">
-              <label for="pwd">Quoted Price</label>
-              <input type="text" name="quoted_price" id="quoted_price" class="form-control" placeholder="Enter Quoted Price" onmouseout="JavaScript:quoted_price_changed(event)">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Profit</label>
-              <input type="text" name="profit" id="profit" class="form-control" placeholder="Enter The Profit" onmouseout="JavaScript:profit_changed(event)" >
-          </div>
-          <div class="form-group">
-              <label for="date">Issue Date</label>
-              <input type="date" name="issue_date" id="issue_date" class="form-control">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Issue Quantity</label>
-              <input type="text" name="issue_quantity" id="issue_quantity" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Issue Voucher</label>
-              <input type="text" name="issue_voucher" id="issue_voucher" class="form-control" placeholder="">
-          </div>
-          <div class="form-group">
-              <label for="pwd">Stock In Hand</label>
-              <input type="text" name="stock_in_hand" id="stock_in_hand" class="form-control" placeholder="">
-          </div>
-          <input class="btn btn-primary"  type="submit" value="Add BOQ">
         </form>
       </div>                     
     </div>  
