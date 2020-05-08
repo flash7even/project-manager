@@ -5,52 +5,52 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
   <link rel='stylesheet' href="../assets/css/window.css">
-  <link rel='stylesheet' href="../assets/css/table-2.css">
   <link rel='stylesheet' href="../assets/css/view_table.css">
   <script>
     if (typeof module === 'object') {window.module = module; module = undefined;}
   </script>
   <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
+
 <body>
   <br>
-    <div class="view-table-1" style="margin: 10%; margin-top: auto;">
+    <div class="view-table-1" style="font-size: small;">
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title" style="text-align: center;">Balance Sheet Report</h3>
         </div>
-      <form name="ipcForm" onSubmit="JavaScript:sendAdvancedBalanceSheetReport(event)" style="font-size: small; text-align: center;">
-          <div class="form-row" style="font-size: 10px; padding: 2px;">
-           
-            <div class="form-group col-md-5">
-              <label for="sel1">Select Project:</label>
-              <select class="form-control" id="projectListInBSheet">
-              </select>
-            </div>
-            <div class="form-group col-md-3">
-                <label for="pwd">Starting Date</label>
-                <input type="date" name="payment_date_start" id="payment_date_start" class="form-control" placeholder="">
-            </div>
-            <div class="form-group col-md-3">
-                <label for="pwd">End Date</label>
-                <input type="date" name="payment_date_end" id="payment_date_end" class="form-control" p">
-            </div>
-            <div class="form-group col-md-1">
-                <div class="row" >
-                  <label for="pwd">Action</label>
+        <div style="padding: 5px;">
+          <form name="ipcForm" onSubmit="JavaScript:sendAdvancedBalanceSheetReport(event)" style="font-size: small; text-align: center;">
+              <div class="form-row" style="font-size: 10px; padding: 2px;">
+                <div class="form-group col-md-5">
+                  <label for="sel1">Select Project:</label>
+                  <select class="form-control" id="projectListInBSheet">
+                  </select>
                 </div>
-                <div class="row">
-                  <input class="btn btn-info" type="submit" value="Update">
+                <div class="form-group col-md-3">
+                    <label for="pwd">Starting Date</label>
+                    <input type="date" name="payment_date_start" id="payment_date_start" class="form-control" placeholder="">
                 </div>
-            </div>
+                <div class="form-group col-md-3">
+                    <label for="pwd">End Date</label>
+                    <input type="date" name="payment_date_end" id="payment_date_end" class="form-control">
+                </div>
+                <div class="form-group col-md-1">
+                    <div class="row" >
+                      <label for="pwd">Action</label>
+                    </div>
+                    <div class="row">
+                      <input class="btn btn-info form-control-sm" type="submit" value="Update">
+                    </div>
+                </div>
+              </div>
+            </form>
 
-          </div>
-        </form>
-
-        <hr class="thin">
-        
-      <table class="table table-bordered panel panel-primary" id="balanceSheetTable">
-      </table>
+            <hr class="thin">
+            
+          <table class="table table-bordered panel panel-primary" id="balanceSheetTable">
+          </table>
+        </div>
     </div>
   </div>
   <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>

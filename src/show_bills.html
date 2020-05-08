@@ -11,6 +11,7 @@
   </script>
   <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
+
 <body>
   <br>
     <div class="view-table-1" style="font-size: small;">
@@ -18,76 +19,76 @@
         <div class="panel-heading">
           <h3 class="panel-title" style="text-align: center;">Bill Report</h3>
         </div>
-      <div style="padding: 5px;">
-      <form name="ipcForm" onSubmit="JavaScript:sendAdvancedBillReport(event)" style="font-size: small; text-align: center;">
-          <div class="form-row" style="font-size: 10px; padding: 2px;">
-              <div class="form-group col-md-3">
-                <label for="sel1">Select Project:</label>
-                <select class="form-control" id="projectListInBill">
-                </select>
-              </div>
-              <div class="form-group col-md-2">
-                  <label for="pwd">Mode of Payment</label>
-                  <select class="form-control" id="mode_of_payment">
-                  </select>
-              </div>
-              <div class="form-group col-md-2">
-                  <label for="pwd">Payment Status</label>
-                  <select class="form-control" id="status">
-                    <option value="ALL">ALL</option>
-                    <option value="PAID">PAID</option>
-                    <option value="DUE">DUE</option>
-                  </select>
-              </div>
-            <div class="form-group col-md-2">
-                <label for="pwd">Start Date</label>
-                <input type="date" name="payment_date_start" id="payment_date_start" class="form-control" placeholder="Enter Minimum Amount">
-            </div>
-            <div class="form-group col-md-2">
-                <label for="pwd">End Date</label>
-                <input type="date" name="payment_date_end" id="payment_date_end" class="form-control" placeholder="Enter Maximum Amount">
-            </div>
-            <div class="form-group col-md-1">
-                <div class="row" >
-                  <label for="pwd">Action</label>
+        <div style="padding: 5px;">
+          <form name="ipcForm" onSubmit="JavaScript:sendAdvancedBillReport(event)" style="font-size: small; text-align: center;">
+              <div class="form-row" style="font-size: 10px; padding: 2px;">
+                  <div class="form-group col-md-3">
+                    <label for="sel1">Select Project:</label>
+                    <select class="form-control" id="projectListInBill">
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                      <label for="pwd">Mode of Payment</label>
+                      <select class="form-control" id="mode_of_payment">
+                      </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                      <label for="pwd">Payment Status</label>
+                      <select class="form-control" id="status">
+                        <option value="ALL">ALL</option>
+                        <option value="PAID">PAID</option>
+                        <option value="DUE">DUE</option>
+                      </select>
+                  </div>
+                <div class="form-group col-md-2">
+                    <label for="pwd">Start Date</label>
+                    <input type="date" name="payment_date_start" id="payment_date_start" class="form-control" placeholder="Enter Minimum Amount">
                 </div>
-                <div class="row">
-                  <input class="btn btn-info form-control-sm" type="submit" value="Update">
+                <div class="form-group col-md-2">
+                    <label for="pwd">End Date</label>
+                    <input type="date" name="payment_date_end" id="payment_date_end" class="form-control" placeholder="Enter Maximum Amount">
                 </div>
-            </div>
-          </div>
-        </form>
+                <div class="form-group col-md-1">
+                    <div class="row" >
+                      <label for="pwd">Action</label>
+                    </div>
+                    <div class="row">
+                      <input class="btn btn-info form-control-sm" type="submit" value="Update">
+                    </div>
+                </div>
+              </div>
+            </form>
 
-        <hr class="thin">
-        
+            <hr class="thin">
+            
 
-      <table id="billListTable" class="table table-striped table-bordered panel panel-info">
-        <thead>
-          <tr>
-            <th>Bill ID</th>
-            <th>Project Name</th>
-            <th>Submission Date</th>
-            <th>Bill Type</th>
-            <th>Description</th>
-            <th>Amount Claimed</th>
-            <th>Amount Received</th>
-            <th>Mode of Payment</th>
-            <th>Bank Name</th>
-            <th>Account No</th>
-            <th>Payment Status</th>
-            <th>Reference No</th>
-            <th>Payment Received Date</th>
-            <th>VAT</th>
-            <th>AIT</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
+          <table id="billListTable" class="table table-striped table-bordered panel panel-info">
+            <thead>
+              <tr>
+                <th>Bill ID</th>
+                <th>Project Name</th>
+                <th>Submission Date</th>
+                <th>Bill Type</th>
+                <th>Description</th>
+                <th>Amount Claimed</th>
+                <th>Amount Received</th>
+                <th>Mode of Payment</th>
+                <th>Bank Name</th>
+                <th>Account No</th>
+                <th>Payment Status</th>
+                <th>Reference No</th>
+                <th>Payment Received Date</th>
+                <th>VAT</th>
+                <th>AIT</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+      </div>
     </div>
-    </div>
-    </div>
-    </div>
+  </div>
+</div>
   <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
