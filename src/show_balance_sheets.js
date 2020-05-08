@@ -58,6 +58,7 @@ async function showBalanceSheet(search_params) {
   balance_sheet_rows += `<td>${bs_data['transaction_sheet']['transaction_balance']}</td>`
   balance_sheet_rows += '</tr>'
 
+  /*
   balance_sheet_rows += '<tr>'
   balance_sheet_rows += `<th scope="row">4</th>`
   balance_sheet_rows += `<td>Advanced Bill Amount</td>`
@@ -87,6 +88,7 @@ async function showBalanceSheet(search_params) {
   balance_sheet_rows += `<td>Total Bill Amount</td>`
   balance_sheet_rows += `<td>${bs_data['bill_sheet']['total_bill']}</td>`
   balance_sheet_rows += '</tr>'
+*/
 
   html += balance_sheet_rows
   html += `</tbody>`
