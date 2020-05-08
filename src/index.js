@@ -201,6 +201,7 @@ async function showProjectOverallChart(){
   var chart = new CanvasJS.Chart("projectOverallChart", {
     animationEnabled: true,
     exportEnabled: true,
+    backgroundColor: "#FAFAFC",
     title:{
       text: ""
     },
