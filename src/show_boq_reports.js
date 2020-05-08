@@ -65,24 +65,34 @@ async function findBoqDataDT(search_params){
       buttons: [
         // Options: 'copy', 'csv', 'excel', 'pdf', 'print',
         {
-            extend: 'excel',
+            extend: 'excelHtml5',
             exportOptions: {
                 columns: ':visible'
             }
         },
         {
-            extend: 'csv',
+            extend: 'csvHtml5',
             exportOptions: {
                 columns: ':visible'
             }
         },
         {
-            extend: 'copy',
+            extend: 'copyHtml5',
             exportOptions: {
                 columns: ':visible'
             }
         },
-        'colvis'
+        {
+          extend: 'pdfHtml5',
+          exportOptions: {
+              columns: ':visible'
+          }
+        },
+        {
+            collectionTitle: 'Select Columns',
+            extend: 'colvis',
+            collectionLayout: 'four-column'
+        }
         ],
         columnDefs: [ {
             targets: -1,
