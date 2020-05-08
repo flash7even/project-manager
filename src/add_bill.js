@@ -66,6 +66,9 @@ async function sendAddBillForm(event) {
       message = 'Bill Failed'
     }
     ipc.send('after-bill', message)
+    
+    var window = remote.getCurrentWindow();
+    window.close();
 }
 
 

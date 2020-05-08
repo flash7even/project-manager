@@ -88,6 +88,9 @@ async function sendAddBoqForm(event) {
       message = 'Boq Failed'
     }
     ipc.send('after-boq', message)
+    
+    var window = remote.getCurrentWindow();
+    window.close();
 }
 
 //-------- make comma separated amount field -------//

@@ -68,6 +68,9 @@ async function sendAddTransactionForm(event) {
       message = 'Transaction Failed'
     }
     ipc.send('after-transaction', message)
+    
+    var window = remote.getCurrentWindow();
+    window.close();
 }
 
 //-------- make comma separated amount field -------//

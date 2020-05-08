@@ -24,4 +24,7 @@ async function sendAddPaymentMethodForm(event) {
       message = 'Payment Method Creation Failed'
     }
     ipc.send('after-payment-method-creation', message)
+    
+    var window = remote.getCurrentWindow();
+    window.close();
 }

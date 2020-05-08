@@ -85,7 +85,10 @@ async function sendAddMaterialForm(event) {
     if(data.status != 200 && data.status != 201){
       message = 'Material Failed'
     }
-    ipc.send('after-material', message)
+    ipc.send('after-material-stock', message)
+    
+    var window = remote.getCurrentWindow();
+    window.close();
 }
 
 //-------- make comma separated amount field -------//

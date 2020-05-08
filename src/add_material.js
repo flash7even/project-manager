@@ -40,6 +40,9 @@ async function sendAddMaterialForm(event) {
       message = 'Material Failed'
     }
     ipc.send('after-material', message)
+    
+    var window = remote.getCurrentWindow();
+    window.close();
 }
 
 viewProjectInMaterialForm()

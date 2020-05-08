@@ -29,6 +29,9 @@ async function sendAddProjectForm(event) {
       message = 'Project Creation Failed'
     }
     ipc.send('after-project-creation', message)
+    
+    var window = remote.getCurrentWindow();
+    window.close();
 }
 
 //-------- make comma separated amount field -------//

@@ -30,6 +30,9 @@ async function sendUpdateProjectForm(event) {
     message = 'Project Update Failed'
   }
   ipc.send('after-project-update', message)
+    
+  var window = remote.getCurrentWindow();
+  window.close();
 }
 
 

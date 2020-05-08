@@ -8,7 +8,56 @@ const Window = require('./Window')
 
 require('electron-reload')(__dirname)
 
+var submenu_win_height = 800
+var submenu_win_width = 1200
+
 let mainWindow
+
+let addProjectWin
+let updateProjectWin
+let updateShowProjectsWin
+let showProjectsWin
+let showGraphWin
+
+let addBillWin
+let showBillsWin
+
+let addTransactionWin
+let showTransactionsWin
+let showBalanceSheetWin
+
+let addPaymentMethodWin
+let showPaymentMethodWin
+
+let addMaterialWin
+let showMaterialsWin
+let addMaterialStockWin
+let showMaterialStockWin
+
+let addBoqWin
+let showBoqsWin
+let showBoqReportsWin
+
+var subwindows = new Array(20);
+
+function createBrowserWindow(sub_window, page_name) {
+  if (!sub_window) {
+    sub_window = new Window({
+      file: path.join('src', page_name),
+      width: submenu_win_width,
+      height: submenu_win_height,
+      parent: mainWindow,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+    // showProjectsWin.webContents.openDevTools()
+    sub_window.on('closed', () => {
+      sub_window = null
+    })
+  }
+}
+
 
 function main () {
   mainWindow = new Window({
@@ -42,19 +91,19 @@ function main () {
         {
           label:'Add Project',
           click() {
-            mainWindow.loadFile('src/add_project.html');
+            createBrowserWindow(addProjectWin, 'add_project.html')
           }
         },
         {
           label:'Update Project',
           click() {
-              mainWindow.loadFile('src/update_show_projects.html');
+            createBrowserWindow(updateShowProjectsWin, 'update_show_projects.html')
           }
         },
         {
           label:'Project Report',
           click() {
-            mainWindow.loadFile('src/show_projects.html');
+            createBrowserWindow(showProjectsWin, 'show_projects.html')
           }
         }
       ]
@@ -65,7 +114,7 @@ function main () {
         {
           label:'Add Transaction',
           click() {
-            mainWindow.loadFile('src/add_transaction.html');
+            createBrowserWindow(addTransactionWin, 'add_transaction.html')
           }
         }
       ]
@@ -76,7 +125,7 @@ function main () {
         {
           label:'Add Bill',
           click() {
-            mainWindow.loadFile('src/add_bill.html');
+            createBrowserWindow(addBillWin, 'add_bill.html')
           }
         },
       ]
@@ -88,25 +137,25 @@ function main () {
         {
           label:'Add Material',
           click() {
-            mainWindow.loadFile('src/add_material.html');
+            createBrowserWindow(addMaterialWin, 'add_material.html')
           }
         },
         {
           label:'Add Material Stock',
           click() {
-            mainWindow.loadFile('src/add_material_stock.html');
+            createBrowserWindow(addMaterialStockWin, 'add_material_stock.html')
           }
         },
         {
           label:'Material List',
           click() {
-            mainWindow.loadFile('src/show_materials.html');
+            createBrowserWindow(showMaterialsWin, 'show_materials.html')
           }
         },
         {
           label:'Material Stock List',
           click() {
-            mainWindow.loadFile('src/show_material_stocks.html');
+            createBrowserWindow(showMaterialStockWin, 'show_material_stocks.html')
           }
         }
       ]
@@ -117,13 +166,13 @@ function main () {
         {
           label:'Add BOQ',
           click() {
-            mainWindow.loadFile('src/add_boq.html');
+            createBrowserWindow(addBoqWin, 'add_boq.html')
           }
         },
         {
           label:'Boq List',
           click() {
-            mainWindow.loadFile('src/show_boqs.html');
+            createBrowserWindow(showBoqsWin, 'show_boqs.html')
           }
         }
       ]
@@ -134,13 +183,13 @@ function main () {
         {
           label:'Add Payment Method',
           click() {
-            mainWindow.loadFile('src/add_payment_method.html');
+            createBrowserWindow(addPaymentMethodWin, 'add_payment_method.html')
           }
         },
         {
           label:'Payment Method List',
           click() {
-            mainWindow.loadFile('src/show_payment_methods.html');
+            createBrowserWindow(showPaymentMethodWin, 'show_payment_methods.html')
           }
         }
       ]
@@ -151,31 +200,31 @@ function main () {
         {
           label:'Transaction Report',
           click() {
-            mainWindow.loadFile('src/show_transactions.html');
+            createBrowserWindow(showTransactionsWin, 'show_transactions.html')
           }
         },
         {
           label:'Bill Report',
           click() {
-            mainWindow.loadFile('src/show_bills.html');
+            createBrowserWindow(showBillsWin, 'show_bills.html')
           }
         },
         {
           label:'Boq Reports',
           click() {
-            mainWindow.loadFile('src/show_boq_reports.html');
+            createBrowserWindow(showBoqReportsWin, 'show_boq_reports.html')
           }
         },
         {
           label:'Balance Sheet',
           click() {
-            mainWindow.loadFile('src/show_balance_sheets.html');
+            createBrowserWindow(showBalanceSheetWin, 'show_balance_sheets.html')
           }
         },
         {
           label:'Graphs',
           click() {
-            mainWindow.loadFile('src/index.html');
+            createBrowserWindow(showGraphWin, 'index.html')
           }
         }
       ]
@@ -185,10 +234,8 @@ function main () {
 }
 
 ipcMain.on('after-transaction', (event, message) => {
-  mainWindow.loadFile('src/show_transactions.html');
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.send('after-transaction-complete', message)
-  });
+  addTransactionWin = null;
+  createBrowserWindow(showTransactionsWin, 'show_transactions.html')
 })
 
 ipcMain.on('after-transaction-update', (event, message) => {
@@ -199,38 +246,33 @@ ipcMain.on('after-transaction-update', (event, message) => {
 })
 
 ipcMain.on('after-project-creation', (event, message) => {
-  mainWindow.loadFile('src/show_projects.html');
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.send('after-project-creation-complete', message)
-  });
+  addProjectWin = null;
+  createBrowserWindow(showProjectsWin, 'show_projects.html')
 })
 
 ipcMain.on('after-payment-method-creation', (event, message) => {
-  mainWindow.loadFile('src/show_payment_methods.html');
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.send('after-payment-method-creation-complete', message)
-  });
+  addPaymentMethodWin = null;
+  createBrowserWindow(showPaymentMethodWin, 'show_payment_methods.html')
 })
 
 ipcMain.on('after-project-update', (event, message) => {
-  mainWindow.loadFile('src/show_projects.html');
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.send('after-project-update-complete', message)
-  });
+  updateProjectWin = null;
+  createBrowserWindow(showProjectsWin, 'show_projects.html')
 })
 
 ipcMain.on('after-bill', (event, message) => {
-  mainWindow.loadFile('src/show_bills.html');
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.send('after-bill-complete', message)
-  });
+  addBillWin = null;
+  createBrowserWindow(showBillsWin, 'show_bills.html')
 })
 
 ipcMain.on('after-material', (event, message) => {
-  mainWindow.loadFile('src/show_materials.html');
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.send('after-material-complete', message)
-  });
+  addMaterialWin = null;
+  createBrowserWindow(showMaterialsWin, 'show_materials.html')
+})
+
+ipcMain.on('after-material-stock', (event, message) => {
+  addMaterialStockWin = null;
+  createBrowserWindow(showMaterialStockWin, 'show_material_stocks.html')
 })
 
 ipcMain.on('after-material-update', (event, message) => {
@@ -241,10 +283,8 @@ ipcMain.on('after-material-update', (event, message) => {
 })
 
 ipcMain.on('after-boq', (event, message) => {
-  mainWindow.loadFile('src/show_boqs.html');
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.send('after-boq-complete', message)
-  });
+  addBoqWin = null;
+  createBrowserWindow(showBoqsWin, 'show_boqs.html')
 })
 
 ipcMain.on('after-boq-update', (event, message) => {
@@ -255,10 +295,7 @@ ipcMain.on('after-boq-update', (event, message) => {
 })
 
 ipcMain.on('call-project-update', (event, message) => {
-  mainWindow.loadFile('src/update_project.html');
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.send('update-project', message)
-  });
+  createBrowserWindow(updateProjectWin, 'update_project.html')
 })
 
 ipcMain.on('call-material-update', (event, message) => {
