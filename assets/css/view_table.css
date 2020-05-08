@@ -11,10 +11,19 @@
     padding: 20px;
     font-size: small;
     color: #0B0C10;
+    font-size: 10px;
 }
 
 .submit-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
+
+table th {
+    font-size: 13px; 
+}
+
+table td {
+    font-size: 13px; 
+}

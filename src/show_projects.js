@@ -40,8 +40,9 @@ async function findProjectDataDT(){
       "aaData": dt_list,
       paging: true,
       destroy: true,
-      scrollY: dimensions.data_table_height,
-      scrollCollapse: false,
+      sScrollX: dimensions.data_table_height,
+      responsive: true,
+      pageLength: 20,
       dom: 'Bfrtip',
       buttons: [
         // Options: 'copy', 'csv', 'excel', 'pdf', 'print',
