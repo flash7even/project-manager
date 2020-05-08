@@ -13,31 +13,35 @@
   </head>
   <body>
     <br>
-      <div class="row view-table-1">
+      <div class="view-table-1">
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title" style="text-align: center;">BOQ List</h3>
           </div>
-          <br>
         <div style="padding: 5px;">
-        <form name="ipcForm" onSubmit="JavaScript:sendAdvancedBOQReport(event)">
-            <div class="form-row">
-              <div class="form-group col-md-4">
+        <form name="ipcForm" onSubmit="JavaScript:sendAdvancedBOQReport(event)" style="font-size: small; text-align: center;">
+            <div class="form-row" style="font-size: 10px; padding: 2px;">
+              <div class="form-group col-md-5">
                 <label for="sel1">Select Project:</label>
                 <select class="form-control" id="projectListInBoq">
                 </select>
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-3">
                   <label for="pwd">Starting Issue Date</label>
                   <input type="date" name="issue_date_start" id="issue_date_start" class="form-control" placeholder="">
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-3">
                   <label for="pwd">End Issue Date</label>
                   <input type="date" name="issue_date_end" id="issue_date_end" class="form-control" placeholder="">
               </div>
-            </div>
-            <div class="form-group col-md-12">
-              <input class="btn btn-info" type="submit" value="Update">
+              <div class="form-group col-md-1">
+                  <div class="row" >
+                    <label for="pwd">Action</label>
+                  </div>
+                  <div class="row">
+                    <input class="btn btn-info" type="submit" value="Update">
+                  </div>
+              </div>
             </div>
           </form>
 
