@@ -444,10 +444,10 @@ function create_show_graph_window(){
 
 function main () {
   mainWindow = new Window({
-    file: path.join('./', 'home.html'),
+    file: path.join('./src/', 'home.html'),
     icon: './assets/img/icon_3.png'
   })
- // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   var menu = Menu.buildFromTemplate([
     {
@@ -456,7 +456,7 @@ function main () {
               {
                   label:'Home',
                   click() {
-                    mainWindow.loadFile('home.html');
+                    mainWindow.loadFile('src/home.html');
                   }
               },
               {type:'separator'},
@@ -689,6 +689,64 @@ ipcMain.on('call-boq-update', (event, message) => {
     mainWindow.send('update-boq', message)
   });
 })
+
+
+ipcMain.on('from-home-add-project', (event, message) => {
+  create_add_project_window();
+})
+ipcMain.on('from-home-update-project', (event, message) => {
+  create_update_show_project_window();
+})
+ipcMain.on('from-home-show-project', (event, message) => {
+  create_show_project_window();
+})
+
+
+ipcMain.on('from-home-add-transaction', (event, message) => {
+  create_add_transaction_window()
+})
+ipcMain.on('from-home-show-transaction', (event, message) => {
+  create_show_transaction_window();
+})
+
+
+ipcMain.on('from-home-add-bill', (event, message) => {
+  create_add_bill_window();
+})
+ipcMain.on('from-home-show-bill', (event, message) => {
+  create_show_bill_window();
+})
+
+
+
+ipcMain.on('from-home-add-material', (event, message) => {
+  create_add_material_window();
+})
+ipcMain.on('from-home-add-material-stock', (event, message) => {
+  create_add_material_stock_window();
+})
+ipcMain.on('from-home-show-material-stock', (event, message) => {
+  create_show_material_stock_window();
+})
+
+
+
+ipcMain.on('from-home-add-boq', (event, message) => {
+  create_add_boq_window();
+})
+ipcMain.on('from-home-show-boq-list', (event, message) => {
+  create_show_boq_list_window();
+})
+ipcMain.on('from-home-show-boq-report', (event, message) => {
+  create_show_boq_report_window();
+})
+
+
+
+ipcMain.on('from-home-show-graph', (event, message) => {
+  create_show_graph_window();
+})
+
 
 app.on('ready', main)
 

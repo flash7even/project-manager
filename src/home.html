@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+    if (typeof module === 'object') {window.module = module; module = undefined;}
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Project Manager - App</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" />
+    <link rel="stylesheet" href="../assets/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/templatemo-style.css" />
+<!--
+Parallo Template
+https://templatemo.com/tm-534-parallo
+-->
+  </head>
+  <body>
+    <div class="parallax-window" data-parallax="scroll" data-image-src="../assets/img/bg-04.jpeg">
+      <div class="container-fluid">
+        <section class="row" id="tmHome">
+          <div class="col-12 tm-home-container">
+            <div class="text-white tm-home-left">
+              <p class="text-uppercase tm-slogan">We Help You To Manage</p>
+              <hr class="tm-home-hr" />
+              <h2 class="tm-home-title">Your Projects</h2>
+              <p class="tm-home-text">
+                Store all your project and transaction data and generate statistics
+                that'll help you to determine your business progress.
+              </p>
+              <a href="#tmFeatures" class="btn btn-primary">Learn More</a>
+            </div>
+            <div class="tm-home-right">
+              <img src="../assets/img/bg-report-06.png" alt="App on Mobile mockup" />
+            </div>
+          </div>
+        </section>
+
+
+
+        <!-- Features -->
+        <div class="row" id="tmFeatures">
+          <div class="col-lg-4">
+            <div class="tm-bg-white-transparent tm-feature-box">
+            <h4 class="tm-feature-name">Manage Project</h4>
+            <p class="text-center" style="font-size: 14px;">Add and update your project informations, generate project report</p>
+            <br>
+            <div class="tm-feature-icon-container">
+                <i class="fas fa-3x fa-server"></i>
+            </div>
+            <div>
+              <input type="button" class="btn btn-dark btn-sm" onclick="addProjectEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="Add Project">
+              <input type="button" class="btn btn-dark btn-sm" onclick="updateProjectEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="Update Project">
+              <input type="button" class="btn btn-dark btn-sm" onclick="showProjectEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="Project Report">
+            </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="tm-bg-white-transparent tm-feature-box">
+                <h3 class="tm-feature-name">Manage Transactions</h3>
+                <p class="text-center" style="font-size: 14px;">Add all of your financial transactions, generate transaction statistics.</p>
+
+                <div class="tm-feature-icon-container">
+                    <i class="fas fa-3x fa-box"></i>
+                </div>
+                <div>
+                  <input type="button" class="btn btn-dark btn-sm" onclick="addTransactionEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="Add Transaction">
+                  <input type="button" class="btn btn-dark btn-sm" onclick="showTransactionEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="Transaction Report">
+                  <input type="button" class="btn btn-dark btn-sm" onclick="showGraphEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="View Graph">
+                </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="tm-bg-white-transparent tm-feature-box">
+                <h3 class="tm-feature-name">Manage Bills</h3>
+                <p class="text-center"  style="font-size: 14px;">Add all of your financial bills, generate bill statistics.</p>
+
+                <div class="tm-feature-icon-container">
+                    <i class="fas fa-3x fa-satellite-dish"></i>
+                </div>
+                <div>
+                  <input type="button" class="btn btn-dark btn-sm" onclick="addBillEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="Add Bill">
+                  <input type="button" class="btn btn-dark btn-sm" onclick="showBillEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="Bill Report">
+                  <input type="button" class="btn btn-dark btn-sm" onclick="showGraphEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="View Graph">
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <div class="row" id="tmFeatures">
+          <div class="col-lg-4">
+            <div class="tm-bg-white-transparent tm-feature-box">
+            <h3 class="tm-feature-name">Manage Materials</h3>
+            <p class="text-center"  style="font-size: 14px;">Add and update material store for all the projects</p>
+            
+            <div class="tm-feature-icon-container">
+                <i class="fas fa-3x fa-server"></i>
+            </div>
+            <div>
+              <input type="button" class="btn btn-dark btn-sm" onclick="addMaterialEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="Add Material">
+              <input type="button" class="btn btn-dark btn-sm" onclick="updateMaterialStockEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="Add Material Stock">
+              <input type="button" class="btn btn-dark btn-sm" onclick="showMaterialStockEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="Material Report">
+            </div>
+
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="tm-bg-white-transparent tm-feature-box">
+                <h3 class="tm-feature-name">Manage BOQ</h3>
+                <p class="text-center"  style="font-size: 14px;">Manage your bill of quantities for the projects</p>
+
+                <div class="tm-feature-icon-container">
+                    <i class="fas fa-3x fa-box"></i>
+                </div>
+                <div>
+                  <input type="button" class="btn btn-dark btn-sm" onclick="addBOQEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="Add BOQ">
+                  <input type="button" class="btn btn-dark btn-sm" onclick="showBOQListEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="BOQ List">
+                  <input type="button" class="btn btn-dark btn-sm" onclick="showBOQReportEvent(event)"  style="border-radius: 5px; border-color:black ; margin: 3px; width: 100%;" value="BOQ Report">
+                </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="tm-bg-white-transparent tm-feature-box">
+                <h3 class="tm-feature-name">Generate Reports</h3>
+
+                <div class="tm-feature-icon-container">
+                    <i class="fas fa-3x fa-satellite-dish"></i>
+                </div>
+                <p class="text-center">Generate different reports, statistics and graphs based on your financial data
+                </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page footer -->
+        <footer class="row">
+          <p class="col-12 text-white text-center tm-copyright-text">
+            Copyright &copy; 2020 Project Manager App. 
+          </p>
+        </footer>
+      </div>
+      <!-- .container-fluid -->
+    </div>
+
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/parallax.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="home.js"></script>
+  </body>
+</html>
