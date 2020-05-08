@@ -15,7 +15,7 @@ function main () {
     file: path.join('./', 'home.html'),
     icon: './assets/img/icon_3.png'
   })
-  mainWindow.webContents.openDevTools()
+ // mainWindow.webContents.openDevTools()
 
   var menu = Menu.buildFromTemplate([
     {
@@ -185,7 +185,7 @@ function main () {
 }
 
 ipcMain.on('after-transaction', (event, message) => {
-  mainWindow.loadFile('src/index.html');
+  mainWindow.loadFile('src/show_transactions.html');
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.send('after-transaction-complete', message)
   });
@@ -199,56 +199,56 @@ ipcMain.on('after-transaction-update', (event, message) => {
 })
 
 ipcMain.on('after-project-creation', (event, message) => {
-  mainWindow.loadFile('src/index.html');
+  mainWindow.loadFile('src/show_projects.html');
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.send('after-project-creation-complete', message)
   });
 })
 
 ipcMain.on('after-payment-method-creation', (event, message) => {
-  mainWindow.loadFile('src/index.html');
+  mainWindow.loadFile('src/show_payment_methods.html');
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.send('after-payment-method-creation-complete', message)
   });
 })
 
 ipcMain.on('after-project-update', (event, message) => {
-  mainWindow.loadFile('src/index.html');
+  mainWindow.loadFile('src/show_projects.html');
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.send('after-project-update-complete', message)
   });
 })
 
 ipcMain.on('after-bill', (event, message) => {
-  mainWindow.loadFile('src/index.html');
+  mainWindow.loadFile('src/show_bills.html');
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.send('after-bill-complete', message)
   });
 })
 
 ipcMain.on('after-material', (event, message) => {
-  mainWindow.loadFile('src/index.html');
+  mainWindow.loadFile('src/show_materials.html');
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.send('after-material-complete', message)
   });
 })
 
 ipcMain.on('after-material-update', (event, message) => {
-  mainWindow.loadFile('src/index.html');
+  mainWindow.loadFile('src/show_materials.html');
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.send('after-material-update-complete', message)
   });
 })
 
 ipcMain.on('after-boq', (event, message) => {
-  mainWindow.loadFile('src/index.html');
+  mainWindow.loadFile('src/show_boqs.html');
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.send('after-boq-complete', message)
   });
 })
 
 ipcMain.on('after-boq-update', (event, message) => {
-  mainWindow.loadFile('src/index.html');
+  mainWindow.loadFile('src/show_boqs.html');
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.send('after-boq-update-complete', message)
   });
