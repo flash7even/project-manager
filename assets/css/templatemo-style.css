@@ -167,8 +167,8 @@ small {
 
 /* Home */
 #tmHome {
-  padding-top: 30px;
-  padding-bottom: 68px;
+  padding-top: 20px;
+  padding-bottom: 50px;
 }
 
 .tm-home-left {
@@ -229,18 +229,18 @@ small {
 }
 
 .tm-feature-box {
-  max-width: 360px;
-  min-height: 480px;
+  max-width: 340px;
+  min-height: 430px;
   border-radius: 10px;
   text-align: center;
-  padding: 20px 30px;
+  padding: 20px 20px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .tm-feature-name {
   color: black;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .tm-feature-icon-container {
@@ -710,7 +710,7 @@ p {
  }
 
  .tm-feature-box {
-   margin-bottom: 10px;
+   margin-bottom: 2px;
    max-width: 500px;   
  }
 
