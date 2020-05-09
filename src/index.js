@@ -71,7 +71,7 @@ async function weeklyTransactionStat(){
     exportEnabled: true,
     zoomEnabled: true,
     interactivityEnabled: true,
-    backgroundColor: "#FAFAFC",
+    backgroundColor: "white",
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     title:{
       text: ""
@@ -112,7 +112,7 @@ async function showTransactionAmountStat(){
     theme: "white",
     exportFileName: "Doughnut Chart",
     theme: "light2", // "light1", "light2", "dark1", "dark2"
-    backgroundColor: "#FAFAFC",
+    backgroundColor: "white",
     exportEnabled: true,
     zoomEnabled: true,
     animationEnabled: true,
@@ -155,7 +155,7 @@ async function divisionWiseProjectTransactionStat(){
     exportEnabled: true,
     zoomEnabled: true,
     interactivityEnabled: true,
-    backgroundColor: "#FAFAFC",
+    backgroundColor: "white",
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     title:{
       text: ""
@@ -201,7 +201,7 @@ async function showProjectOverallChart(){
   var chart = new CanvasJS.Chart("projectOverallChart", {
     animationEnabled: true,
     exportEnabled: true,
-    backgroundColor: "#FAFAFC",
+    backgroundColor: "white",
     title:{
       text: ""
     },

@@ -89,7 +89,7 @@ function create_update_project_window(){
         nodeIntegration: true
       }
     })
-    updateProjectWin.webContents.openDevTools()
+    // updateProjectWin.webContents.openDevTools()
     updateProjectWin.on('closed', () => {
       updateProjectWin = null
     })
@@ -447,7 +447,7 @@ function main () {
     file: path.join('./src/', 'home.html'),
     icon: './assets/img/icon_3.png'
   })
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 
   var menu = Menu.buildFromTemplate([
     {
@@ -745,6 +745,9 @@ ipcMain.on('from-home-show-boq-report', (event, message) => {
 
 ipcMain.on('from-home-show-graph', (event, message) => {
   create_show_graph_window();
+})
+ipcMain.on('from-home-balance-sheet-graph', (event, message) => {
+  create_show_balance_sheet_window();
 })
 
 

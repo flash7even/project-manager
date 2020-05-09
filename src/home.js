@@ -59,3 +59,6 @@ async function showBOQReportEvent(event){
 async function showGraphEvent(event){
   ipc.send('from-home-show-graph', 'home')
 }
+async function showBalanceSheetEvent(event){
+  ipc.send('from-home-balance-sheet-graph', 'home')
+}

@@ -202,12 +202,6 @@ small {
   margin-bottom: 47px;
 }
 
-.btn {
-  border-radius: 0;
-  padding: 13px 40px;
-  font-size: 1.3rem;
-}
-
 .btn-primary {
   background-color: white;
   border: 0;  
@@ -227,8 +221,8 @@ small {
 
 /* Features section */
 #tmFeatures {
-  padding-top: 68px;
-  padding-bottom: 60px;
+  padding-top: 18px;
+  padding-bottom: 10px;
   max-width: 1260px;
   margin-left: auto;
   margin-right: auto;
@@ -239,7 +233,7 @@ small {
   min-height: 480px;
   border-radius: 10px;
   text-align: center;
-  padding: 40px 50px;
+  padding: 20px 30px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -259,7 +253,7 @@ small {
   justify-content: center; 
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 /* Call to Action section */
@@ -716,8 +710,8 @@ p {
  }
 
  .tm-feature-box {
-   margin-bottom: 20px;
-   max-width: 600px;   
+   margin-bottom: 10px;
+   max-width: 500px;   
  }
 
  .navbar-expand-lg .navbar-nav .nav-link {
