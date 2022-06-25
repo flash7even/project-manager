@@ -65,7 +65,7 @@
     "electron-reload": "^1.2.5",
     "electron-store": "^2.0.0",
     "moment": "^2.24.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "spectre.css": "^0.5.3"
   }
 }
